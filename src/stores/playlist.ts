@@ -1,14 +1,20 @@
-import { defineStore } from 'pinia'
+import { defineStore, type StoreDefinition } from 'pinia'
+import { type Song } from '../models/song'
 
 export const usePlaylistStore = defineStore('playlist', {
-  state: () => ({
-    currentSong: {},
+  state: (): {
+    currentSong: Song | null,
+    playlist: Song[],
+    playedSongs: Song[],
+    possibleColors: string[]
+  } => ({
+    currentSong: null,
     playlist: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet']
   }),
   actions: {
-    initPlaylist() {
+    initPlaylist(): void {
       this.playlist = [
         {
           year: 2020,
@@ -32,29 +38,30 @@ export const usePlaylistStore = defineStore('playlist', {
         }
       ]
     },
-    getNextSong() {
+    getNextSong(): void {
       if (this.playlist.length > 0) {
         const index: number = Math.floor(Math.random() * this.playlist.length)
-        this.currentSong = this.playlist[index]
-        this.currentSong.color = this.randomColor()
-        this.playlist.splice(index, 1)
+        if (this.playlist[index]) {
+          this.currentSong = this.playlist[index]
+          this.currentSong.color = this.randomColor()
+          this.playlist.splice(index, 1)
+        }
       }
     },
 
-    addPlayedSong(currentSong, index) {
+    addPlayedSong(currentSong: Song, index: number): boolean {
       console.log('addPlayedSong', currentSong)
       this.playedSongs.splice(index, 0, currentSong)
       return this.isAddedSongRight(index)
     },
 
-    getReference(currentSong) {
-      return currentSong.name.concat(currentSong.artist).replace(' ', '-')
-    },
-
-    checkPlayedSongOrder() {
+    checkPlayedSongOrder(): boolean {
       let sorted: boolean = true
-      for (let i: number = 0; i < this.playedSongs.length - 1; i++) {
-        if (this.playedSongs[i].year > this.playedSongs[i + 1].year) {
+      const playedSongs = [...this.playedSongs];
+      for (let i: number = 0; i < playedSongs.length - 1; i++) {
+        const song1: Song | undefined = playedSongs[i];
+        const song2: Song | undefined = playedSongs[i + 1];
+        if (song1 && song2 && song1.year > song2.year) {
           sorted = false
           break
         }
@@ -62,7 +69,7 @@ export const usePlaylistStore = defineStore('playlist', {
       return sorted
     },
 
-    isAddedSongRight(index) {
+    isAddedSongRight(index: number): boolean {
       const sorted: boolean = this.checkPlayedSongOrder()
 
       if (sorted) {
@@ -77,9 +84,9 @@ export const usePlaylistStore = defineStore('playlist', {
       return sorted
     },
 
-    randomColor() {
+    randomColor(): string {
       const index = Math.floor(Math.random() * this.possibleColors.length)
-      return this.possibleColors[index]
+      return this.possibleColors[index] ? this.possibleColors[index] : ''
     },
 
     playSong() {

@@ -23,13 +23,12 @@ onMounted(() => {
 })
 
 const setInitialSong = () => {
-  playlistStore.addPlayedSong(playlistStore.currentSong, 0)
+  const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, 0) : false
   playlistStore.getNextSong()
 }
 
-const selectTimelineForSong = (index) => {
-  const response = playlistStore.addPlayedSong(playlistStore.currentSong, index + 1)
-  const referenceName = playlistStore.getReference(playlistStore.currentSong)
+const selectTimelineForSong = (index: number) => {
+  const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, index + 1) : false
 
   if (response) {
     console.log('parabéns')
