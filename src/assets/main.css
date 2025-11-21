@@ -7,29 +7,56 @@
   font-weight: normal;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.teal-card {
+  background-color: #2f4040;
+  border-color: #c3d7d7;
+  color: #c3d7d7;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.lavanda-card {
+  background-color: #2A2438;
+  border-color: #B4A7D6;
+  color: #B4A7D6;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.lightblue-card {
+  background-color: #1E2A3A;
+  border-color: #8BADD4;
+  color: #8BADD4;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.mint-card {
+  background-color: #1F2E2A;
+  border-color: #88C9B8;
+  color: #88C9B8;
+}
+
+.lightpink-card {
+  background-color: #2E2328;
+  border-color: #E6A0B8;
+  color: #E6A0B8;
+}
+
+.yellow-card {
+  background-color: #2E2A1E;
+  border-color: #E8D08A;
+  color: #E8D08A;
+}
+
+.peach-card {
+  background-color: #2E271E;
+  border-color: #F5B895;
+  color: #F5B895;
+}
+
+.sage-card {
+  background-color: #232E25;
+  border-color: #A8C69F;
+  color: #A8C69F;
+}
+
+.violet-card {
+  background-color: #2A2338;
+  border-color: #C9A8D6;
+  color: #C9A8D6;
 }
