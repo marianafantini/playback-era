@@ -8,35 +8,31 @@ const playlistStore = usePlaylistStore()
 const { song } = defineProps<{ song: Song; }>()
 
 const configurePlayer = () => {
-  const tag = document.createElement('script')
-  tag.src = 'https://www.youtube.com/iframe_api'
-  const firstScriptTag = document.getElementsByTagName('script')[0]
-  if (firstScriptTag) {
-    firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag)
+  window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    const element = document.getElementById('embed-iframe')
+    const options = {
+      uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
+
+    }
+    const callback = (EmbedController) => {
+      EmbedController.addListener('ready', () => {
+        console.log('ready')
+        EmbedController.loadUri('spotify:episode:7makk4oTQel546B0PZlDM5')
+      })
+    }
+    IFrameAPI.createController(element, options, callback)
   }
 
-  (window as any).onYouTubePlayerAPIReady = () => {
-    playlistStore.player = new (window as any).YT.Player('music-player', {
-      videoId: song.youtubeVideoID,
-      origin: 'http://localhost:5173/play',
-      events: {
-        'onReady': (event: CustomEvent) => {
-          playlistStore.ready = true
-          event?.target?.playVideo()
-        }
-      }
-    })
-  }
 }
 
 configurePlayer()
 
 const playSong = () => {
-  playlistStore.player.playVideo()
+  playlistStore.player.play()
 }
 
 const pauseSong = () => {
-  playlistStore.player.pauseVideo()
+  playlistStore.player.pause()
 }
 
 
@@ -51,7 +47,7 @@ const pauseSong = () => {
 
 
   <div class="hidden">
-    <div id="music-player"></div>
+    <div id="embed-iframe"></div>
   </div>
 
 </template>
@@ -59,7 +55,9 @@ const pauseSong = () => {
 <style scoped>
 
 .hidden {
-  display: none;
+  visibility: hidden;
+  height: 0;
+  width: 0;
 }
 
 </style>
