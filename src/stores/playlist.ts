@@ -6,12 +6,14 @@ export const usePlaylistStore = defineStore('playlist', {
     currentSong: Song | null,
     playlist: Song[],
     playedSongs: Song[],
-    possibleColors: string[]
+    possibleColors: string[],
+    player: any
   } => ({
     currentSong: null,
     playlist: [],
     playedSongs: [],
-    possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet']
+    possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
+    player: {}
   }),
   actions: {
     initPlaylist(): void {
@@ -19,22 +21,26 @@ export const usePlaylistStore = defineStore('playlist', {
         {
           year: 2020,
           name: 'august',
-          artist: 'Taylor Swift'
+          artist: 'Taylor Swift',
+          youtubeVideoID: '18nFH23iXJw'
         },
         {
           year: 2022,
           name: 'As It Was',
-          artist: 'Harry Styles'
+          artist: 'Harry Styles',
+          youtubeVideoID: '18nFH23iXJw'
         },
         {
           year: 2020,
           name: 'Watermelon Sugar',
-          artist: 'Harry Styles'
+          artist: 'Harry Styles',
+          youtubeVideoID: '18nFH23iXJw'
         },
         {
           year: 1985,
           name: 'Tédio',
-          artist: 'Biquíni Cavadão'
+          artist: 'Biquíni Cavadão',
+          youtubeVideoID: '18nFH23iXJw'
         }
       ]
     },
@@ -57,10 +63,10 @@ export const usePlaylistStore = defineStore('playlist', {
 
     checkPlayedSongOrder(): boolean {
       let sorted: boolean = true
-      const playedSongs = [...this.playedSongs];
+      const playedSongs = [...this.playedSongs]
       for (let i: number = 0; i < playedSongs.length - 1; i++) {
-        const song1: Song | undefined = playedSongs[i];
-        const song2: Song | undefined = playedSongs[i + 1];
+        const song1: Song | undefined = playedSongs[i]
+        const song2: Song | undefined = playedSongs[i + 1]
         if (song1 && song2 && song1.year > song2.year) {
           sorted = false
           break
@@ -88,12 +94,5 @@ export const usePlaylistStore = defineStore('playlist', {
       const index = Math.floor(Math.random() * this.possibleColors.length)
       return this.possibleColors[index] ? this.possibleColors[index] : ''
     },
-
-    playSong() {
-      // const iframe = document.createElement('iframe')
-      // iframe.setAttribute('src', 'https://www.youtube.com/embed/watch?v=18nFH23iXJw')
-      // iframe.setAttribute('display', 'flex')
-      // document.body.appendChild(iframe)
-    }
   }
 })

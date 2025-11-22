@@ -2,13 +2,9 @@
 import CardComponent from '@/components/CardComponent.vue'
 import AddHereComponent from '@/components/AddHereComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist'
-import gsap from 'gsap'
 
-import { RoughEase } from 'gsap/EasePack'
-
-gsap.registerPlugin(RoughEase)
-
-import { onBeforeMount, onMounted, ref, useTemplateRef } from 'vue'
+import { onBeforeMount, onMounted } from 'vue'
+import PlayerComponent from '@/components/PlayerComponent.vue'
 
 const playlistStore = usePlaylistStore()
 
@@ -19,7 +15,7 @@ onBeforeMount(() => {
 
 onMounted(() => {
   setInitialSong()
-  playlistStore.playSong()
+  // playlistStore.playSong()
 })
 
 const setInitialSong = () => {
@@ -48,7 +44,12 @@ const selectTimelineForSong = (index: number) => {
     <section class="game-board">
       <section>
         <!--   show current card without song info   -->
-        <CardComponent :hidden="true" :song="playlistStore.currentSong"></CardComponent>
+        <PlayerComponent :hidden="true"
+                         :song="playlistStore.currentSong"
+                         @playSong="playSong"
+                         @pauseSong="pauseSong">
+
+        </PlayerComponent>
       </section>
 
       <section>
@@ -64,6 +65,10 @@ const selectTimelineForSong = (index: number) => {
           ></CardComponent>
         </div>
       </section>
+
+      <div class="hidden">
+        <div id="music-player"></div>
+      </div>
     </section>
   </main>
 </template>
@@ -83,6 +88,10 @@ const selectTimelineForSong = (index: number) => {
 .cards-in-timeline-repeat {
   display: flex;
   gap: 1rem;
+}
+
+.hidden {
+  display: none !important;
 }
 
 </style>

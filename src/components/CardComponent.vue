@@ -6,10 +6,6 @@ const { song, hidden } = defineProps(['song', 'hidden'])
 </script>
 
 <template>
-  <div v-if="hidden" class="music-card">
-    <p>qr code here</p>
-  </div>
-
   <div v-if="!hidden" :class="'music-card ' + song?.color + '-card'" ref="card-ref">
     <p>{{ song?.artist }}</p>
     <p class="year">{{ song?.year }}</p>
