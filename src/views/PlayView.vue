@@ -39,8 +39,6 @@ const selectTimelineForSong = (index: number) => {
 
 <template>
   <main>
-    <h1>Music!</h1>
-
     <section class="game-board">
       <section>
         <!--   show current card without song info   -->
