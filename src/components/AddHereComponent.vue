@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { Button } from 'ant-design-vue'
 </script>
 
 <template>
   <div class="select-timeline-button-wrapper">
-    <button class="select-timeline-button">+</button>
+    <Button class="select-timeline-button" type="dashed" shape="circle">
+      +
+    </Button>
   </div>
 </template>
 
@@ -12,19 +15,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 }
 
 .select-timeline-button {
-  border-radius: 50%;
-  height: 2rem;
-  width: 2rem;
-  border: 0.1rem solid #297878;
+  border-color: #638e8e;
   background-color: #2f4040;
-  color: #c3d7d7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  color: #638e8e;
 }
+
+.select-timeline-button:hover {
+  border: 0.1rem dashed #84acac;
+  background-color: #425a5a;
+  color: #84acac;
+}
+
 </style>
