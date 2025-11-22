@@ -3,8 +3,11 @@ import CardComponent from '@/components/CardComponent.vue'
 import AddHereComponent from '@/components/AddHereComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist'
 
-import { onBeforeMount, onMounted } from 'vue'
+import { type DebuggerEventExtraInfo, onBeforeMount, onMounted } from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
+import type { SubscriptionCallbackMutation } from 'pinia'
+
+import type { Song } from '@/models/song.ts'
 
 const playlistStore = usePlaylistStore()
 
@@ -22,7 +25,14 @@ const getAndStartNextSong = () => {
   if (playlistStore.ready) {
     playlistStore.player.loadVideoById(playlistStore.currentSong?.youtubeVideoID)
   }
-  playlistStore.$subscribe((mutation) => {
+  playlistStore.$subscribe((mutation: SubscriptionCallbackMutation<{
+    currentSong: Song;
+    playlist: Song[];
+    playedSongs: Song[];
+    possibleColors: string[];
+    player: any;
+    ready: boolean;
+  }>) => {
     if (mutation?.events?.key === 'ready' && mutation?.events?.newValue) {
       playlistStore.player.playVideo()
     }
@@ -64,13 +74,17 @@ const selectTimelineForSong = (index: number) => {
         <!--   cards that the user has, in timeline   -->
         <div class="cards-in-timeline">
           <AddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)"></AddHereComponent>
-          <CardComponent
-            v-for="(song, index) in playlistStore.playedSongs"
-            class="cards-in-timeline-repeat"
-            @selectTimelineForSong="selectTimelineForSong(index)"
-            :song="song"
-            ref="cards"
-          ></CardComponent>
+          <div v-for="(song, index) in playlistStore.playedSongs"
+               class="cards-in-timeline-repeat">
+            <CardComponent
+              :song="song"
+              ref="cards"
+            ></CardComponent>
+            <div class="add-here-button">
+              <AddHereComponent
+                @selectTimelineForSong="selectTimelineForSong(index)"></AddHereComponent>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -93,6 +107,8 @@ const selectTimelineForSong = (index: number) => {
 .cards-in-timeline-repeat {
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>

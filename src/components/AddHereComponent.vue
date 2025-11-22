@@ -4,7 +4,10 @@ import { Button } from 'ant-design-vue'
 
 <template>
   <div class="select-timeline-button-wrapper">
-    <Button class="select-timeline-button" type="dashed" shape="circle">
+    <Button class="select-timeline-button"
+            type="dashed"
+            shape="circle"
+            @click="$emit('selectTimelineForSong')">
       +
     </Button>
   </div>

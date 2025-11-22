@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import PlayerControlsComponent from '@/components/PlayerControlsComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist.ts'
+import { Song } from '@/models/song.ts'
 
 const playlistStore = usePlaylistStore()
-const { song } = defineProps(['song'])
+const { song } = defineProps<{ song: Song; }>()
 
 const configurePlayer = () => {
   const tag = document.createElement('script')
@@ -42,7 +43,6 @@ const pauseSong = () => {
 <template>
 
   <PlayerControlsComponent :hidden="true"
-                           :song="song"
                            @playSong="playSong"
                            @pauseSong="pauseSong">
   </PlayerControlsComponent>

@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
-import { type Song } from '../models/song'
+import { type Song } from '@/models/song'
 
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
-    currentSong: Song | null,
+    currentSong: Song,
     playlist: Song[],
     playedSongs: Song[],
     possibleColors: string[],
     player: any,
     ready: boolean,
   } => ({
-    currentSong: null,
+    currentSong: {},
     playlist: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],

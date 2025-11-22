@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons-vue'
 
-const { song } = defineProps(['song'])
+interface Emits {
+  (e: 'playSong'): void;
+  (e: 'pauseSong',): void;
+}
+
+const emit = defineEmits<Emits>();
 
 </script>
 
 <template>
   <div class="music-card">
-    <PlayCircleOutlined  class="control-icons" @click="$emit('playSong')" />
-    <PauseCircleOutlined class="control-icons"  @click="$emit('pauseSong')" />
+    <PlayCircleOutlined  class="control-icons" @click="emit('playSong')" />
+    <PauseCircleOutlined class="control-icons"  @click="emit('pauseSong')" />
   </div>
 </template>
 
