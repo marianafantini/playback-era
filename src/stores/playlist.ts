@@ -3,14 +3,13 @@ import { type Song } from '@/models/song'
 
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
-    currentSong: Song,
+    currentSong?: Song,
     playlist: Song[],
     playedSongs: Song[],
     possibleColors: string[],
     player: any,
     ready: boolean,
   } => ({
-    currentSong: {},
     playlist: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],

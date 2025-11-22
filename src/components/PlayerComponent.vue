@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import PlayerControlsComponent from '@/components/PlayerControlsComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist.ts'
-import { Song } from '@/models/song.ts'
+import type { Song } from '@/models/song.ts'
+import type { CustomEvent } from '@/models/CustomEvent.ts'
 
 const playlistStore = usePlaylistStore()
 const { song } = defineProps<{ song: Song; }>()
@@ -15,11 +16,11 @@ const configurePlayer = () => {
   }
 
   (window as any).onYouTubePlayerAPIReady = () => {
-    playlistStore.player = new YT.Player('music-player', {
+    playlistStore.player = new (window as any).YT.Player('music-player', {
       videoId: song.youtubeVideoID,
       origin: 'http://localhost:5173/play',
       events: {
-        'onReady': (event) => {
+        'onReady': (event: CustomEvent) => {
           playlistStore.ready = true
           event?.target?.playVideo()
         }
@@ -37,6 +38,7 @@ const playSong = () => {
 const pauseSong = () => {
   playlistStore.player.pauseVideo()
 }
+
 
 </script>
 

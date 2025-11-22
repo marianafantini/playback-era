@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons-vue'
 
-interface Emits {
-  (e: 'playSong'): void;
-  (e: 'pauseSong',): void;
-}
-
-const emit = defineEmits<Emits>();
+const emit = defineEmits<{
+  (event: 'playSong'): void
+  (event: 'pauseSong'): void
+}>()
 
 </script>
 

@@ -3,9 +3,9 @@ import CardComponent from '@/components/CardComponent.vue'
 import AddHereComponent from '@/components/AddHereComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist'
 
-import { type DebuggerEventExtraInfo, onBeforeMount, onMounted } from 'vue'
+import { type DebuggerEvent, type DebuggerEventExtraInfo, onBeforeMount, onMounted } from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
-import type { SubscriptionCallbackMutation } from 'pinia'
+import type { SubscriptionCallbackMutation, SubscriptionCallbackMutationPatchObject } from 'pinia'
 
 import type { Song } from '@/models/song.ts'
 
@@ -33,7 +33,8 @@ const getAndStartNextSong = () => {
     player: any;
     ready: boolean;
   }>) => {
-    if (mutation?.events?.key === 'ready' && mutation?.events?.newValue) {
+    const event = Array.isArray(mutation?.events) ? mutation.events[0] as DebuggerEvent : mutation.events as DebuggerEvent;
+    if (event.key === 'ready' && event.newValue) {
       playlistStore.player.playVideo()
     }
   })
@@ -62,11 +63,8 @@ const selectTimelineForSong = (index: number) => {
 <template>
   <main>
     <section class="game-board">
-      <section>
-        <!--   show current card without song info   -->
-        <PlayerComponent :song="playlistStore.currentSong"
-                         @playSong="playSong"
-                         @pauseSong="pauseSong">
+      <section v-if="playlistStore.currentSong">
+        <PlayerComponent :song="playlistStore.currentSong">
         </PlayerComponent>
       </section>
 
