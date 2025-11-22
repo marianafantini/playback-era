@@ -1,32 +1,16 @@
 <script setup lang="ts">
-import AddHereComponent from '@/components/AddHereComponent.vue'
-
 const { song, hidden } = defineProps(['song', 'hidden'])
-
 </script>
 
 <template>
-  <div v-if="hidden" class="music-card">
-    <p>qr code here</p>
-  </div>
-
   <div v-if="!hidden" :class="'music-card ' + song?.color + '-card'" ref="card-ref">
     <p>{{ song?.artist }}</p>
     <p class="year">{{ song?.year }}</p>
     <p>{{ song?.name }}</p>
   </div>
-
-  <div v-if="!hidden" class="add-here-button">
-    <AddHereComponent @click="$emit('selectTimelineForSong')"></AddHereComponent>
-  </div>
 </template>
 
 <style scoped>
-.add-here-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .music-card {
   border: 0.1rem solid;
@@ -37,11 +21,12 @@ const { song, hidden } = defineProps(['song', 'hidden'])
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  min-height: 10rem;
-  min-width: 10rem;
+  min-height: var(--card-height);
+  min-width: var(--card-width);
 }
 
 .year {
   font-size: 3rem;
 }
+
 </style>

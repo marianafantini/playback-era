@@ -2,13 +2,12 @@
 import CardComponent from '@/components/CardComponent.vue'
 import AddHereComponent from '@/components/AddHereComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist'
-import gsap from 'gsap'
 
-import { RoughEase } from 'gsap/EasePack'
+import { type DebuggerEvent, type DebuggerEventExtraInfo, onBeforeMount, onMounted } from 'vue'
+import PlayerComponent from '@/components/PlayerComponent.vue'
+import type { SubscriptionCallbackMutation, SubscriptionCallbackMutationPatchObject } from 'pinia'
 
-gsap.registerPlugin(RoughEase)
-
-import { onBeforeMount, onMounted, ref, useTemplateRef } from 'vue'
+import type { Song } from '@/models/song.ts'
 
 const playlistStore = usePlaylistStore()
 
@@ -19,15 +18,35 @@ onBeforeMount(() => {
 
 onMounted(() => {
   setInitialSong()
-  playlistStore.playSong()
 })
+
+const getAndStartNextSong = () => {
+  playlistStore.getNextSong()
+  if (playlistStore.ready) {
+    playlistStore.player.loadVideoById(playlistStore.currentSong?.youtubeVideoID)
+  }
+  playlistStore.$subscribe((mutation: SubscriptionCallbackMutation<{
+    currentSong: Song;
+    playlist: Song[];
+    playedSongs: Song[];
+    possibleColors: string[];
+    player: any;
+    ready: boolean;
+  }>) => {
+    const event = Array.isArray(mutation?.events) ? mutation.events[0] as DebuggerEvent : mutation.events as DebuggerEvent;
+    if (event.key === 'ready' && event.newValue) {
+      playlistStore.player.playVideo()
+    }
+  })
+}
 
 const setInitialSong = () => {
   const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, 0) : false
-  playlistStore.getNextSong()
+  getAndStartNextSong()
 }
 
 const selectTimelineForSong = (index: number) => {
+  playlistStore.player.stopVideo()
   const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, index + 1) : false
 
   if (response) {
@@ -36,34 +55,37 @@ const selectTimelineForSong = (index: number) => {
     console.log('oops')
   }
 
-  playlistStore.getNextSong()
+  getAndStartNextSong()
 }
 
 </script>
 
 <template>
   <main>
-    <h1>Music!</h1>
-
     <section class="game-board">
-      <section>
-        <!--   show current card without song info   -->
-        <CardComponent :hidden="true" :song="playlistStore.currentSong"></CardComponent>
+      <section v-if="playlistStore.currentSong">
+        <PlayerComponent :song="playlistStore.currentSong">
+        </PlayerComponent>
       </section>
 
       <section>
         <!--   cards that the user has, in timeline   -->
         <div class="cards-in-timeline">
           <AddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)"></AddHereComponent>
-          <CardComponent
-            v-for="(song, index) in playlistStore.playedSongs"
-            class="cards-in-timeline-repeat"
-            @selectTimelineForSong="selectTimelineForSong(index)"
-            :song="song"
-            ref="cards"
-          ></CardComponent>
+          <div v-for="(song, index) in playlistStore.playedSongs"
+               class="cards-in-timeline-repeat">
+            <CardComponent
+              :song="song"
+              ref="cards"
+            ></CardComponent>
+            <div class="add-here-button">
+              <AddHereComponent
+                @selectTimelineForSong="selectTimelineForSong(index)"></AddHereComponent>
+            </div>
+          </div>
         </div>
       </section>
+
     </section>
   </main>
 </template>
@@ -83,6 +105,8 @@ const selectTimelineForSong = (index: number) => {
 .cards-in-timeline-repeat {
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>
