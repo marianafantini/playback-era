@@ -28,6 +28,7 @@ const { song } = defineProps(['song'])
 
 .control-icons {
   font-size: 3rem;
+  cursor: pointer;
 }
 
 </style>

@@ -15,15 +15,27 @@ onBeforeMount(() => {
 
 onMounted(() => {
   setInitialSong()
-  // playlistStore.playSong()
 })
+
+const getAndStartNextSong = () => {
+  playlistStore.getNextSong()
+  if (playlistStore.ready) {
+    playlistStore.player.loadVideoById(playlistStore.currentSong?.youtubeVideoID)
+  }
+  playlistStore.$subscribe((mutation) => {
+    if (mutation?.events?.key === 'ready' && mutation?.events?.newValue) {
+      playlistStore.player.playVideo()
+    }
+  })
+}
 
 const setInitialSong = () => {
   const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, 0) : false
-  playlistStore.getNextSong()
+  getAndStartNextSong()
 }
 
 const selectTimelineForSong = (index: number) => {
+  playlistStore.player.stopVideo()
   const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, index + 1) : false
 
   if (response) {
@@ -32,7 +44,7 @@ const selectTimelineForSong = (index: number) => {
     console.log('oops')
   }
 
-  playlistStore.getNextSong()
+  getAndStartNextSong()
 }
 
 </script>
@@ -42,11 +54,9 @@ const selectTimelineForSong = (index: number) => {
     <section class="game-board">
       <section>
         <!--   show current card without song info   -->
-        <PlayerComponent :hidden="true"
-                         :song="playlistStore.currentSong"
+        <PlayerComponent :song="playlistStore.currentSong"
                          @playSong="playSong"
                          @pauseSong="pauseSong">
-
         </PlayerComponent>
       </section>
 
@@ -64,9 +74,6 @@ const selectTimelineForSong = (index: number) => {
         </div>
       </section>
 
-      <div class="hidden">
-        <div id="music-player"></div>
-      </div>
     </section>
   </main>
 </template>
@@ -86,10 +93,6 @@ const selectTimelineForSong = (index: number) => {
 .cards-in-timeline-repeat {
   display: flex;
   gap: 1rem;
-}
-
-.hidden {
-  display: none !important;
 }
 
 </style>

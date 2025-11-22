@@ -1,4 +1,4 @@
-import { defineStore, type StoreDefinition } from 'pinia'
+import { defineStore } from 'pinia'
 import { type Song } from '../models/song'
 
 export const usePlaylistStore = defineStore('playlist', {
@@ -7,13 +7,15 @@ export const usePlaylistStore = defineStore('playlist', {
     playlist: Song[],
     playedSongs: Song[],
     possibleColors: string[],
-    player: any
+    player: any,
+    ready: boolean,
   } => ({
     currentSong: null,
     playlist: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
-    player: {}
+    player: {},
+    ready: false,
   }),
   actions: {
     initPlaylist(): void {
@@ -22,19 +24,19 @@ export const usePlaylistStore = defineStore('playlist', {
           year: 2020,
           name: 'august',
           artist: 'Taylor Swift',
-          youtubeVideoID: '18nFH23iXJw'
+          youtubeVideoID: 'nn_0zPAfyo8'
         },
         {
           year: 2022,
           name: 'As It Was',
           artist: 'Harry Styles',
-          youtubeVideoID: '18nFH23iXJw'
+          youtubeVideoID: 'H5v3kku4y6Q'
         },
         {
           year: 2020,
           name: 'Watermelon Sugar',
           artist: 'Harry Styles',
-          youtubeVideoID: '18nFH23iXJw'
+          youtubeVideoID: 'E07s5ZYygMg'
         },
         {
           year: 1985,

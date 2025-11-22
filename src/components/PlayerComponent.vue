@@ -1,43 +1,40 @@
 <script setup lang="ts">
 import PlayerControlsComponent from '@/components/PlayerControlsComponent.vue'
+import { usePlaylistStore } from '@/stores/playlist.ts'
 
+const playlistStore = usePlaylistStore()
 const { song } = defineProps(['song'])
-let player
 
 const configurePlayer = () => {
   const tag = document.createElement('script')
   tag.src = 'https://www.youtube.com/iframe_api'
   const firstScriptTag = document.getElementsByTagName('script')[0]
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+  if (firstScriptTag) {
+    firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag)
+  }
 
-  window.onYouTubePlayerAPIReady = () => {
-    console.log('youtube api ready')
-
-    player = new YT.Player('music-player', {
-      height: 0,
-      width: 0,
-      videoId: '18nFH23iXJw',
-      autoplay: 1,
+  (window as any).onYouTubePlayerAPIReady = () => {
+    playlistStore.player = new YT.Player('music-player', {
+      videoId: song.youtubeVideoID,
       origin: 'http://localhost:5173/play',
       events: {
         'onReady': (event) => {
-          event.target.playVideo()
+          playlistStore.ready = true
+          event?.target?.playVideo()
         }
       }
     })
-
-    document.getElementById('music-player')?.classList.add('hidden')
   }
 }
 
-configurePlayer();
+configurePlayer()
 
 const playSong = () => {
-  player.playVideo()
+  playlistStore.player.playVideo()
 }
 
 const pauseSong = () => {
-  player.pauseVideo()
+  playlistStore.player.pauseVideo()
 }
 
 </script>
@@ -50,8 +47,17 @@ const pauseSong = () => {
                            @pauseSong="pauseSong">
   </PlayerControlsComponent>
 
+
+  <div class="hidden">
+    <div id="music-player"></div>
+  </div>
+
 </template>
 
 <style scoped>
+
+.hidden {
+  display: none;
+}
 
 </style>
