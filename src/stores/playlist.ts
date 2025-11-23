@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { type Song } from '@/models/song'
+import type { SpotifyItem } from '@/models/spotify-track.ts'
 
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
@@ -9,14 +10,13 @@ export const usePlaylistStore = defineStore('playlist', {
     possibleColors: string[],
     player: any,
     playerReady: boolean,
-    accessToken: string,
+    accessToken?: string,
   } => ({
     playlist: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
     player: {},
     playerReady: false,
-    accessToken: null
   }),
   actions: {
     async getSpotifyCredentials() {
@@ -42,7 +42,7 @@ export const usePlaylistStore = defineStore('playlist', {
       }
     },
 
-    async initPlaylist(): void {
+    async initPlaylist(): Promise<Song[]> {
       const response = await fetch('https://api.spotify.com/v1/playlists/2h9UT9SQZoC58sQ5KvTFdX/tracks', {
         method: 'GET',
         headers: {
@@ -52,7 +52,7 @@ export const usePlaylistStore = defineStore('playlist', {
         return response.json()
       })
 
-      this.playlist = response.items.map((item) => {
+      const playlist = response.items.map((item: SpotifyItem) => {
         return {
           name: item.track.name,
           spotifyURI: item.track.uri,
@@ -60,6 +60,10 @@ export const usePlaylistStore = defineStore('playlist', {
           year: item.track.album.release_date.split("-")[0],
         }
       })
+
+      this.playlist = playlist
+
+      return playlist
     },
 
     getNextSong(): void {
