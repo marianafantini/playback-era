@@ -15,7 +15,7 @@ const sha256 = async (plain: string) => {
   return window.crypto.subtle.digest('SHA-256', data)
 }
 
-const base64encode = (input: string) => {
+const base64encode = (input: any) => {
   return btoa(String.fromCharCode(...new Uint8Array(input)))
     .replace(/=/g, '')
     .replace(/\+/g, '-')
