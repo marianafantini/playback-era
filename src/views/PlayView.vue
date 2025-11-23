@@ -3,11 +3,8 @@ import CardComponent from '@/components/CardComponent.vue'
 import AddHereComponent from '@/components/AddHereComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist'
 
-import { type DebuggerEvent, type DebuggerEventExtraInfo, onBeforeMount, onMounted } from 'vue'
+import { onBeforeMount } from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
-import type { SubscriptionCallbackMutation, SubscriptionCallbackMutationPatchObject } from 'pinia'
-
-import type { Song } from '@/models/song.ts'
 
 const playlistStore = usePlaylistStore()
 
@@ -29,7 +26,9 @@ const getAndStartNextSong = () => {
 }
 
 const setInitialSong = () => {
-  const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, 0) : false
+  if (playlistStore.currentSong) {
+    playlistStore.addPlayedSong(playlistStore.currentSong, 0)
+  }
   getAndStartNextSong()
 }
 
