@@ -23,25 +23,29 @@ export const usePlaylistStore = defineStore('playlist', {
           year: 2020,
           name: 'august',
           artist: 'Taylor Swift',
-          youtubeVideoID: 'nn_0zPAfyo8'
+          youtubeVideoID: 'nn_0zPAfyo8',
+          spotifyURI: ''
         },
         {
           year: 2022,
           name: 'As It Was',
           artist: 'Harry Styles',
-          youtubeVideoID: 'H5v3kku4y6Q'
+          youtubeVideoID: 'H5v3kku4y6Q',
+          spotifyURI: ''
         },
         {
           year: 2020,
           name: 'Watermelon Sugar',
           artist: 'Harry Styles',
-          youtubeVideoID: 'E07s5ZYygMg'
+          youtubeVideoID: 'E07s5ZYygMg',
+          spotifyURI: ''
         },
         {
           year: 1985,
           name: 'Tédio',
           artist: 'Biquíni Cavadão',
-          youtubeVideoID: '18nFH23iXJw'
+          youtubeVideoID: '18nFH23iXJw',
+          spotifyURI: ''
         }
       ]
     },

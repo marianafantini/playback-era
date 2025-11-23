@@ -10,18 +10,16 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-  clickPlaySong()
+  playSong()
 })
 
 const configurePlayer = () => {
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    playlistStore.SpotifyIFrameAPI = IFrameAPI
-
+  (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
     const element = document.getElementById('embed-iframe')
     const options = {
       uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
     }
-    const callback = (EmbedController) => {
+    const callback = (EmbedController: any) => {
       playlistStore.player = EmbedController
       playlistStore.playerReady = true
     }

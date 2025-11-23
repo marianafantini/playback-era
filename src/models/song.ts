@@ -4,4 +4,5 @@ export interface Song {
   year: number;
   color?: string;
   youtubeVideoID: string;
+  spotifyURI: string;
 }
