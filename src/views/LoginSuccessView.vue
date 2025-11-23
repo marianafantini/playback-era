@@ -7,7 +7,7 @@ const {code} = defineProps(["code"])
 const getToken = async (code: any) => {
   const codeVerifier = window.localStorage.getItem('code_verifier')
   console.log("codeVerifier", codeVerifier)
-  const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_LOGIN_URI;
+  const redirectUri = window.location.origin + "/play";
 
   const queryParams = new URLSearchParams({
     client_id: import.meta.env.VITE_SPOTIFY_CLIENT_ID || "",
