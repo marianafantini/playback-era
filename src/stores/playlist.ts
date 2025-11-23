@@ -19,34 +19,13 @@ export const usePlaylistStore = defineStore('playlist', {
     playerReady: false,
   }),
   actions: {
-    async getSpotifyCredentials() {
-      if (this.accessToken === null) {
-        const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
-        const SPOTIFY_SECRET_TOKEN = import.meta.env.VITE_SPOTIFY_SECRET_TOKEN
-        const body = 'grant_type=client_credentials&client_id=' + SPOTIFY_CLIENT_ID + '&client_secret=' + SPOTIFY_SECRET_TOKEN
-        const { access_token } = await fetch('https://accounts.spotify.com/api/token', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: body
-        }).then((response) => {
-          return response.json()
-        })
-
-        this.accessToken = access_token
-
-        console.log('access token initialized')
-      } else {
-        console.log('access token already exists')
-      }
-    },
-
     async initPlaylist(): Promise<Song[]> {
+      const accessToken = localStorage.getItem('spotify_access_token')
+      console.log("accessToken", accessToken)
       const response = await fetch('https://api.spotify.com/v1/playlists/2h9UT9SQZoC58sQ5KvTFdX/tracks', {
         method: 'GET',
         headers: {
-          authorization: `Bearer ${this.accessToken}`
+          authorization: `Bearer ${accessToken}`
         }
       }).then((response) => {
         return response.json()

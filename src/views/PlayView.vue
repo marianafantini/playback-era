@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue'
 import AddHereComponent from '@/components/AddHereComponent.vue'
-import { usePlaylistStore } from '@/stores/playlist'
+import {usePlaylistStore} from '@/stores/playlist'
 
-import { onBeforeMount } from 'vue'
+import {onBeforeMount} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 
+const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
-  playlistStore.getSpotifyCredentials().then(() => {
-    playlistStore.initPlaylist().then(() => {
-      playlistStore.getNextSong()
-      setInitialSong()
-    })
+  playlistStore.initPlaylist().then(() => {
+    playlistStore.getNextSong()
+    setInitialSong()
   })
 })
 
@@ -50,6 +49,7 @@ const selectTimelineForSong = (index: number) => {
 <template>
   <main>
     <section class="game-board">
+
       <section v-if="playlistStore.currentSong">
         <PlayerComponent :song="playlistStore.currentSong">
         </PlayerComponent>
