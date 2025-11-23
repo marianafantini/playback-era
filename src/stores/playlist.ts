@@ -16,27 +16,22 @@ export const usePlaylistStore = defineStore('playlist', {
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
     player: {},
-    playerReady: false,
+    playerReady: false
   }),
   actions: {
     async getSpotifyCredentials() {
-      if (this.accessToken === null) {
+      if (!this.accessToken) {
         const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
-        const SPOTIFY_SECRET_TOKEN = import.meta.env.VITE_SPOTIFY_SECRET_TOKEN
-        const body = 'grant_type=client_credentials&client_id=' + SPOTIFY_CLIENT_ID + '&client_secret=' + SPOTIFY_SECRET_TOKEN
-        const { access_token } = await fetch('https://accounts.spotify.com/api/token', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: body
-        }).then((response) => {
-          return response.json()
+
+        const foobar = await fetch('https://accounts.spotify.com/authorize?' +
+          // 'scope=\'user-read-private user-read-email\'&' +
+          'response_type=code&client_id=' + SPOTIFY_CLIENT_ID + "&" +
+          "redirect_uri=http://localhost:5173/play", {
+          method: 'GET',
+          headers: {}
         })
 
-        this.accessToken = access_token
-
-        console.log('access token initialized')
+        console.log('access token initialized', foobar)
       } else {
         console.log('access token already exists')
       }
@@ -57,7 +52,7 @@ export const usePlaylistStore = defineStore('playlist', {
           name: item.track.name,
           spotifyURI: item.track.uri,
           artist: item.track.artists.map((artist) => artist.name).join(' & '),
-          year: item.track.album.release_date.split("-")[0],
+          year: item.track.album.release_date.split('-')[0]
         }
       })
 
