@@ -4,17 +4,17 @@ const router = useRouter();
 
 const {code} = defineProps(["code"])
 
-const getToken = async (code) => {
+const getToken = async (code: any) => {
   const codeVerifier = window.localStorage.getItem('code_verifier')
   console.log("codeVerifier", codeVerifier)
   const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_LOGIN_URI;
 
   const queryParams = new URLSearchParams({
-    client_id: import.meta.env.VITE_SPOTIFY_CLIENT_ID,
+    client_id: import.meta.env.VITE_SPOTIFY_CLIENT_ID || "",
     grant_type: 'authorization_code',
     code: code,
     redirect_uri: redirectUri,
-    code_verifier: codeVerifier,
+    code_verifier: codeVerifier || "",
   });
   const payload = {
     method: 'POST',
