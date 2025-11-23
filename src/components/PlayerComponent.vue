@@ -4,6 +4,7 @@ import { onBeforeMount, onMounted } from 'vue'
 import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
+const {song} = defineProps(["song"])
 
 onBeforeMount(() => {
   configurePlayer()
@@ -17,7 +18,7 @@ const configurePlayer = () => {
   (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
     const element = document.getElementById('embed-iframe')
     const options = {
-      uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
+      uri: song.spotifyURI
     }
     const callback = (EmbedController: any) => {
       playlistStore.player = EmbedController

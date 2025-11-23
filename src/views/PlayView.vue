@@ -12,32 +12,20 @@ import type { Song } from '@/models/song.ts'
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
-  playlistStore.initPlaylist()
-  playlistStore.getNextSong()
-})
-
-onMounted(() => {
-  setInitialSong()
+  playlistStore.getSpotifyCredentials().then(() => {
+    playlistStore.initPlaylist().then(() => {
+      playlistStore.getNextSong()
+      setInitialSong()
+    })
+  })
 })
 
 const getAndStartNextSong = () => {
   playlistStore.getNextSong()
   if (playlistStore.playerReady) {
     playlistStore.player.loadUri(playlistStore.currentSong?.spotifyURI)
+    playlistStore.player.play()
   }
-  playlistStore.$subscribe((mutation: SubscriptionCallbackMutation<{
-    currentSong: Song;
-    playlist: Song[];
-    playedSongs: Song[];
-    possibleColors: string[];
-    player: any;
-    playerReady: boolean;
-  }>) => {
-    const event = Array.isArray(mutation?.events) ? mutation.events[0] as DebuggerEvent : mutation.events as DebuggerEvent;
-    if (event.key === 'playerReady' && event.newValue) {
-      playlistStore.player.play()
-    }
-  })
 }
 
 const setInitialSong = () => {
@@ -69,7 +57,6 @@ const selectTimelineForSong = (index: number) => {
       </section>
 
       <section>
-        <!--   cards that the user has, in timeline   -->
         <div class="cards-in-timeline">
           <AddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)"></AddHereComponent>
           <div v-for="(song, index) in playlistStore.playedSongs"
