@@ -8,6 +8,9 @@
     <RouterLink to="/play">
       <button>Play now!</button>
     </RouterLink>
+    <RouterLink to="/login">
+      <button>Login and play!</button>
+    </RouterLink>
     <RouterLink to="/how-to-play">
       <button>How to play</button>
     </RouterLink>
