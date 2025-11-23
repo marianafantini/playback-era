@@ -1,17 +1,13 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'; // For Composition API
+const router = useRouter();
 
 const {code} = defineProps(["code"])
 
-localStorage.setItem("spotify_user_code", code)
-
 const getToken = async (code) => {
-  // stored in the previous step
-
-  const codeVerifier = localStorage.getItem('code_verifier')
+  const codeVerifier = window.localStorage.getItem('code_verifier')
   console.log("codeVerifier", codeVerifier)
-  const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_PLAY_URI;
-
-  console.log("redirectUri", redirectUri)
+  const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_LOGIN_URI;
 
   const queryParams = new URLSearchParams({
     client_id: import.meta.env.VITE_SPOTIFY_CLIENT_ID,
@@ -25,17 +21,20 @@ const getToken = async (code) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    // body: queryParams
+    body: queryParams
   }
-  const url = "https://accounts.spotify.com/api/token?" + queryParams.toString();
+  const url = "https://accounts.spotify.com/api/token"
 
-  const body = await fetch(url, payload);
-  const response = await body.json();
+  const response = await fetch(url, payload).then((response) => {
+    return response.json()
+  });
 
-  localStorage.setItem('access_token', response.access_token);
+  window.localStorage.setItem('spotify_access_token', response.access_token);
 }
 
-getToken(code)
+getToken(code).then(() => {
+  router.push("/play")
+})
 
 </script>
 

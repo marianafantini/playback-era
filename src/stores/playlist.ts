@@ -20,7 +20,7 @@ export const usePlaylistStore = defineStore('playlist', {
   }),
   actions: {
     async initPlaylist(): Promise<Song[]> {
-      const accessToken = localStorage.getItem('spotify_access_token')
+      const accessToken = window.localStorage.getItem('spotify_access_token')
       console.log("accessToken", accessToken)
       const response = await fetch('https://api.spotify.com/v1/playlists/2h9UT9SQZoC58sQ5KvTFdX/tracks', {
         method: 'GET',

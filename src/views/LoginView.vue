@@ -24,7 +24,8 @@ const base64encode = (input) => {
 
 const startLogin = async () => {
   const codeVerifier = generateRandomString(64)
-  localStorage.setItem('code_verifier', codeVerifier)
+  console.log("code verifier saved on local storage", codeVerifier)
+  window.localStorage.setItem('code_verifier', codeVerifier)
 
   const hashed = await sha256(codeVerifier)
   const codeChallenge = base64encode(hashed);
