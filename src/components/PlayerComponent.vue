@@ -1,50 +1,52 @@
 <script setup lang="ts">
-import PlayerControlsComponent from '@/components/PlayerControlsComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist.ts'
-import type { Song } from '@/models/song.ts'
-import type { CustomEvent } from '@/models/CustomEvent.ts'
+import { onBeforeMount, onMounted } from 'vue'
+import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
-const { song } = defineProps<{ song: Song; }>()
+
+onBeforeMount(() => {
+  configurePlayer()
+})
+
+onMounted(() => {
+  clickPlaySong()
+})
 
 const configurePlayer = () => {
   window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    playlistStore.SpotifyIFrameAPI = IFrameAPI
+
     const element = document.getElementById('embed-iframe')
     const options = {
       uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
-
     }
     const callback = (EmbedController) => {
-      EmbedController.addListener('ready', () => {
-        console.log('ready')
-        EmbedController.loadUri('spotify:episode:7makk4oTQel546B0PZlDM5')
-      })
+      playlistStore.player = EmbedController
+      playlistStore.playerReady = true
     }
     IFrameAPI.createController(element, options, callback)
   }
-
 }
 
-configurePlayer()
-
 const playSong = () => {
-  playlistStore.player.play()
+  if (playlistStore.playerReady && playlistStore.player) {
+    playlistStore.player.play()
+  }
 }
 
 const pauseSong = () => {
   playlistStore.player.pause()
 }
 
-
 </script>
 
 <template>
 
-  <PlayerControlsComponent :hidden="true"
-                           @playSong="playSong"
-                           @pauseSong="pauseSong">
-  </PlayerControlsComponent>
-
+  <div class="music-card">
+    <PlayCircleOutlined class="control-icons" @click="playSong" />
+    <PauseCircleOutlined class="control-icons" @click="pauseSong" />
+  </div>
 
   <div class="hidden">
     <div id="embed-iframe"></div>
@@ -53,6 +55,23 @@ const pauseSong = () => {
 </template>
 
 <style scoped>
+
+.music-card {
+  border: 0.1rem solid;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  min-height: var(--card-height);
+  min-width: var(--card-width);
+}
+
+.control-icons {
+  font-size: 3rem;
+  cursor: pointer;
+}
 
 .hidden {
   visibility: hidden;

@@ -8,13 +8,13 @@ export const usePlaylistStore = defineStore('playlist', {
     playedSongs: Song[],
     possibleColors: string[],
     player: any,
-    ready: boolean,
+    playerReady: boolean,
   } => ({
     playlist: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
     player: {},
-    ready: false,
+    playerReady: false
   }),
   actions: {
     initPlaylist(): void {
@@ -94,6 +94,6 @@ export const usePlaylistStore = defineStore('playlist', {
     randomColor(): string {
       const index = Math.floor(Math.random() * this.possibleColors.length)
       return this.possibleColors[index] ? this.possibleColors[index] : ''
-    },
+    }
   }
 })

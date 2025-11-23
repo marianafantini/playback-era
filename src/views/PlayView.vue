@@ -22,8 +22,8 @@ onMounted(() => {
 
 const getAndStartNextSong = () => {
   playlistStore.getNextSong()
-  if (playlistStore.ready) {
-    playlistStore.player.loadVideoById(playlistStore.currentSong?.youtubeVideoID)
+  if (playlistStore.playerReady) {
+    playlistStore.player.loadUri(playlistStore.currentSong?.spotifyURI)
   }
   playlistStore.$subscribe((mutation: SubscriptionCallbackMutation<{
     currentSong: Song;
@@ -31,11 +31,11 @@ const getAndStartNextSong = () => {
     playedSongs: Song[];
     possibleColors: string[];
     player: any;
-    ready: boolean;
+    playerReady: boolean;
   }>) => {
     const event = Array.isArray(mutation?.events) ? mutation.events[0] as DebuggerEvent : mutation.events as DebuggerEvent;
-    if (event.key === 'ready' && event.newValue) {
-      playlistStore.player.playVideo()
+    if (event.key === 'playerReady' && event.newValue) {
+      playlistStore.player.play()
     }
   })
 }
@@ -46,7 +46,7 @@ const setInitialSong = () => {
 }
 
 const selectTimelineForSong = (index: number) => {
-  playlistStore.player.stopVideo()
+  playlistStore.player.pause()
   const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, index + 1) : false
 
   if (response) {
