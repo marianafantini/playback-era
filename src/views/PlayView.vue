@@ -99,6 +99,11 @@ const selectTimelineForSong = (index: number) => {
   gap: 2rem;
 }
 
+.cards-in-timeline {
+  width: 100%;
+  overflow-x: scroll;
+}
+
 .player-section,
 .timeline-section,
 .cards-in-timeline,
@@ -122,7 +127,6 @@ const selectTimelineForSong = (index: number) => {
 .cards-in-timeline-repeat {
   display: flex;
   gap: 1rem;
-  justify-content: center;
   align-items: center;
 }
 
