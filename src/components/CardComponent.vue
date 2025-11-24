@@ -24,8 +24,8 @@ const {song} = defineProps(['song'])
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
-  justify-content: center;
+  gap: 1rem;
+  justify-content: flex-start;
   align-items: center;
   border-radius: 1rem;
   width: 100%;

@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import {RouterView, useRouter} from 'vue-router'
+import {RouterView, RouterLink, useRouter} from 'vue-router'
+
 const router = useRouter();
 </script>
 
 <template>
-  <header v-if="router?.currentRoute.value.name !== 'home'" @click="router.push('/')">
-    <img src="/public/mp3-icon.png"
-         alt="Logo of the app, which is an mp3 player icon"
-         class="logo"/>
-    <span class="logo-title">Playback Era </span>
+  <header v-if="router?.currentRoute.value.name !== 'home'">
+    <div class="header-logo" @click="router.push('/')">
+      <img src="/public/mp3-icon.png"
+           alt="Logo of the app, which is an mp3 player icon"
+           class="logo"/>
+      <span class="logo-title">Playback Era </span>
+    </div>
+
+    <nav>
+      <RouterLink to="/select-playlist">Playlists</RouterLink>
+    </nav>
   </header>
 
   <RouterView/>
@@ -17,6 +24,21 @@ const router = useRouter();
 <style scoped>
 
 header {
+  display: flex;
+  gap: 1rem;
+}
+
+header nav {
+  display: flex;
+  gap: 1rem;
+}
+
+header a {
+  color: var(--color);
+  cursor: pointer;
+}
+
+.header-logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;

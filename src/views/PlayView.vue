@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue'
 import {usePlaylistStore} from '@/stores/playlist'
-
+import {Button} from "ant-design-vue"
 import {onBeforeMount} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
 
 const {playlist} = defineProps(["playlist"])
 const playlistStore = usePlaylistStore()
@@ -52,19 +55,19 @@ const selectTimelineForSong = (index: number) => {
 
 <template>
   <main>
-    <section v-if="playlistStore.playlist.length === 0">
+    <div v-if="playlistStore.playlist.length === 0">
       No songs to play
-    </section>
-    <section class="game-board" v-if="playlistStore.playlist.length > 0">
+    </div>
+    <div class="game-board" v-if="playlistStore.playlist.length > 0">
 
       <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
 
-      <section v-if="playlistStore.currentSong" class="player-section">
+      <div v-if="playlistStore.currentSong" class="player-section">
         <PlayerComponent :song="playlistStore.currentSong">
         </PlayerComponent>
-      </section>
+      </div>
 
-      <section class="timeline-section">
+      <div class="timeline-section">
         <div class="cards-in-timeline">
           <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)">
           </CardAddHereComponent>
@@ -78,13 +81,16 @@ const selectTimelineForSong = (index: number) => {
             </CardAddHereComponent>
           </div>
         </div>
-      </section>
-
-    </section>
+      </div>
+    </div>
   </main>
 </template>
 
 <style scoped>
+
+.back-to-playlists {
+  margin: 1rem 0;
+}
 
 .game-board {
   display: flex;
