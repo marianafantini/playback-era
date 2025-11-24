@@ -85,10 +85,6 @@ const pauseSong = () => {
   width: 100%;
 }
 
-.progress {
-  margin-bottom: 0.2rem;
-}
-
 .control-icons {
   font-size: 2rem;
   cursor: pointer;
