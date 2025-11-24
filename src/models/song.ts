@@ -5,5 +5,5 @@ export interface Song {
   color?: string;
   youtubeVideoID?: string;
   spotifyURI?: string;
-  duration_ms: number;
+  image: string;
 }

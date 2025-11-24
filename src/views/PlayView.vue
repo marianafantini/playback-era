@@ -57,6 +57,8 @@ const selectTimelineForSong = (index: number) => {
     </section>
     <section class="game-board" v-if="playlistStore.playlist.length > 0">
 
+      <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
+
       <section v-if="playlistStore.currentSong" class="player-section">
         <PlayerComponent :song="playlistStore.currentSong">
         </PlayerComponent>
@@ -72,10 +74,8 @@ const selectTimelineForSong = (index: number) => {
               :song="song"
               ref="cards"
             ></CardComponent>
-            <div class="add-here-button">
-              <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(index)">
-              </CardAddHereComponent>
-            </div>
+            <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(index)">
+            </CardAddHereComponent>
           </div>
         </div>
       </section>
@@ -97,7 +97,10 @@ const selectTimelineForSong = (index: number) => {
   gap: 2rem;
 }
 
-.player-section, .timeline-section {
+.player-section,
+.timeline-section,
+.cards-in-timeline,
+.cards-in-timeline-repeat {
   width: 100%;
 }
 
@@ -115,7 +118,7 @@ const selectTimelineForSong = (index: number) => {
   align-items: center;
 }
 
-@media(max-width: 40rem) {
+@media (max-width: 40rem) {
 
   .cards-in-timeline,
   .cards-in-timeline-repeat {

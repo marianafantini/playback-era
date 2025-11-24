@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import {usePlaylistStore} from '@/stores/playlist.ts'
 import {onBeforeMount, onMounted, watch} from 'vue'
-import {Progress} from 'ant-design-vue'
+import {Progress, Button} from 'ant-design-vue'
 import {PauseCircleOutlined, PlayCircleOutlined} from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
 const {song} = defineProps(["song"])
+let isPlaying = false;
 
 onBeforeMount(() => {
   configurePlayer()
@@ -18,25 +19,15 @@ const configurePlayer = () => {
       uri: song.spotifyURI
     }
     const callback = (EmbedController: any) => {
-      // const handlePlaybackUpdate = (e) => {
-      //   const {position, duration, isBuffering, isPaused, playingURI} = e.data;
-      //   playlistStore.songPercentage = Math.max(position / duration * 100, 5);
-      //   console.log(playlistStore.songPercentage)
-      //   console.log(
-      //     `Playback State updates:
-      //         position - ${position},
-      //         duration - ${duration},
-      //         isBuffering - ${isBuffering},
-      //         isPaused - ${isPaused},
-      //         playingURI - ${playingURI},
-      //         duration - ${duration}`
-      //   );
-      // };
-      //
-      // EmbedController.addListener(
-      //   "playback_update",
-      //   handlePlaybackUpdate
-      // );
+      EmbedController.addListener('playback_update', event => {
+        if (event.data.isPaused) {
+          isPlaying = false;
+          console.log("pause")
+        } else {
+          isPlaying = true;
+          console.log("play")
+        }
+      });
 
       playlistStore.player = EmbedController
       playlistStore.playerReady = true
@@ -56,20 +47,10 @@ const pauseSong = () => {
 </script>
 
 <template>
-
   <div class="music-card">
-    <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
-
     <div class="player-commands" v-if="playlistStore.playerReady">
       <PlayCircleOutlined class="control-icons" @click="playSong"/>
       <PauseCircleOutlined class="control-icons" @click="pauseSong"/>
-
-<!--      <Progress :percent="playlistStore.songPercentage"-->
-<!--                :showInfo="false"-->
-<!--                size="small"-->
-<!--                class="progress"-->
-<!--                strokeColor="rgba(218, 222, 235, 0.85)"/>-->
-
     </div>
   </div>
 
@@ -83,7 +64,6 @@ const pauseSong = () => {
 
 .music-card {
   width: 100%;
-  min-height: var(--card-height);
   min-width: var(--card-width);
   border: none;
   padding: 1rem;
@@ -97,7 +77,6 @@ const pauseSong = () => {
 }
 
 .player-commands {
-  background-color: var(--player-timeline-color);
   padding: 0.5rem;
   display: flex;
   align-items: center;

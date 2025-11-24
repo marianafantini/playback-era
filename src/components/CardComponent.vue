@@ -1,32 +1,47 @@
 <script setup lang="ts">
-const { song } = defineProps(['song'])
+const {song} = defineProps(['song'])
 </script>
 
 <template>
   <div :class="'music-card ' + song?.color + '-card'">
-    <p>{{ song?.artist }}</p>
-    <p class="year">{{ song?.year }}</p>
-    <p>{{ song?.name }}</p>
+    <img :src="song.image" :alt="'Imagem da música ' + song.name" class="song-image">
+    <div>
+      <p class="song-name">{{ song?.name }}</p>
+      <p class="song-artist">{{ song?.artist }}</p>
+      <p class="song-year">{{ song?.year }}</p>
+    </div>
   </div>
 </template>
 
 <style scoped>
 
+.song-image {
+  height: 5rem;
+}
+
 .music-card {
   border: 0.1rem solid;
-  padding: 1rem 2rem;
+  padding: 0.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  min-height: var(--card-height);
-  min-width: var(--card-width);
+  width: 100%;
 }
 
-.year {
-  font-size: 3rem;
+.song-artist {
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.song-name {
+  font-weight: bold;
+}
+
+.song-year {
+  font-size: 1.5rem;
 }
 
 </style>

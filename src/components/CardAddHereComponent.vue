@@ -24,8 +24,7 @@ import {PlusOutlined} from "@ant-design/icons-vue";
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  min-height: var(--card-height);
-  min-width: var(--card-width);
+  width: 100%;
   cursor: pointer;
 }
 
