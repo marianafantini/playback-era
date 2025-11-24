@@ -52,7 +52,7 @@ const startLogin = async () => {
 
 <template>
   <div>
-    <Button @click="startLogin">login</Button>
+    <Button @click="startLogin">Login with Spotify</Button>
   </div>
 </template>
 
