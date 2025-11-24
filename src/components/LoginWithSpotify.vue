@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from "ant-design-vue"
+import {Button} from "ant-design-vue"
 
 const generateRandomString = (length: number) => {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -52,10 +52,40 @@ const startLogin = async () => {
 
 <template>
   <div>
-    <Button @click="startLogin">Login with Spotify</Button>
+    <Button @click="startLogin"
+            size="large"
+            class="spotify-button">
+      <img src="/public/2024_Spotify_logo_without_text_(black).svg">
+      Login with Spotify
+    </Button>
   </div>
 </template>
 
 <style>
+
+.spotify-button {
+  background: var(--spotify-green);
+  border-color: var(--spotify-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotify-button:hover {
+  background: var(--spotify-green);
+  border-color: var(--spotify-green) !important;
+  color: black !important;
+  transform: scale(1.1);
+}
+
+.spotify-button img {
+  height: 1rem;
+  margin-right: 1rem;
+}
+
+.spotify-button span {
+  font-weight: bold;
+}
+
 
 </style>
