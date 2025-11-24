@@ -53,7 +53,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  min-height: 70vh;
 }
 
 .game-title {

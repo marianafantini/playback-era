@@ -23,15 +23,13 @@ const goToPlaylist = (playlist: Playlist) => {
 <template>
   <main>
     <section class="game-board">
-      <section>
-        <div class="playlist-list">
-          <div v-for="playlist in playlistStore.usersPlaylists"
-               @click="goToPlaylist(playlist)">
-            <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
+      <div class="playlist-list">
+        <div v-for="playlist in playlistStore.usersPlaylists"
+             @click="goToPlaylist(playlist)">
+          <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
 
-          </div>
         </div>
-      </section>
+      </div>
 
     </section>
   </main>
@@ -46,14 +44,16 @@ const goToPlaylist = (playlist: Playlist) => {
   align-items: center;
   height: 100%;
   min-height: 70vh;
+  width: 100%;
 }
 
 .playlist-list {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 </style>
