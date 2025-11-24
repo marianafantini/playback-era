@@ -19,7 +19,7 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      path: '/loginSuccess',
+      path: '/login-success',
       name: 'loginSuccess',
       component: LoginSuccessView,
       props: (route) => ({ code: route.query.code }),
