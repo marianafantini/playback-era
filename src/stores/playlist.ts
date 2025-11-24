@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { type Song } from '@/models/song'
+import type { SpotifyItem } from '@/models/spotify-track.ts'
 
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
@@ -8,43 +9,42 @@ export const usePlaylistStore = defineStore('playlist', {
     playedSongs: Song[],
     possibleColors: string[],
     player: any,
-    ready: boolean,
+    playerReady: boolean,
+    accessToken?: string,
   } => ({
     playlist: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
     player: {},
-    ready: false,
+    playerReady: false,
   }),
   actions: {
-    initPlaylist(): void {
-      this.playlist = [
-        {
-          year: 2020,
-          name: 'august',
-          artist: 'Taylor Swift',
-          youtubeVideoID: 'nn_0zPAfyo8'
-        },
-        {
-          year: 2022,
-          name: 'As It Was',
-          artist: 'Harry Styles',
-          youtubeVideoID: 'H5v3kku4y6Q'
-        },
-        {
-          year: 2020,
-          name: 'Watermelon Sugar',
-          artist: 'Harry Styles',
-          youtubeVideoID: 'E07s5ZYygMg'
-        },
-        {
-          year: 1985,
-          name: 'Tédio',
-          artist: 'Biquíni Cavadão',
-          youtubeVideoID: '18nFH23iXJw'
+    async initPlaylist(): Promise<Song[]> {
+      const accessToken = window.localStorage.getItem('spotify_access_token')
+      console.log("accessToken", accessToken)
+      const response = await fetch('https://api.spotify.com/v1/playlists/2h9UT9SQZoC58sQ5KvTFdX/tracks', {
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${accessToken}`
         }
-      ]
+      }).then((response) => {
+        return response.json()
+      })
+
+      const playlist = response.items.map((item: SpotifyItem) => {
+        return {
+          name: item.track.name,
+          spotifyURI: item.track.uri,
+          artist: item.track.artists.map((artist) => artist.name).join(' & '),
+          year: item.track.album.release_date.split("-")[0],
+        }
+      })
+
+      this.playlist = playlist
+
+      return playlist
     },
+
     getNextSong(): void {
       if (this.playlist.length > 0) {
         const index: number = Math.floor(Math.random() * this.playlist.length)
@@ -94,6 +94,6 @@ export const usePlaylistStore = defineStore('playlist', {
     randomColor(): string {
       const index = Math.floor(Math.random() * this.possibleColors.length)
       return this.possibleColors[index] ? this.possibleColors[index] : ''
-    },
+    }
   }
 })

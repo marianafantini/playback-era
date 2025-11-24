@@ -1,52 +1,38 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue'
 import AddHereComponent from '@/components/AddHereComponent.vue'
-import { usePlaylistStore } from '@/stores/playlist'
+import {usePlaylistStore} from '@/stores/playlist'
 
-import { type DebuggerEvent, type DebuggerEventExtraInfo, onBeforeMount, onMounted } from 'vue'
+import {onBeforeMount} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
-import type { SubscriptionCallbackMutation, SubscriptionCallbackMutationPatchObject } from 'pinia'
 
-import type { Song } from '@/models/song.ts'
-
+const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
-  playlistStore.initPlaylist()
-  playlistStore.getNextSong()
-})
-
-onMounted(() => {
-  setInitialSong()
+  playlistStore.initPlaylist().then(() => {
+    playlistStore.getNextSong()
+    setInitialSong()
+  })
 })
 
 const getAndStartNextSong = () => {
   playlistStore.getNextSong()
-  if (playlistStore.ready) {
-    playlistStore.player.loadVideoById(playlistStore.currentSong?.youtubeVideoID)
+  if (playlistStore.playerReady) {
+    playlistStore.player.loadUri(playlistStore.currentSong?.spotifyURI)
+    playlistStore.player.play()
   }
-  playlistStore.$subscribe((mutation: SubscriptionCallbackMutation<{
-    currentSong: Song;
-    playlist: Song[];
-    playedSongs: Song[];
-    possibleColors: string[];
-    player: any;
-    ready: boolean;
-  }>) => {
-    const event = Array.isArray(mutation?.events) ? mutation.events[0] as DebuggerEvent : mutation.events as DebuggerEvent;
-    if (event.key === 'ready' && event.newValue) {
-      playlistStore.player.playVideo()
-    }
-  })
 }
 
 const setInitialSong = () => {
-  const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, 0) : false
+  if (playlistStore.currentSong) {
+    playlistStore.addPlayedSong(playlistStore.currentSong, 0)
+  }
   getAndStartNextSong()
 }
 
 const selectTimelineForSong = (index: number) => {
-  playlistStore.player.stopVideo()
+  playlistStore.player.pause()
   const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, index + 1) : false
 
   if (response) {
@@ -63,13 +49,13 @@ const selectTimelineForSong = (index: number) => {
 <template>
   <main>
     <section class="game-board">
+
       <section v-if="playlistStore.currentSong">
         <PlayerComponent :song="playlistStore.currentSong">
         </PlayerComponent>
       </section>
 
       <section>
-        <!--   cards that the user has, in timeline   -->
         <div class="cards-in-timeline">
           <AddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)"></AddHereComponent>
           <div v-for="(song, index) in playlistStore.playedSongs"

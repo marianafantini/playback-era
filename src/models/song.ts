@@ -1,7 +1,8 @@
 export interface Song {
   name: string;
   artist: string;
-  year: number;
+  year: string;
   color?: string;
-  youtubeVideoID: string;
+  youtubeVideoID?: string;
+  spotifyURI?: string;
 }
