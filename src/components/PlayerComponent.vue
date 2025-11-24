@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {usePlaylistStore} from '@/stores/playlist.ts'
-import {onBeforeMount, onMounted, watch} from 'vue'
-import {Progress, Button} from 'ant-design-vue'
+import {onBeforeMount} from 'vue'
 import {PauseCircleOutlined, PlayCircleOutlined} from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
