@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'; // For Composition API
+import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const {code} = defineProps(["code"])
