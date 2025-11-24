@@ -57,12 +57,12 @@ const selectTimelineForSong = (index: number) => {
     </section>
     <section class="game-board" v-if="playlistStore.playlist.length > 0">
 
-      <section v-if="playlistStore.currentSong">
+      <section v-if="playlistStore.currentSong" class="player-section">
         <PlayerComponent :song="playlistStore.currentSong">
         </PlayerComponent>
       </section>
 
-      <section>
+      <section class="timeline-section">
         <div class="cards-in-timeline">
           <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)">
           </CardAddHereComponent>
@@ -93,12 +93,18 @@ const selectTimelineForSong = (index: number) => {
   align-items: center;
   height: 100%;
   min-height: 70vh;
+  width: 100%;
+  gap: 2rem;
+}
+
+.player-section, .timeline-section {
+  width: 100%;
 }
 
 .cards-in-timeline {
   background-color: var(--cards-background-color);
   padding: 2rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
 }
 
 .cards-in-timeline,
