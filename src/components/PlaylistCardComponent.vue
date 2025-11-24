@@ -23,9 +23,9 @@ const {playlist} = defineProps(['playlist'])
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  width: var(--card-width);
-  min-height: var(--card-height);
-  max-height: calc(var(--card-height) * 1.1);
+  min-width: var(--card-width);
+  max-width: calc(var(--card-width) * 1.2);
+  height: var(--card-height);
 }
 
 .playlist-cover {

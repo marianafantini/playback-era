@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue'
 import {usePlaylistStore} from '@/stores/playlist'
-import {Button} from "ant-design-vue"
 import {onBeforeMount} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
-import {useRouter} from 'vue-router';
-
-const router = useRouter();
+import { Spin } from "ant-design-vue"
 
 const {playlist} = defineProps(["playlist"])
 const playlistStore = usePlaylistStore()
@@ -55,11 +52,13 @@ const selectTimelineForSong = (index: number) => {
 
 <template>
   <main>
-    <div v-if="playlistStore.playlist.length === 0">
+    <div v-if="playlistStore.loading">
+      <Spin></Spin>
+    </div>
+    <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
       No songs to play
     </div>
-    <div class="game-board" v-if="playlistStore.playlist.length > 0">
-
+    <div class="game-board" v-if="!playlistStore.loading && playlistStore.playlist.length > 0">
       <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
 
       <div v-if="playlistStore.currentSong" class="player-section">

@@ -36,9 +36,8 @@ import {PlusOutlined} from "@ant-design/icons-vue";
 @media (min-width: 25rem) {
   .music-card {
     min-width: var(--card-width);
-    max-width: calc(var(--card-width) * 1.1);
-    min-height: var(--card-height);
-    max-height: calc(var(--card-height) * 1.1);
+    max-width: calc(var(--card-width) * 1.2);
+    height: var(--card-height);
   }
 }
 
