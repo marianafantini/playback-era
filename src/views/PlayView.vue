@@ -10,9 +10,13 @@ const {playlist} = defineProps(["playlist"])
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
-  playlistStore.initPlaylist(playlist).then(() => {
-    playlistStore.getNextSong()
-    setInitialSong()
+  playlistStore.initPlaylist(playlist).then((response) => {
+    if (response.filter((item) => item !== undefined).length > 0) {
+      playlistStore.getNextSong()
+      setInitialSong()
+    } else {
+      console.log("no songs on this playlist")
+    }
   })
 })
 
