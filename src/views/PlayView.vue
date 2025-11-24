@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue'
-import AddHereComponent from '@/components/AddHereComponent.vue'
 import {usePlaylistStore} from '@/stores/playlist'
 
 import {onBeforeMount} from 'vue'
@@ -96,12 +95,27 @@ const selectTimelineForSong = (index: number) => {
   min-height: 70vh;
 }
 
+.cards-in-timeline {
+  background-color: var(--cards-background-color);
+  padding: 2rem;
+  border-radius: 2rem;
+}
+
 .cards-in-timeline,
 .cards-in-timeline-repeat {
   display: flex;
   gap: 1rem;
   justify-content: center;
   align-items: center;
+}
+
+@media(max-width: 40rem) {
+
+  .cards-in-timeline,
+  .cards-in-timeline-repeat {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 </style>
