@@ -6,11 +6,11 @@ import {usePlaylistStore} from '@/stores/playlist'
 import {onBeforeMount} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 
-const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
+const {playlist} = defineProps(["playlist"])
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
-  playlistStore.initPlaylist().then(() => {
+  playlistStore.initPlaylist(playlist).then(() => {
     playlistStore.getNextSong()
     setInitialSong()
   })
