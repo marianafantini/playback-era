@@ -36,18 +36,18 @@ export const usePlaylistStore = defineStore('playlist', {
 
     async getUserPlaylists(): Promise<Playlist[]> {
       const response = await this.makeRequestToSpotify("https://api.spotify.com/v1/me/playlists", "GET")
-
-      console.log(response)
-      const playlistList = response.items.map((item: SpotifyPlaylist) => {
+      const playlistList = response.items.map((playlist: SpotifyPlaylist) => {
         return {
-          name: item.name,
-          id: item.id,
-          spotifyURI: item.uri,
-          collaborative: item.collaborative,
-          description: item.description,
-          public: item.public,
+          name: playlist.name,
+          id: playlist.id,
+          spotifyURI: playlist.uri,
+          collaborative: playlist.collaborative,
+          description: playlist.description,
+          public: playlist.public,
+          cover: playlist.images[0].url
         }
       })
+
 
       this.usersPlaylists = playlistList;
       return playlistList
@@ -57,11 +57,13 @@ export const usePlaylistStore = defineStore('playlist', {
       const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks', 'GET')
 
       const playlist = response.items.map((item: SpotifyItem) => {
-        return {
-          name: item.track.name,
-          spotifyURI: item.track.uri,
-          artist: item.track.artists.map((artist) => artist.name).join(' & '),
-          year: item.track.album.release_date.split("-")[0],
+        if (item.track.type === "track") {
+          return {
+            name: item.track.name,
+            spotifyURI: item.track.uri,
+            artist: item.track.artists.map((artist) => artist.name).join(' & '),
+            year: item.track.album.release_date.split("-")[0],
+          }
         }
       })
 

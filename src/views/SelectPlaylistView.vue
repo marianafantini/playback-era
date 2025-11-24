@@ -9,12 +9,11 @@ const router = useRouter();
 
 const playlistStore = usePlaylistStore()
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
   playlistStore.getUserPlaylists()
 })
 
 const goToPlaylist = (playlist) => {
-  console.log("go to playlist", playlist.id)
   router.push("/play?playlist=" + playlist.id)
 }
 
@@ -25,7 +24,8 @@ const goToPlaylist = (playlist) => {
     <section class="game-board">
       <section>
         <div class="playlist-list">
-          <div v-for="playlist in playlistStore.usersPlaylists" @click="goToPlaylist(playlist)">
+          <div v-for="playlist in playlistStore.usersPlaylists"
+               @click="goToPlaylist(playlist)">
             <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
 
           </div>
@@ -45,6 +45,14 @@ const goToPlaylist = (playlist) => {
   align-items: center;
   height: 100%;
   min-height: 70vh;
+}
+
+.playlist-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 </style>

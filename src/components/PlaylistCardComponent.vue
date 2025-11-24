@@ -1,11 +1,13 @@
 <script setup lang="ts">
-const { playlist } = defineProps(['playlist'])
+const {playlist} = defineProps(['playlist'])
 </script>
 
 <template>
   <div class="music-card">
-       <p>{{playlist.name}}</p>
-       <p v-if="playlist.description">{{playlist.description}}</p>
+    <img :src="playlist.cover"
+         alt="Playlist Cover Image"
+         class="playlist-cover"/>
+    <p>{{ playlist.name }}</p>
   </div>
 </template>
 
@@ -20,8 +22,17 @@ const { playlist } = defineProps(['playlist'])
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  min-height: var(--card-height);
-  min-width: var(--card-width);
+  height: var(--card-height);
+  width: var(--card-width);
+}
+
+.playlist-cover {
+  max-width: calc(var(--card-width) * 0.7);
+  height: auto;
+}
+
+p {
+  text-wrap: wrap;
 }
 
 </style>

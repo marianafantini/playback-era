@@ -5,4 +5,5 @@ export interface Playlist {
   collaborative: boolean;
   description: string;
   public: boolean;
+  cover: string;
 }
