@@ -4,16 +4,17 @@ import {usePlaylistStore} from '@/stores/playlist'
 import {onBeforeMount} from 'vue'
 import PlaylistCardComponent from "@/components/PlaylistCardComponent.vue";
 import {useRouter} from "vue-router";
+import type {Playlist} from "@/models/playlist.ts";
 
 const router = useRouter();
 
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(async () => {
-  playlistStore.getUserPlaylists()
+  await playlistStore.getUserPlaylists()
 })
 
-const goToPlaylist = (playlist) => {
+const goToPlaylist = (playlist: Playlist) => {
   router.push("/play?playlist=" + playlist.id)
 }
 

@@ -1,16 +1,5 @@
-interface SpotifyArtist {
-  name: string
-}
-
-interface SpotifyAlbum {
-  release_date: string
-}
-
-interface SpotifyTrack {
-  name: string
-  uri: string
-  artists: SpotifyArtist[]
-  album: SpotifyAlbum
+interface SpotifyImage {
+  url: string
 }
 
 export interface SpotifyPlaylist {
@@ -20,4 +9,5 @@ export interface SpotifyPlaylist {
   description: string;
   collaborative: boolean;
   public: boolean;
+  images: SpotifyImage[];
 }

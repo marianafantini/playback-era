@@ -11,6 +11,7 @@ interface SpotifyTrack {
   uri: string
   artists: SpotifyArtist[]
   album: SpotifyAlbum
+  type: string
 }
 
 export interface SpotifyItem {

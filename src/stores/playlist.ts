@@ -2,6 +2,7 @@ import {defineStore} from 'pinia'
 import {type Song} from '@/models/song'
 import type {SpotifyItem} from '@/models/spotify-track.ts'
 import type {Playlist} from "@/models/playlist.ts";
+import type {SpotifyPlaylist} from "@/models/spotify-playlist.ts";
 
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
@@ -22,7 +23,7 @@ export const usePlaylistStore = defineStore('playlist', {
     playerReady: false,
   }),
   actions: {
-    async makeRequestToSpotify(url, method) {
+    async makeRequestToSpotify(url: string, method: string) {
       const accessToken = window.localStorage.getItem('spotify_access_token');
       return await fetch(url, {
         method: method,
@@ -44,7 +45,7 @@ export const usePlaylistStore = defineStore('playlist', {
           collaborative: playlist.collaborative,
           description: playlist.description,
           public: playlist.public,
-          cover: playlist.images[0].url
+          cover: playlist.images[0]?.url
         }
       })
 
@@ -53,11 +54,11 @@ export const usePlaylistStore = defineStore('playlist', {
       return playlistList
     },
 
-    async initPlaylist(playlistID): Promise<Song[]> {
+    async initPlaylist(playlistID: string): Promise<Song[]> {
       const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks', 'GET')
 
       const playlist = response.items
-        .filter((item) => item.track.type === "track")
+        .filter((item: SpotifyItem) => item.track.type === "track")
         .map((item: SpotifyItem) => {
           return {
             name: item.track.name,
