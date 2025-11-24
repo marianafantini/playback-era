@@ -1,6 +1,7 @@
 :root {
-  --first-color-gradient: rgba(131, 58, 180, 1);
-  --second-color-gradient: rgba(252, 176, 69, 1);
+  --background-color: #1c2e72;
+  --cards-background-color: #263b5d;
+  --color: #90a1bb;
   --spotify-green: #1ed760;
 
   font-family:
@@ -27,7 +28,8 @@
 }
 
 body {
-  background: linear-gradient(120deg, var(--first-color-gradient) 0%, var(--second-color-gradient) 100%);
+  background-color: var(--background-color);
+  color: var(--color);
   min-height: 100vh;
   transition:
     color 0.5s,

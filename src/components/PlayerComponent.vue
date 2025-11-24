@@ -65,6 +65,7 @@ const pauseSong = () => {
   border-radius: 1rem;
   min-height: var(--card-height);
   min-width: var(--card-width);
+  background-color: var(--cards-background-color);
 }
 
 .control-icons {

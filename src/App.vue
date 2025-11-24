@@ -4,7 +4,7 @@ const router = useRouter();
 </script>
 
 <template>
-  <header v-if="router?.currentRoute.value.name !== 'home'">
+  <header v-if="router?.currentRoute.value.name !== 'home'" @click="router.push('/')">
     <img src="/public/mp3-icon.png"
          alt="Logo of the app, which is an mp3 player icon"
          class="logo"/>
@@ -20,6 +20,7 @@ header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
 .logo {
