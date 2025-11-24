@@ -11,10 +11,6 @@ onBeforeMount(() => {
   configurePlayer()
 })
 
-onMounted(() => {
-  initSong()
-})
-
 const configurePlayer = () => {
   (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
     const element = document.getElementById('embed-iframe')
@@ -22,20 +18,31 @@ const configurePlayer = () => {
       uri: song.spotifyURI
     }
     const callback = (EmbedController: any) => {
+      // const handlePlaybackUpdate = (e) => {
+      //   const {position, duration, isBuffering, isPaused, playingURI} = e.data;
+      //   playlistStore.songPercentage = Math.max(position / duration * 100, 5);
+      //   console.log(playlistStore.songPercentage)
+      //   console.log(
+      //     `Playback State updates:
+      //         position - ${position},
+      //         duration - ${duration},
+      //         isBuffering - ${isBuffering},
+      //         isPaused - ${isPaused},
+      //         playingURI - ${playingURI},
+      //         duration - ${duration}`
+      //   );
+      // };
+      //
+      // EmbedController.addListener(
+      //   "playback_update",
+      //   handlePlaybackUpdate
+      // );
+
       playlistStore.player = EmbedController
       playlistStore.playerReady = true
     }
     IFrameAPI.createController(element, options, callback)
   }
-}
-
-const initSong = () => {
-  // todo: fix this to enable song to start once the page loads
-  playlistStore.$subscribe((mutation) => {
-    if (mutation.events.key === "playerReady" && mutation.events.newValue === true) {
-      playlistStore.player.play()
-    }
-  })
 }
 
 const playSong = () => {
@@ -51,18 +58,17 @@ const pauseSong = () => {
 <template>
 
   <div class="music-card">
-    <div v-if="!playlistStore.playerReady">
-      Loading
-    </div>
+    <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
+
     <div class="player-commands" v-if="playlistStore.playerReady">
       <PlayCircleOutlined class="control-icons" @click="playSong"/>
       <PauseCircleOutlined class="control-icons" @click="pauseSong"/>
 
-      <Progress :percent="30"
-                :showInfo="false"
-                size="small"
-                class="progress"
-                strokeColor="rgba(218, 222, 235, 0.85)"/>
+<!--      <Progress :percent="playlistStore.songPercentage"-->
+<!--                :showInfo="false"-->
+<!--                size="small"-->
+<!--                class="progress"-->
+<!--                strokeColor="rgba(218, 222, 235, 0.85)"/>-->
 
     </div>
   </div>
@@ -83,7 +89,7 @@ const pauseSong = () => {
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;

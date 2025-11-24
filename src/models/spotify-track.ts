@@ -12,6 +12,7 @@ interface SpotifyTrack {
   artists: SpotifyArtist[]
   album: SpotifyAlbum
   type: string
+  duration_ms: number
 }
 
 export interface SpotifyItem {
