@@ -33,7 +33,7 @@ const getToken = async (code: any) => {
 }
 
 getToken(code).then(() => {
-  router.push("/play")
+  router.push("/select-playlist")
 })
 
 </script>

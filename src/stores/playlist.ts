@@ -1,10 +1,13 @@
-import { defineStore } from 'pinia'
-import { type Song } from '@/models/song'
-import type { SpotifyItem } from '@/models/spotify-track.ts'
+import {defineStore} from 'pinia'
+import {type Song} from '@/models/song'
+import type {SpotifyItem} from '@/models/spotify-track.ts'
+import type {Playlist} from "@/models/playlist.ts";
+import type {SpotifyPlaylist} from "@/models/spotify-playlist.ts";
 
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
     currentSong?: Song,
+    usersPlaylists: Playlist[],
     playlist: Song[],
     playedSongs: Song[],
     possibleColors: string[],
@@ -12,6 +15,7 @@ export const usePlaylistStore = defineStore('playlist', {
     playerReady: boolean,
     accessToken?: string,
   } => ({
+    usersPlaylists: [],
     playlist: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
@@ -19,26 +23,51 @@ export const usePlaylistStore = defineStore('playlist', {
     playerReady: false,
   }),
   actions: {
-    async initPlaylist(): Promise<Song[]> {
-      const accessToken = window.localStorage.getItem('spotify_access_token')
-      console.log("accessToken", accessToken)
-      const response = await fetch('https://api.spotify.com/v1/playlists/2h9UT9SQZoC58sQ5KvTFdX/tracks', {
-        method: 'GET',
+    async makeRequestToSpotify(url: string, method: string) {
+      const accessToken = window.localStorage.getItem('spotify_access_token');
+      return await fetch(url, {
+        method: method,
         headers: {
           authorization: `Bearer ${accessToken}`
         }
       }).then((response) => {
         return response.json()
       })
+    },
 
-      const playlist = response.items.map((item: SpotifyItem) => {
+    async getUserPlaylists(): Promise<Playlist[]> {
+      const response = await this.makeRequestToSpotify("https://api.spotify.com/v1/me/playlists", "GET")
+      const playlistList = response.items.map((playlist: SpotifyPlaylist) => {
         return {
-          name: item.track.name,
-          spotifyURI: item.track.uri,
-          artist: item.track.artists.map((artist) => artist.name).join(' & '),
-          year: item.track.album.release_date.split("-")[0],
+          name: playlist.name,
+          id: playlist.id,
+          spotifyURI: playlist.uri,
+          collaborative: playlist.collaborative,
+          description: playlist.description,
+          public: playlist.public,
+          cover: playlist.images[0]?.url
         }
       })
+
+
+      this.usersPlaylists = playlistList;
+      return playlistList
+    },
+
+    async initPlaylist(playlistID: string): Promise<Song[]> {
+      const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks', 'GET')
+
+      const playlist = response.items
+        .filter((item: SpotifyItem) => item.track.type === "track")
+        .map((item: SpotifyItem) => {
+          return {
+            name: item.track.name,
+            spotifyURI: item.track.uri,
+            artist: item.track.artists.map((artist) => artist.name).join(' & '),
+            year: item.track.album.release_date.split("-")[0],
+
+          }
+        })
 
       this.playlist = playlist
 

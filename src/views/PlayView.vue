@@ -6,13 +6,17 @@ import {usePlaylistStore} from '@/stores/playlist'
 import {onBeforeMount} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 
-const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
+const {playlist} = defineProps(["playlist"])
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
-  playlistStore.initPlaylist().then(() => {
-    playlistStore.getNextSong()
-    setInitialSong()
+  playlistStore.initPlaylist(playlist).then((response) => {
+    if (response.length > 0) {
+      playlistStore.getNextSong()
+      setInitialSong()
+    } else {
+      console.log("no songs on this playlist")
+    }
   })
 })
 
@@ -48,7 +52,10 @@ const selectTimelineForSong = (index: number) => {
 
 <template>
   <main>
-    <section class="game-board">
+    <section v-if="playlistStore.playlist.length === 0">
+      No songs to play
+    </section>
+    <section class="game-board" v-if="playlistStore.playlist.length > 0">
 
       <section v-if="playlistStore.currentSong">
         <PlayerComponent :song="playlistStore.currentSong">
