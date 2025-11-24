@@ -24,8 +24,20 @@ import {PlusOutlined} from "@ant-design/icons-vue";
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  width: 100%;
   cursor: pointer;
+}
+
+@media (max-width: 25rem) {
+  .music-card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 25rem) {
+  .music-card {
+    min-width: var(--card-width);
+    min-height: var(--card-height);
+  }
 }
 
 </style>

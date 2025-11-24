@@ -88,10 +88,6 @@ const selectTimelineForSong = (index: number) => {
 
 <style scoped>
 
-.back-to-playlists {
-  margin: 1rem 0;
-}
-
 .game-board {
   display: flex;
   flex-direction: column;
@@ -110,6 +106,12 @@ const selectTimelineForSong = (index: number) => {
   width: 100%;
 }
 
+@media (min-width: 25rem) {
+  .cards-in-timeline-repeat {
+    justify-content: flex-start !important;
+  }
+}
+
 .cards-in-timeline {
   background-color: var(--cards-background-color);
   padding: 2rem;
@@ -125,7 +127,6 @@ const selectTimelineForSong = (index: number) => {
 }
 
 @media (max-width: 40rem) {
-
   .cards-in-timeline,
   .cards-in-timeline-repeat {
     display: flex;

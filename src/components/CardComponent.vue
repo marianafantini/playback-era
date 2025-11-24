@@ -21,7 +21,7 @@ const {song} = defineProps(['song'])
 
 .music-card {
   border: 0.1rem solid;
-  padding: 0.5rem;
+  padding: 1rem;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -29,6 +29,14 @@ const {song} = defineProps(['song'])
   align-items: center;
   border-radius: 1rem;
   width: 100%;
+}
+
+@media (min-width: 25rem) {
+  .music-card {
+    min-width: var(--card-width);
+    width: auto;
+    min-height: var(--card-height);
+  }
 }
 
 .song-artist {
