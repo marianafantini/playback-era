@@ -11,7 +11,7 @@ const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
   playlistStore.initPlaylist(playlist).then((response) => {
-    if (response.filter((item) => item !== undefined).length > 0) {
+    if (response.length > 0) {
       playlistStore.getNextSong()
       setInitialSong()
     } else {
@@ -52,7 +52,10 @@ const selectTimelineForSong = (index: number) => {
 
 <template>
   <main>
-    <section class="game-board">
+    <section v-if="playlistStore.playlist.length === 0">
+      No songs to play
+    </section>
+    <section class="game-board" v-if="playlistStore.playlist.length > 0">
 
       <section v-if="playlistStore.currentSong">
         <PlayerComponent :song="playlistStore.currentSong">

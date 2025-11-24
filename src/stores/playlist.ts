@@ -56,16 +56,17 @@ export const usePlaylistStore = defineStore('playlist', {
     async initPlaylist(playlistID): Promise<Song[]> {
       const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks', 'GET')
 
-      const playlist = response.items.map((item: SpotifyItem) => {
-        if (item.track.type === "track") {
+      const playlist = response.items
+        .filter((item) => item.track.type === "track")
+        .map((item: SpotifyItem) => {
           return {
             name: item.track.name,
             spotifyURI: item.track.uri,
             artist: item.track.artists.map((artist) => artist.name).join(' & '),
             year: item.track.album.release_date.split("-")[0],
+
           }
-        }
-      })
+        })
 
       this.playlist = playlist
 
