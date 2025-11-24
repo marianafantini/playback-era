@@ -31,7 +31,7 @@ const startLogin = async () => {
   const codeChallenge = base64encode(hashed);
 
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-  const redirectUri = window.location.origin + "/play";
+  const redirectUri = window.location.origin + "/login-success";
 
   const scope = 'user-read-private user-read-email';
   const authUrl = new URL("https://accounts.spotify.com/authorize")
