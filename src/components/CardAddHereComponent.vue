@@ -1,19 +1,22 @@
 <script setup lang="ts">
-const { song } = defineProps(['song'])
+const {song} = defineProps(['song'])
+import {PlusOutlined} from "@ant-design/icons-vue";
 </script>
 
 <template>
-  <div :class="'music-card ' + song?.color + '-card'">
-    <p>{{ song?.artist }}</p>
-    <p class="year">{{ song?.year }}</p>
-    <p>{{ song?.name }}</p>
+  <div class="music-card"
+       @click="$emit('selectTimelineForSong')">
+    <div>
+      <PlusOutlined/>
+      Add here
+    </div>
   </div>
 </template>
 
 <style scoped>
 
 .music-card {
-  border: 0.1rem solid;
+  border: 0.1rem dashed var(--color);
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
@@ -23,10 +26,7 @@ const { song } = defineProps(['song'])
   border-radius: 1rem;
   min-height: var(--card-height);
   min-width: var(--card-width);
-}
-
-.year {
-  font-size: 3rem;
+  cursor: pointer;
 }
 
 </style>

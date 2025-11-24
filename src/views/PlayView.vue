@@ -5,6 +5,7 @@ import {usePlaylistStore} from '@/stores/playlist'
 
 import {onBeforeMount} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
+import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
 
 const {playlist} = defineProps(["playlist"])
 const playlistStore = usePlaylistStore()
@@ -64,7 +65,8 @@ const selectTimelineForSong = (index: number) => {
 
       <section>
         <div class="cards-in-timeline">
-          <AddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)"></AddHereComponent>
+          <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)">
+          </CardAddHereComponent>
           <div v-for="(song, index) in playlistStore.playedSongs"
                class="cards-in-timeline-repeat">
             <CardComponent
@@ -72,8 +74,8 @@ const selectTimelineForSong = (index: number) => {
               ref="cards"
             ></CardComponent>
             <div class="add-here-button">
-              <AddHereComponent
-                @selectTimelineForSong="selectTimelineForSong(index)"></AddHereComponent>
+              <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(index)">
+              </CardAddHereComponent>
             </div>
           </div>
         </div>
