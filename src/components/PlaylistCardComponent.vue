@@ -24,7 +24,7 @@ const {playlist} = defineProps(['playlist'])
   align-items: center;
   border-radius: 1rem;
   min-width: var(--card-width);
-  max-width: calc(var(--card-width) * 1.2);
+  width: calc(var(--card-width) * 1.2);
   height: var(--card-height);
 }
 
