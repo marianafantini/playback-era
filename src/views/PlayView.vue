@@ -84,13 +84,15 @@ const selectTimelineForSong = (index: number) => {
           <div v-if="playlistStore.playlistSongsLeft.length === 0">
             <h3>
               <SmileOutlined />
-              Parabéns!! Você acertou {{ playlistStore.playedSongs.length }} músicas
+              Parabéns!! Você acertou {{ playlistStore.playedSongs.length }}
+              {{ playlistStore.playedSongs.length > 1 ? 'músicas' : 'música' }}
             </h3>
           </div>
         </div>
 
         <div v-if="playlistStore.currentSong" class="player-component">
           <PlayerComponent :song="playlistStore.currentSong"
+                           :isGameStillActive="playlistStore.isGameStillActive()"
                            :amountOfSongs="playlistStore.playlist.length"
                            :amountOfSongsLeft="playlistStore.playlistSongsLeft.length">
           </PlayerComponent>
@@ -99,7 +101,8 @@ const selectTimelineForSong = (index: number) => {
 
       <div class="timeline-section">
         <div class="cards-in-timeline">
-          <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)">
+          <CardAddHereComponent :isGameStillActive="playlistStore.isGameStillActive()"
+                                @selectTimelineForSong="selectTimelineForSong(-1)">
           </CardAddHereComponent>
           <div v-for="(song, index) in playlistStore.playedSongs"
                class="cards-in-timeline-repeat"
@@ -109,7 +112,8 @@ const selectTimelineForSong = (index: number) => {
               ref="cards"
               :id="getIDForSongCard(song.name)"
             ></CardComponent>
-            <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(index)">
+            <CardAddHereComponent :isGameStillActive="playlistStore.isGameStillActive()"
+                                  @selectTimelineForSong="selectTimelineForSong(index)">
             </CardAddHereComponent>
           </div>
         </div>

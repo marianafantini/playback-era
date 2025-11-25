@@ -119,6 +119,10 @@ export const usePlaylistStore = defineStore('playlist', {
       }
     },
 
+    isGameStillActive(): boolean {
+      return this.playlistSongsLeft.length > 0
+    },
+
     addPlayedSong(currentSong: Song, index: number): boolean {
       console.log('addPlayedSong', currentSong)
       this.playedSongs.splice(index, 0, currentSong)

@@ -7,8 +7,9 @@ const playlistStore = usePlaylistStore()
 const {
   song,
   amountOfSongs,
-  amountOfSongsLeft
-} = defineProps(['song', 'amountOfSongs', 'amountOfSongsLeft'])
+  amountOfSongsLeft,
+  isGameStillActive
+} = defineProps(['song', 'amountOfSongs', 'amountOfSongsLeft', 'isGameStillActive'])
 let isPlaying = false
 
 onBeforeMount(() => {
@@ -56,9 +57,8 @@ const pauseSong = () => {
 </script>
 
 <template>
-  <div class="music-card">
-
-    <div class="player-commands" v-if="playlistStore.playerReady">
+  <div class="music-card" v-if="playlistStore.playerReady && isGameStillActive">
+    <div class="player-commands">
       <PlayCircleOutlined class="control-icons" @click="playSong" />
       <PauseCircleOutlined class="control-icons" @click="pauseSong" />
     </div>
