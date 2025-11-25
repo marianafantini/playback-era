@@ -36,30 +36,29 @@ const setInitialSong = () => {
   getAndStartNextSong()
 }
 
-const getIDForSongCard = (songName) => {
+const getIDForSongCard = (songName: string) => {
   return 'cards-song-' + songName.replaceAll(' ', '-').replaceAll('(', '-').replaceAll(')', '-')
 }
 
 const selectTimelineForSong = (index: number) => {
   playlistStore.player.pause()
-  let response: boolean
-  if (playlistStore.currentSong) {
-    response = playlistStore.addPlayedSong(playlistStore.currentSong, index + 1)
+  if (playlistStore.currentSong && playlistStore?.currentSong?.name) {
+    false
+    const elementId = getIDForSongCard(playlistStore?.currentSong?.name)
+    const response = playlistStore.addPlayedSong(playlistStore.currentSong, index + 1)
+
+    if (response) {
+      setTimeout(() => {
+        document.getElementById(elementId)?.classList.add('correct-item')
+      }, 100)
+    } else {
+      setTimeout(() => {
+        document.getElementById(elementId)?.classList.add('remove-item')
+      }, 100)
+    }
+
+    getAndStartNextSong()
   }
-
-  const elementId = getIDForSongCard(playlistStore?.currentSong?.name)
-
-  if (response) {
-    setTimeout(() => {
-      document.getElementById(elementId)?.classList.add('correct-item')
-    }, 100)
-  } else {
-    setTimeout(() => {
-      document.getElementById(elementId)?.classList.add('remove-item')
-    }, 100)
-  }
-
-  getAndStartNextSong()
 }
 
 </script>

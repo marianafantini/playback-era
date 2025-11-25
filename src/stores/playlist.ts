@@ -113,7 +113,9 @@ export const usePlaylistStore = defineStore('playlist', {
         const index: number = Math.floor(Math.random() * this.playlistSongsLeft.length)
         if (this.playlistSongsLeft[index]) {
           this.currentSong = this.playlist[index]
-          this.currentSong.color = this.randomColor()
+          if (this.currentSong) {
+            this.currentSong.color = this.randomColor()
+          }
           this.playlistSongsLeft.splice(index, 1)
         }
       }
@@ -126,7 +128,15 @@ export const usePlaylistStore = defineStore('playlist', {
     addPlayedSong(currentSong: Song, index: number): boolean {
       console.log('addPlayedSong', currentSong)
       this.playedSongs.splice(index, 0, currentSong)
-      return this.isAddedSongRight(index)
+      const isOrderCorrect: boolean = this.checkPlayedSongOrder()
+      if (!isOrderCorrect) {
+        setTimeout(() => {
+          console.log('splice remove item')
+          this.playedSongs.splice(index, 1)
+        }, 1100)
+      }
+
+      return isOrderCorrect
     },
 
     checkPlayedSongOrder(): boolean {
@@ -140,22 +150,6 @@ export const usePlaylistStore = defineStore('playlist', {
           break
         }
       }
-      return sorted
-    },
-
-    isAddedSongRight(index: number): boolean {
-      const sorted: boolean = this.checkPlayedSongOrder()
-
-      if (sorted) {
-        console.log('segue o jogo')
-      } else {
-        console.log('error')
-        setTimeout(() => {
-          console.log('splice remove item')
-          this.playedSongs.splice(index, 1)
-        }, 1100)
-      }
-
       return sorted
     },
 

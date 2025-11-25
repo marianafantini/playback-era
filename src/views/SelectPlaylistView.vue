@@ -20,8 +20,8 @@ const goToPlaylist = (playlist: Playlist) => {
   router.push("/play?playlist=" + playlist.id)
 }
 
-const searchForPlaylist = async (q: string): Promise<Playlist[]> => {
-  let searchResults = []
+const searchForPlaylist = async (q: string): Promise<void> => {
+  let searchResults: Playlist[] = []
   if (q.length > 0) {
     searchResults = await playlistStore.searchForPlaylist(q)
   }
