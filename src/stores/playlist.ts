@@ -89,7 +89,7 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     getSongsForRounds(playlist: Song[]): Song[] {
-      const numberOfSongs: number = this.amountOfRounds + 1
+      const numberOfSongs: number = Math.min(this.amountOfRounds + 1, playlist.length)
       const songs: Song[] = []
 
       while (songs.length < numberOfSongs) {
