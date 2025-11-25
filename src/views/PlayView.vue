@@ -43,7 +43,6 @@ const getIDForSongCard = (songName: string) => {
 const selectTimelineForSong = (index: number) => {
   playlistStore.player.pause()
   if (playlistStore.currentSong && playlistStore?.currentSong?.name) {
-    false
     const elementId = getIDForSongCard(playlistStore?.currentSong?.name)
     const response = playlistStore.addPlayedSong(playlistStore.currentSong, index + 1)
 
@@ -68,7 +67,8 @@ const selectTimelineForSong = (index: number) => {
       <Spin></Spin>
     </div>
     <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">No songs to play</div>
-    <div class="game-board">
+    <div v-if="!playlistStore.loading && playlistStore.playlist.length > 0"
+         class="game-board">
       <div class="player-section">
         <div class="player-page-title">
           <p>
