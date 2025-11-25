@@ -11,7 +11,7 @@ const router = useRouter();
       <img src="/public/mp3-icon.png"
            alt="Logo of the app, which is an mp3 player icon"
            class="logo"/>
-      <span class="logo-title">Playback Era </span>
+      <span class="logo-title">Playback Era</span>
     </div>
 
     <nav>

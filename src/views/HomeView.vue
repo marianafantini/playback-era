@@ -51,9 +51,10 @@ import LoginWithSpotify from "@/components/LoginWithSpotify.vue";
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  min-height: 70vh;
+  min-height: 90vh;
+  width: 100%;
 }
 
 .game-title {
@@ -61,16 +62,16 @@ main {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 3rem 2rem;
+  margin: 1rem;
   gap: 1.5rem;
 }
 
 .game-title h1 {
-  font-size: 6rem;
+  font-size: 2.5rem;
 }
 
 .game-title img {
-  height: 5rem;
+  height: 4rem;
   margin-top: 0.5rem;
 }
 
@@ -123,5 +124,23 @@ main {
   font-weight: bold;
 }
 
+@media (min-width: 40rem) {
+  main {
+    justify-content: center;
+    min-height: 70vh;
+  }
+
+  .game-title h1 {
+    font-size: 6rem;
+  }
+
+  .game-title img {
+    height: 5rem;
+  }
+
+  .game-title {
+    margin: 3rem 2rem;
+  }
+}
 
 </style>
