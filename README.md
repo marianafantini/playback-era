@@ -19,28 +19,26 @@ HITSTER is a game in which the goal is to guess correctly the timeline of a list
 - [X] Click on a playlist and play with it
 - [X] Can add the card to the selected place on timeline
 - [X] Deploy with Vercel on [https://playback-era.vercel.app](https://playback-era.vercel.app)
+- [X] Better styling and better UI/UX
+- [X] Make it responsive to play on the phone
+- [X] Play with a custom playlist, not just your saved playlists
 
 ## What's missing
 
 ### From the code perspective
 
-- [ ] Better home screen, better styling, better call to action
 - [ ] Animations to make it look nicer. Right now cards appear and disappear without even a CSS transition
 - [ ] Win or lose the game actions (and animations, too)
-- [ ] Better styling, better interfaces, better CSS
-- [ ] Make it responsive to play on the phone
 - [ ] Fix it on Brave browser (ps: I can't use spotify on Brave either, not sure if I'll be able to fix that)
 - [ ] Improve the player of current music. At the moment we're unable to tell if it's loading, playing, paused, or something else
 - [ ] Add tests, many tests
 
 ### From a product perspective:
 
-- [ ] Play with a custom playlist, not just your saved playlists
 - [ ] Misc mode: play with random music
 - [ ] Enable multiplayer mode
   - [ ] Add friends, take turns, create games with different friends
 - [ ] More game options: not just the timeline one
-- [ ] Be able to play it on the phone
 - [ ] Different ways to play: for example, an easy mode in which we show the album cover to help. Or a hard mode with just 30s of the song.
 
 ## Contribute
