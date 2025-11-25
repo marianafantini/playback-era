@@ -21,15 +21,15 @@ const goToPlaylist = (playlist: Playlist) => {
 }
 
 const searchForPlaylist = async (q: string): Promise<Playlist[]> => {
-  return await playlistStore.searchForPlaylist(q)
-}
-
-const cleanSearch = () => {
-  playlistStore.cleanSearchResults()
+  let searchResults = []
+  if (q.length > 0) {
+    searchResults = await playlistStore.searchForPlaylist(q)
+  }
+  playlistStore.searchResults = searchResults;
 }
 
 onUnmounted(() => {
-  cleanSearch()
+  playlistStore.cleanSearchResults()
 })
 
 </script>
@@ -40,14 +40,11 @@ onUnmounted(() => {
 
       <div class="search-playlists-area">
 
-        <Search placeholder="Search for playlist"
+        <Search placeholder="Procurar playlist do spotify"
                 @search="searchForPlaylist"
+                @onChange="searchForPlaylist"
+                :allowClear="true"
                 class="search-playlists-input"/>
-
-        <Button @click="cleanSearch">
-          Limpar
-        </Button>
-
       </div>
 
       <div class="playlist-list">

@@ -89,7 +89,7 @@ export const usePlaylistStore = defineStore('playlist', {
 
     async searchForPlaylist(q: string): Promise<Playlist[]> {
       const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/search?type=playlist&q=' + q, 'GET')
-      const searchResults = response.playlists.items
+      return response.playlists.items
         .filter((item: SpotifyPlaylist | null) => item !== null)
         .map((playlist: SpotifyPlaylist) => {
           return {
@@ -102,11 +102,6 @@ export const usePlaylistStore = defineStore('playlist', {
             cover: playlist.images[0]?.url
           }
         })
-
-      this.searchResults = searchResults
-
-      return searchResults
-
     },
 
     cleanSearchResults(): void {
