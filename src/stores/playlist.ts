@@ -70,7 +70,7 @@ export const usePlaylistStore = defineStore('playlist', {
             spotifyURI: item.track.uri,
             artist: item.track.artists.map((artist) => artist.name).join(' & '),
             year: item.track.album.release_date.split("-")[0],
-            image: item.track.album.images[0].url,
+            image: item.track?.album?.images[0]?.url,
           }
         })
 

@@ -11,6 +11,12 @@ onBeforeMount(() => {
   configurePlayer()
 })
 
+interface CustomEvent {
+  data: {
+    isPaused: boolean
+  }
+}
+
 const configurePlayer = () => {
   (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
     const element = document.getElementById('embed-iframe')
@@ -18,7 +24,7 @@ const configurePlayer = () => {
       uri: song.spotifyURI
     }
     const callback = (EmbedController: any) => {
-      EmbedController.addListener('playback_update', event => {
+      EmbedController.addListener('playback_update', (event: CustomEvent) => {
         if (event.data.isPaused) {
           isPlaying = false;
           console.log("pause")
