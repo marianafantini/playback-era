@@ -31,7 +31,7 @@ const {song} = defineProps(['song'])
   width: 100%;
 }
 
-@media (min-width: 25rem) {
+@media (min-width: 40rem) {
   .music-card {
     min-width: var(--card-width);
     width: calc(var(--card-width) * 1.2);
