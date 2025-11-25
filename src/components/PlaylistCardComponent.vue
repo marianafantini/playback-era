@@ -22,8 +22,8 @@ const {playlist} = defineProps(['playlist'])
   gap: 1.5rem;
   align-items: center;
   border-radius: 1rem;
-  max-width: var(--card-width);
   height: 100%;
+  width: 100%;
 }
 
 .playlist-cover {
@@ -37,11 +37,12 @@ p {
   overflow-wrap: anywhere;
 }
 
-@media (min-width: 30rem) {
+@media (min-width: 40rem) {
   .music-card {
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem 2rem;
+    max-width: var(--card-width);
   }
 }
 

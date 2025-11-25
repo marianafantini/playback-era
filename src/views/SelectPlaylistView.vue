@@ -91,14 +91,20 @@ const cleanSearch = () => {
   flex-wrap: wrap;
 }
 
+.playlist-list div {
+  width: 100%;
+  justify-content: flex-start;
+}
 
-@media (min-width: 30rem) {
+
+@media (min-width: 40rem) {
   .search-playlists-input {
     max-width: 40%;
   }
 
   .playlist-list div {
     flex-grow: inherit;
+    width: auto;
   }
 }
 
