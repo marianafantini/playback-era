@@ -16,13 +16,14 @@ const {playlist} = defineProps(['playlist'])
 .music-card {
   border-color: transparent;
   background-color: var(--cards-background-color);
-  min-height: var(--card-height);
   padding: 1rem;
   display: flex;
+  justify-content: space-around;
   gap: 1.5rem;
   align-items: center;
   border-radius: 1rem;
-  width: 100%;
+  max-width: var(--card-width);
+  height: 100%;
 }
 
 .playlist-cover {
@@ -38,13 +39,9 @@ p {
 
 @media (min-width: 30rem) {
   .music-card {
-    min-width: var(--card-width);
-    width: calc(var(--card-width) * 1.2);
-    height: auto;
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem 2rem;
-    justify-content: center;
   }
 }
 

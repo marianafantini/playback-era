@@ -102,6 +102,10 @@ export const usePlaylistStore = defineStore('playlist', {
 
     },
 
+    cleanSearchResults(): void {
+      this.searchResults = [];
+    },
+
     getNextSong(): void {
       if (this.playlist.length > 0) {
         const index: number = Math.floor(Math.random() * this.playlist.length)

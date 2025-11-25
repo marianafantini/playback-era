@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {usePlaylistStore} from '@/stores/playlist'
-import {Input} from "ant-design-vue"
+import {Input, Button} from "ant-design-vue"
 
 const {Search} = Input;
 import {onBeforeMount} from 'vue'
@@ -24,15 +24,27 @@ const searchForPlaylist = async (q: string): Playlist[] => {
   await playlistStore.searchForPlaylist(q)
 }
 
+const cleanSearch = () => {
+  playlistStore.cleanSearchResults()
+}
+
 </script>
 
 <template>
   <main>
     <section class="game-board">
 
-      <Search placeholder="Search for playlist"
-              @search="searchForPlaylist"
-              class="search-playlists-input"/>
+      <div class="search-playlists-area">
+
+        <Search placeholder="Search for playlist"
+                @search="searchForPlaylist"
+                class="search-playlists-input"/>
+
+        <Button @click="cleanSearch">
+          Limpar
+        </Button>
+
+      </div>
 
       <div class="playlist-list">
 
@@ -52,6 +64,12 @@ const searchForPlaylist = async (q: string): Playlist[] => {
 
 <style scoped>
 
+.search-playlists-area {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
 .search-playlists-input {
   border: none;
 }
@@ -68,17 +86,11 @@ const searchForPlaylist = async (q: string): Playlist[] => {
 }
 
 .playlist-list {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   gap: 1rem;
+  display: flex;
   flex-wrap: wrap;
-  width: 100%;
 }
 
-.playlist-list div {
-  width: 100%;
-}
 
 @media (min-width: 30rem) {
   .search-playlists-input {
@@ -86,8 +98,9 @@ const searchForPlaylist = async (q: string): Playlist[] => {
   }
 
   .playlist-list div {
-    width: auto;
-    max-width: var(--card-width);
+    flex: 1;
+    //width: auto;
+    //max-width: var(--card-width);
   }
 }
 
