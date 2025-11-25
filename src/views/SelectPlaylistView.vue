@@ -3,7 +3,7 @@ import {usePlaylistStore} from '@/stores/playlist'
 import {Input, Button} from "ant-design-vue"
 
 const {Search} = Input;
-import {onBeforeMount} from 'vue'
+import {onBeforeMount, onUnmounted} from 'vue'
 import PlaylistCardComponent from "@/components/PlaylistCardComponent.vue";
 import {useRouter} from "vue-router";
 import type {Playlist} from "@/models/playlist.ts";
@@ -27,6 +27,10 @@ const searchForPlaylist = async (q: string): Promise<Playlist[]> => {
 const cleanSearch = () => {
   playlistStore.cleanSearchResults()
 }
+
+onUnmounted(() => {
+  cleanSearch()
+})
 
 </script>
 

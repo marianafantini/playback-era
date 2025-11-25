@@ -61,6 +61,8 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     async initPlaylist(playlistID: string): Promise<Song[]> {
+      this.playedSongs = []
+
       const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks', 'GET')
 
       const playlist = response.items
@@ -146,7 +148,7 @@ export const usePlaylistStore = defineStore('playlist', {
         console.log('error')
         setTimeout(() => {
           this.playedSongs.splice(index, 1)
-        }, 4000)
+        }, 1000)
       }
 
       return sorted
