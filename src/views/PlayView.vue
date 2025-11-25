@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue'
-import {usePlaylistStore} from '@/stores/playlist'
-import {onBeforeMount} from 'vue'
+import { usePlaylistStore } from '@/stores/playlist'
+import { onBeforeMount } from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
-import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
-import { Spin } from "ant-design-vue"
+import CardAddHereComponent from '@/components/CardAddHereComponent.vue'
+import { Spin } from 'ant-design-vue'
 
-const {playlist} = defineProps(["playlist"])
+const { playlist } = defineProps(['playlist'])
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
@@ -15,7 +15,7 @@ onBeforeMount(() => {
       playlistStore.getNextSong()
       setInitialSong()
     } else {
-      console.log("no songs on this playlist")
+      console.log('no songs on this playlist')
     }
   })
 })
@@ -35,14 +35,27 @@ const setInitialSong = () => {
   getAndStartNextSong()
 }
 
+const getIDForSongCard = (songName) => {
+  return 'cards-song-' + songName.replaceAll(' ', '-').replaceAll('(', '-').replaceAll(')', '-')
+}
+
 const selectTimelineForSong = (index: number) => {
   playlistStore.player.pause()
-  const response = playlistStore.currentSong ? playlistStore.addPlayedSong(playlistStore.currentSong, index + 1) : false
+  let response: boolean
+  if (playlistStore.currentSong) {
+    response = playlistStore.addPlayedSong(playlistStore.currentSong, index + 1)
+  }
+
+  const elementId = getIDForSongCard(playlistStore?.currentSong?.name)
 
   if (response) {
-    console.log('parabéns')
+    setTimeout(() => {
+      document.getElementById(elementId)?.classList.add('correct-item')
+    }, 100)
   } else {
-    console.log('oops')
+    setTimeout(() => {
+      document.getElementById(elementId)?.classList.add('remove-item')
+    }, 100)
   }
 
   getAndStartNextSong()
@@ -58,11 +71,19 @@ const selectTimelineForSong = (index: number) => {
     <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
       No songs to play
     </div>
-    <div class="game-board" v-if="!playlistStore.loading && playlistStore.playlist.length > 0">
-      <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
+    <div class="game-board"
+         v-if="!playlistStore.loading && playlistStore.playlist.length > 0">
+      <div v-if="playlistStore.playlistSongsLeft.length === 0">
+        <h3>Parabéns!! Você acertou {{ playlistStore.playedSongs.length }} músicas</h3>
+      </div>
+      <div v-if="playlistStore.playlistSongsLeft.length > 0">
+        <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
+      </div>
 
       <div v-if="playlistStore.currentSong" class="player-section">
-        <PlayerComponent :song="playlistStore.currentSong">
+        <PlayerComponent :song="playlistStore.currentSong"
+                         :amountOfSongs="playlistStore.playlist.length"
+                         :amountOfSongsLeft="playlistStore.playlistSongsLeft.length">
         </PlayerComponent>
       </div>
 
@@ -71,10 +92,12 @@ const selectTimelineForSong = (index: number) => {
           <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)">
           </CardAddHereComponent>
           <div v-for="(song, index) in playlistStore.playedSongs"
-               class="cards-in-timeline-repeat">
+               class="cards-in-timeline-repeat"
+               :key="song.spotifyURI">
             <CardComponent
               :song="song"
               ref="cards"
+              :id="getIDForSongCard(song.name)"
             ></CardComponent>
             <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(index)">
             </CardAddHereComponent>
@@ -134,6 +157,38 @@ const selectTimelineForSong = (index: number) => {
   .cards-in-timeline-repeat {
     display: flex;
     flex-direction: column;
+  }
+}
+
+.remove-item {
+  animation: zoomInOut 900ms forwards;
+}
+
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0.1);
+  }
+}
+
+.correct-item {
+  animation: zoomIn 1s forwards;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 

@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import {usePlaylistStore} from '@/stores/playlist.ts'
-import {onBeforeMount} from 'vue'
-import {PauseCircleOutlined, PlayCircleOutlined} from '@ant-design/icons-vue'
+import { usePlaylistStore } from '@/stores/playlist.ts'
+import { onBeforeMount } from 'vue'
+import { Progress, Slider } from 'ant-design-vue'
+import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
-const {song} = defineProps(["song"])
-let isPlaying = false;
+const {
+  song,
+  amountOfSongs,
+  amountOfSongsLeft
+} = defineProps(['song', 'amountOfSongs', 'amountOfSongsLeft'])
+let isPlaying = false
 
 onBeforeMount(() => {
   configurePlayer()
@@ -26,13 +31,13 @@ const configurePlayer = () => {
     const callback = (EmbedController: any) => {
       EmbedController.addListener('playback_update', (event: CustomEvent) => {
         if (event.data.isPaused) {
-          isPlaying = false;
-          console.log("pause")
+          isPlaying = false
+          console.log('pause')
         } else {
-          isPlaying = true;
-          console.log("play")
+          isPlaying = true
+          console.log('play')
         }
-      });
+      })
 
       playlistStore.player = EmbedController
       playlistStore.playerReady = true
@@ -54,8 +59,19 @@ const pauseSong = () => {
 <template>
   <div class="music-card">
     <div class="player-commands" v-if="playlistStore.playerReady">
-      <PlayCircleOutlined class="control-icons" @click="playSong"/>
-      <PauseCircleOutlined class="control-icons" @click="pauseSong"/>
+      <PlayCircleOutlined class="control-icons" @click="playSong" />
+      <PauseCircleOutlined class="control-icons" @click="pauseSong" />
+    </div>
+
+    <div class="progress-area">
+      <Progress :percent="(amountOfSongs - amountOfSongsLeft)/amountOfSongs*100"
+                strokeColor="#55679d"
+                trailColor="#99a9da"
+                :showInfo="false">
+      </Progress>
+      <p class="progress-text">
+        {{ (amountOfSongs - amountOfSongsLeft)}}º/{{ amountOfSongs }}
+      </p>
     </div>
   </div>
 
@@ -71,14 +87,17 @@ const pauseSong = () => {
   width: 100%;
   min-width: var(--card-width);
   border: none;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
   background-color: var(--cards-background-color);
+}
+
+.music-slider {
+  width: 100%;
 }
 
 .player-commands {
@@ -87,12 +106,21 @@ const pauseSong = () => {
   align-items: center;
   gap: 0.5rem;
   border-radius: 0.5rem;
-  width: 100%;
 }
 
 .control-icons {
   font-size: 2rem;
   cursor: pointer;
+}
+
+.progress-text {
+  font-size: 1rem;
+}
+
+.progress-area {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
 }
 
 .hidden {

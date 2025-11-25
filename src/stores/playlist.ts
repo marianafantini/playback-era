@@ -1,8 +1,8 @@
-import {defineStore} from 'pinia'
-import {type Song} from '@/models/song'
-import type {SpotifyItem} from '@/models/spotify-track.ts'
-import type {Playlist} from "@/models/playlist.ts";
-import type {SpotifyPlaylist} from "@/models/spotify-playlist.ts";
+import { defineStore } from 'pinia'
+import { type Song } from '@/models/song'
+import type { SpotifyItem } from '@/models/spotify-track.ts'
+import type { Playlist } from '@/models/playlist.ts'
+import type { SpotifyPlaylist } from '@/models/spotify-playlist.ts'
 
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
@@ -10,6 +10,7 @@ export const usePlaylistStore = defineStore('playlist', {
     searchResults?: Playlist[],
     usersPlaylists: Playlist[],
     playlist: Song[],
+    playlistSongsLeft: Song[],
     playedSongs: Song[],
     possibleColors: string[],
     player: any,
@@ -19,30 +20,34 @@ export const usePlaylistStore = defineStore('playlist', {
   } => ({
     usersPlaylists: [],
     playlist: [],
+    playlistSongsLeft: [],
     playedSongs: [],
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
     player: {},
     playerReady: false,
-    loading: false,
+    loading: false
   }),
   actions: {
     async makeRequestToSpotify(url: string, method: string) {
-      this.loading = true;
-      const accessToken = window.localStorage.getItem('spotify_access_token');
+      this.loading = true
+      const accessToken = window.localStorage.getItem('spotify_access_token')
       return await fetch(url, {
         method: method,
         headers: {
           authorization: `Bearer ${accessToken}`
         }
       }).then((response) => {
+        if (response.status === 401) {
+          window.location.href = '/'
+        }
         return response.json()
       }).finally(() => {
-        this.loading = false;
+        this.loading = false
       })
     },
 
     async getUserPlaylists(): Promise<Playlist[]> {
-      const response = await this.makeRequestToSpotify("https://api.spotify.com/v1/me/playlists", "GET")
+      const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/me/playlists', 'GET')
       const playlistList = response.items.map((playlist: SpotifyPlaylist) => {
         return {
           name: playlist.name,
@@ -55,8 +60,7 @@ export const usePlaylistStore = defineStore('playlist', {
         }
       })
 
-
-      this.usersPlaylists = playlistList;
+      this.usersPlaylists = playlistList
       return playlistList
     },
 
@@ -66,18 +70,19 @@ export const usePlaylistStore = defineStore('playlist', {
       const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks', 'GET')
 
       const playlist = response.items
-        .filter((item: SpotifyItem) => item.track.type === "track")
+        .filter((item: SpotifyItem) => item.track.type === 'track')
         .map((item: SpotifyItem) => {
           return {
             name: item.track.name,
             spotifyURI: item.track.uri,
             artist: item.track.artists.map((artist) => artist.name).join(' & '),
-            year: item.track.album.release_date.split("-")[0],
-            image: item.track?.album?.images[0]?.url,
+            year: item.track.album.release_date.split('-')[0],
+            image: item.track?.album?.images[0]?.url
           }
         })
 
-      this.playlist = playlist
+      this.playlist = [...playlist]
+      this.playlistSongsLeft = [...playlist]
 
       return playlist
     },
@@ -98,23 +103,23 @@ export const usePlaylistStore = defineStore('playlist', {
           }
         })
 
-      this.searchResults = searchResults;
+      this.searchResults = searchResults
 
-      return searchResults;
+      return searchResults
 
     },
 
     cleanSearchResults(): void {
-      this.searchResults = [];
+      this.searchResults = []
     },
 
     getNextSong(): void {
-      if (this.playlist.length > 0) {
-        const index: number = Math.floor(Math.random() * this.playlist.length)
-        if (this.playlist[index]) {
+      if (this.playlistSongsLeft.length > 0) {
+        const index: number = Math.floor(Math.random() * this.playlistSongsLeft.length)
+        if (this.playlistSongsLeft[index]) {
           this.currentSong = this.playlist[index]
           this.currentSong.color = this.randomColor()
-          this.playlist.splice(index, 1)
+          this.playlistSongsLeft.splice(index, 1)
         }
       }
     },
@@ -147,8 +152,9 @@ export const usePlaylistStore = defineStore('playlist', {
       } else {
         console.log('error')
         setTimeout(() => {
+          console.log('splice remove item')
           this.playedSongs.splice(index, 1)
-        }, 1000)
+        }, 1100)
       }
 
       return sorted
