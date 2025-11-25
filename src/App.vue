@@ -18,6 +18,7 @@ const router = useRouter()
 
     <nav>
       <RouterLink to="/select-playlist">Playlists</RouterLink>
+      <RouterLink to="/settings">Settings</RouterLink>
     </nav>
   </header>
 

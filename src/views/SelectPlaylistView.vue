@@ -13,7 +13,7 @@ const router = useRouter()
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(async () => {
-  await playlistStore.getUserPlaylists()
+  await playlistStore.setUserPlaylists()
 })
 
 const goToPlaylist = (playlist: Playlist) => {

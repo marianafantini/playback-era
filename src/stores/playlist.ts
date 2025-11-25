@@ -12,30 +12,19 @@ export const usePlaylistStore = defineStore('playlist', {
     playlist: Song[]
     playlistSongsLeft: Song[]
     playedSongs: Song[]
-    possibleColors: string[]
     player: any
     playerReady: boolean
-    accessToken?: string
     loading: boolean
+    amountOfRounds: number
   } => ({
     usersPlaylists: [],
     playlist: [],
     playlistSongsLeft: [],
     playedSongs: [],
-    possibleColors: [
-      'teal',
-      'lavanda',
-      'lightblue',
-      'mint',
-      'lightpink',
-      'yellow',
-      'peach',
-      'sage',
-      'violet',
-    ],
     player: {},
     playerReady: false,
     loading: false,
+    amountOfRounds: 10
   }),
   actions: {
     async makeRequestToSpotify(url: string, method: string) {
@@ -44,8 +33,8 @@ export const usePlaylistStore = defineStore('playlist', {
       return await fetch(url, {
         method: method,
         headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
+          authorization: `Bearer ${accessToken}`
+        }
       })
         .then((response) => {
           if (response.status === 401) {
@@ -58,59 +47,8 @@ export const usePlaylistStore = defineStore('playlist', {
         })
     },
 
-    async getUserPlaylists(): Promise<Playlist[]> {
-      const response = await this.makeRequestToSpotify(
-        'https://api.spotify.com/v1/me/playlists',
-        'GET',
-      )
-      const playlistList = response.items.map((playlist: SpotifyPlaylist) => {
-        return {
-          name: playlist.name,
-          id: playlist.id,
-          spotifyURI: playlist.uri,
-          collaborative: playlist.collaborative,
-          description: playlist.description,
-          public: playlist.public,
-          cover: playlist.images[0]?.url,
-        }
-      })
-
-      this.usersPlaylists = playlistList
-      return playlistList
-    },
-
-    async initPlaylist(playlistID: string): Promise<Song[]> {
-      this.playedSongs = []
-
-      const response = await this.makeRequestToSpotify(
-        'https://api.spotify.com/v1/playlists/' + playlistID + '/tracks',
-        'GET',
-      )
-
-      const playlist = response.items
-        .filter((item: SpotifyItem) => item.track.type === 'track')
-        .map((item: SpotifyItem) => {
-          return {
-            name: item.track.name,
-            spotifyURI: item.track.uri,
-            artist: item.track.artists.map((artist) => artist.name).join(' & '),
-            year: item.track.album.release_date.split('-')[0],
-            image: item.track?.album?.images[0]?.url,
-          }
-        })
-
-      this.playlist = [...playlist]
-      this.playlistSongsLeft = [...playlist]
-
-      return playlist
-    },
-
-    async searchForPlaylist(q: string): Promise<Playlist[]> {
-      const response = await this.makeRequestToSpotify(
-        'https://api.spotify.com/v1/search?type=playlist&q=' + q,
-        'GET',
-      )
-      return response.playlists.items
+    spotifyPlaylistToAppPlaylist(items: SpotifyPlaylist[]): Playlist[] {
+      return items
         .filter((item: SpotifyPlaylist | null) => item !== null)
         .map((playlist: SpotifyPlaylist) => {
           return {
@@ -120,9 +58,71 @@ export const usePlaylistStore = defineStore('playlist', {
             collaborative: playlist.collaborative,
             description: playlist.description,
             public: playlist.public,
-            cover: playlist.images[0]?.url,
+            cover: playlist.images[0]?.url
           }
         })
+    },
+
+    async setUserPlaylists(): Promise<void> {
+      const response = await this.makeRequestToSpotify(
+        'https://api.spotify.com/v1/me/playlists',
+        'GET'
+      )
+      const playlistList = this.spotifyPlaylistToAppPlaylist(response.items)
+      this.usersPlaylists = [...playlistList]
+    },
+
+    spotifyTracksToAppSongs(items: SpotifyItem[]): Song[] {
+      return items
+        .filter((item: SpotifyItem) => item.track.type === 'track')
+        .filter((item: SpotifyItem) => !!item.track.album.release_date)
+        .map((item: SpotifyItem) => {
+          return {
+            name: item.track.name,
+            spotifyURI: item.track.uri,
+            artist: item.track.artists.map((artist) => artist.name).join(' & '),
+            year: item.track.album.release_date.split('-')[0] || '',
+            image: item.track?.album?.images[0]?.url
+          }
+        })
+        .filter((item) => item.year !== '')
+    },
+
+    getSongsForRounds(playlist: Song[]): Song[] {
+      const numberOfSongs: number = Math.min(this.amountOfRounds + 1, playlist.length)
+      const songs: Song[] = []
+
+      while (songs.length < numberOfSongs) {
+        let index: number = Math.floor(Math.random() * playlist.length)
+        if (songs.indexOf(playlist[index] as Song) === -1) {
+          songs.push(playlist[index] as Song)
+        }
+      }
+      return songs
+    },
+
+    async initPlaylist(playlistID: string) {
+      this.playedSongs = []
+
+      const response = await this.makeRequestToSpotify(
+        'https://api.spotify.com/v1/playlists/' + playlistID + '/tracks',
+        'GET'
+      )
+
+      const playlist: Song[] = this.spotifyTracksToAppSongs(response.items)
+      const playlistForRounds: Song[] = [...this.getSongsForRounds(playlist)]
+      this.playlist = [...playlistForRounds]
+      this.playlistSongsLeft = [...playlistForRounds]
+
+      return playlist
+    },
+
+    async searchForPlaylist(q: string): Promise<Playlist[]> {
+      const response = await this.makeRequestToSpotify(
+        'https://api.spotify.com/v1/search?type=playlist&q=' + q,
+        'GET'
+      )
+      return this.spotifyPlaylistToAppPlaylist(response.playlists.items)
     },
 
     cleanSearchResults(): void {
@@ -175,8 +175,19 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     randomColor(): string {
-      const index = Math.floor(Math.random() * this.possibleColors.length)
-      return this.possibleColors[index] ? this.possibleColors[index] : ''
-    },
-  },
+      const possibleColors = [
+        'teal',
+        'lavanda',
+        'lightblue',
+        'mint',
+        'lightpink',
+        'yellow',
+        'peach',
+        'sage',
+        'violet'
+      ]
+      const index = Math.floor(Math.random() * possibleColors.length)
+      return possibleColors[index] ? possibleColors[index] : ''
+    }
+  }
 })
