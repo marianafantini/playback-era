@@ -83,7 +83,7 @@ export const usePlaylistStore = defineStore('playlist', {
     async searchForPlaylist(q: string): Promise<Playlist[]> {
       const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/search?type=playlist&q=' + q, 'GET')
       const searchResults = response.playlists.items
-        .filter((item) => item !== null)
+        .filter((item: SpotifyPlaylist | null) => item !== null)
         .map((playlist: SpotifyPlaylist) => {
           return {
             name: playlist.name,

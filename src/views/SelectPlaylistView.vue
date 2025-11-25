@@ -20,8 +20,8 @@ const goToPlaylist = (playlist: Playlist) => {
   router.push("/play?playlist=" + playlist.id)
 }
 
-const searchForPlaylist = async (q: string): Playlist[] => {
-  await playlistStore.searchForPlaylist(q)
+const searchForPlaylist = async (q: string): Promise<Playlist[]> => {
+  return await playlistStore.searchForPlaylist(q)
 }
 
 const cleanSearch = () => {
@@ -99,8 +99,6 @@ const cleanSearch = () => {
 
   .playlist-list div {
     flex: 1;
-    //width: auto;
-    //max-width: var(--card-width);
   }
 }
 
