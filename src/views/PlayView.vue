@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue'
 import {usePlaylistStore} from '@/stores/playlist'
-import {onBeforeMount} from 'vue'
+import {onBeforeMount, onUnmounted} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
 import { Spin } from "ant-design-vue"
@@ -18,6 +18,10 @@ onBeforeMount(() => {
       console.log("no songs on this playlist")
     }
   })
+})
+
+onUnmounted(() => {
+  playlistStore.cleanPlayedSongs()
 })
 
 const getAndStartNextSong = () => {

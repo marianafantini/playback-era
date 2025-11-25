@@ -102,6 +102,10 @@ export const usePlaylistStore = defineStore('playlist', {
 
     },
 
+    cleanPlayedSongs(): void {
+      this.playedSongs = [];
+    },
+
     cleanSearchResults(): void {
       this.searchResults = [];
     },
