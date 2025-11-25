@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { usePlaylistStore } from '@/stores/playlist.ts'
 import { onBeforeMount } from 'vue'
-import { Progress, Slider } from 'ant-design-vue'
 import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
@@ -63,17 +62,6 @@ const pauseSong = () => {
       <PlayCircleOutlined class="control-icons" @click="playSong" />
       <PauseCircleOutlined class="control-icons" @click="pauseSong" />
     </div>
-
-<!--    <div class="progress-area">-->
-<!--      <Progress :percent="(amountOfSongs - amountOfSongsLeft - 1)/(amountOfSongs - 1)*100"-->
-<!--                strokeColor="#55679d"-->
-<!--                trailColor="#99a9da"-->
-<!--                :showInfo="false">-->
-<!--      </Progress>-->
-<!--      <p class="progress-text">-->
-<!--        {{ (amountOfSongs - amountOfSongsLeft - 1)}}º/{{ amountOfSongs - 1 }}-->
-<!--      </p>-->
-<!--    </div>-->
   </div>
 
   <div class="hidden">
@@ -91,7 +79,6 @@ const pauseSong = () => {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  //flex-direction: column;
   align-items: center;
 }
 
@@ -108,16 +95,6 @@ const pauseSong = () => {
 .control-icons {
   font-size: 3rem;
   cursor: pointer;
-}
-
-.progress-text {
-  font-size: 1rem;
-}
-
-.progress-area {
-  display: flex;
-  width: 100%;
-  gap: 0.5rem;
 }
 
 .hidden {

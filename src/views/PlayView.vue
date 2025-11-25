@@ -128,7 +128,7 @@ const selectTimelineForSong = (index: number) => {
   height: 100%;
   min-height: 70vh;
   width: 100%;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .cards-in-timeline {
