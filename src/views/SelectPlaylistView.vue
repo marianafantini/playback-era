@@ -98,7 +98,7 @@ const cleanSearch = () => {
   }
 
   .playlist-list div {
-    flex: 1;
+    flex-grow: inherit;
   }
 }
 
