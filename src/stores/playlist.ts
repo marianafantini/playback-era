@@ -133,7 +133,7 @@ export const usePlaylistStore = defineStore('playlist', {
       if (this.playlistSongsLeft.length > 0) {
         const index: number = Math.floor(Math.random() * this.playlistSongsLeft.length)
         if (this.playlistSongsLeft[index]) {
-          this.currentSong = this.playlist[index]
+          this.currentSong = this.playlistSongsLeft[index]
           if (this.currentSong) {
             this.currentSong.color = this.randomColor()
           }
