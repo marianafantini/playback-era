@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory, type LocationQueryValue } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PlayView from '@/views/PlayView.vue'
-import HowToPlayView from '@/views/HowToPlayView.vue'
 import LoginSuccessView from '@/views/LoginSuccessView.vue'
-import LoginView from '@/views/LoginView.vue'
 import SelectPlaylistView from '@/views/SelectPlaylistView.vue'
 
 const router = createRouter({
@@ -13,11 +11,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: LoginView,
     },
     {
       path: '/login-success',
@@ -39,19 +32,6 @@ const router = createRouter({
       props: (route): { playlist: LocationQueryValue | LocationQueryValue[] | undefined } => ({
         playlist: route.query.playlist,
       }),
-    },
-    {
-      path: '/how-to-play',
-      name: 'how-to-play',
-      component: HowToPlayView,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
     },
   ],
 })

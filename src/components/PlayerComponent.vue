@@ -4,11 +4,10 @@ import { onBeforeMount } from 'vue'
 import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
-const { song, amountOfSongs, amountOfSongsLeft, isGameStillActive } = defineProps([
+const { song, amountOfSongs, amountOfSongsLeft } = defineProps([
   'song',
   'amountOfSongs',
-  'amountOfSongsLeft',
-  'isGameStillActive',
+  'amountOfSongsLeft'
 ])
 let isPlaying = false
 
@@ -26,7 +25,7 @@ const configurePlayer = () => {
   ;(window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
     const element = document.getElementById('embed-iframe')
     const options = {
-      uri: song.spotifyURI,
+      uri: song.spotifyURI
     }
     const callback = (EmbedController: any) => {
       EmbedController.addListener('playback_update', (event: CustomEvent) => {
@@ -56,7 +55,7 @@ const pauseSong = () => {
 </script>
 
 <template>
-  <div class="music-card" v-if="playlistStore.playerReady && isGameStillActive">
+  <div class="music-card">
     <div class="player-commands">
       <PlayCircleOutlined class="control-icons" @click="playSong" />
       <PauseCircleOutlined class="control-icons" @click="pauseSong" />
