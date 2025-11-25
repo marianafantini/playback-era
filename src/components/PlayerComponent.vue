@@ -55,7 +55,7 @@ const pauseSong = () => {
 </script>
 
 <template>
-  <div class="music-card">
+  <div class="player-card-component">
     <div class="player-commands">
       <PlayCircleOutlined class="control-icons" @click="playSong" />
       <PauseCircleOutlined class="control-icons" @click="pauseSong" />
@@ -68,7 +68,7 @@ const pauseSong = () => {
 </template>
 
 <style scoped>
-.music-card {
+.player-card-component {
   width: 100%;
   min-width: var(--card-width);
   border: none;
