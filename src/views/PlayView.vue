@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CardComponent from '@/components/CardComponent.vue'
+import MusicCardComponent from '@/components/MusicCardComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist'
 import { onBeforeMount } from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
@@ -111,11 +111,11 @@ const selectTimelineForSong = (index: number) => {
             class="cards-in-timeline-repeat"
             :key="song.spotifyURI"
           >
-            <CardComponent
+            <MusicCardComponent
               :song="song"
               ref="cards"
               :id="getIDForSongCard(song.name)"
-            ></CardComponent>
+            ></MusicCardComponent>
             <CardAddHereComponent
               :isGameStillActive="playlistStore.isGameStillActive()"
               @selectTimelineForSong="selectTimelineForSong(index)"
