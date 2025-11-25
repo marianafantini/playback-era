@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import LoginWithSpotify from "@/components/LoginWithSpotify.vue";
+import LoginWithSpotify from '@/components/LoginWithSpotify.vue'
 </script>
 
 <template>
   <main>
     <div class="game-title">
-      <img src="/public/mp3-icon.png"
-           alt="Logo of the app, which is an mp3 player icon"/>
+      <img src="/public/mp3-icon.png" alt="Logo of the app, which is an mp3 player icon" />
       <h1>Playback Era</h1>
     </div>
 
@@ -14,7 +13,7 @@ import LoginWithSpotify from "@/components/LoginWithSpotify.vue";
       <ul>
         <li>
           <div class="icon">
-            <img src="/public/2024_Spotify_logo_without_text_(black).svg">
+            <img src="/public/2024_Spotify_logo_without_text_(black).svg" />
           </div>
           <div>
             <h3>Escolha uma playlist do spotify</h3>
@@ -23,7 +22,7 @@ import LoginWithSpotify from "@/components/LoginWithSpotify.vue";
         </li>
         <li>
           <div class="icon">
-            <img src="/public/480-4806365_music-notes-svg-cut-file-hd-png-download.png">
+            <img src="/public/480-4806365_music-notes-svg-cut-file-hd-png-download.png" />
           </div>
           <div>
             <h3>Ouça a música</h3>
@@ -32,7 +31,7 @@ import LoginWithSpotify from "@/components/LoginWithSpotify.vue";
         </li>
         <li>
           <div class="icon">
-            <img src="/public/calendar-icon.png">
+            <img src="/public/calendar-icon.png" />
           </div>
           <div>
             <h3>Adivinhe o ano</h3>
@@ -40,10 +39,9 @@ import LoginWithSpotify from "@/components/LoginWithSpotify.vue";
           </div>
         </li>
       </ul>
-
     </div>
 
-    <LoginWithSpotify/>
+    <LoginWithSpotify />
   </main>
 </template>
 
@@ -142,5 +140,4 @@ main {
     margin: 3rem 2rem;
   }
 }
-
 </style>

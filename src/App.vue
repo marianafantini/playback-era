@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import {RouterView, RouterLink, useRouter} from 'vue-router'
-import { inject } from "@vercel/analytics"
+import { RouterView, RouterLink, useRouter } from 'vue-router'
+import { inject } from '@vercel/analytics'
 inject()
-const router = useRouter();
+const router = useRouter()
 </script>
 
 <template>
   <header v-if="router?.currentRoute.value.name !== 'home'">
     <div class="header-logo" @click="router.push('/')">
-      <img src="/public/mp3-icon.png"
-           alt="Logo of the app, which is an mp3 player icon"
-           class="logo"/>
+      <img
+        src="/public/mp3-icon.png"
+        alt="Logo of the app, which is an mp3 player icon"
+        class="logo"
+      />
       <span class="logo-title">Playback Era</span>
     </div>
 
@@ -19,11 +21,10 @@ const router = useRouter();
     </nav>
   </header>
 
-  <RouterView/>
+  <RouterView />
 </template>
 
 <style scoped>
-
 header {
   display: flex;
   gap: 1rem;
@@ -53,5 +54,4 @@ header a {
 .logo-title {
   font-weight: 500;
 }
-
 </style>

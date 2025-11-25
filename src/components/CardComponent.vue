@@ -4,7 +4,7 @@ const { song, id } = defineProps(['song', 'id'])
 
 <template>
   <div :id="id" :class="'music-card ' + song?.color + '-card '">
-    <img :src="song.image" :alt="'Imagem da música ' + song.name" class="song-image">
+    <img :src="song.image" :alt="'Imagem da música ' + song.name" class="song-image" />
     <div>
       <p class="song-name">{{ song?.name }}</p>
       <p class="song-artist">{{ song?.artist }}</p>
@@ -14,7 +14,6 @@ const { song, id } = defineProps(['song', 'id'])
 </template>
 
 <style scoped>
-
 .song-image {
   height: 5rem;
 }
@@ -51,5 +50,4 @@ const { song, id } = defineProps(['song', 'id'])
 .song-year {
   font-size: 1.5rem;
 }
-
 </style>

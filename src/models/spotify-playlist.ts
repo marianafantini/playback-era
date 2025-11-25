@@ -3,11 +3,11 @@ interface SpotifyImage {
 }
 
 export interface SpotifyPlaylist {
-  id: string;
-  name: string;
-  uri: string;
-  description: string;
-  collaborative: boolean;
-  public: boolean;
-  images: SpotifyImage[];
+  id: string
+  name: string
+  uri: string
+  description: string
+  collaborative: boolean
+  public: boolean
+  images: SpotifyImage[]
 }

@@ -4,12 +4,12 @@ import { onBeforeMount } from 'vue'
 import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
-const {
-  song,
-  amountOfSongs,
-  amountOfSongsLeft,
-  isGameStillActive
-} = defineProps(['song', 'amountOfSongs', 'amountOfSongsLeft', 'isGameStillActive'])
+const { song, amountOfSongs, amountOfSongsLeft, isGameStillActive } = defineProps([
+  'song',
+  'amountOfSongs',
+  'amountOfSongsLeft',
+  'isGameStillActive',
+])
 let isPlaying = false
 
 onBeforeMount(() => {
@@ -23,10 +23,10 @@ interface CustomEvent {
 }
 
 const configurePlayer = () => {
-  (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
+  ;(window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
     const element = document.getElementById('embed-iframe')
     const options = {
-      uri: song.spotifyURI
+      uri: song.spotifyURI,
     }
     const callback = (EmbedController: any) => {
       EmbedController.addListener('playback_update', (event: CustomEvent) => {
@@ -53,7 +53,6 @@ const playSong = () => {
 const pauseSong = () => {
   playlistStore.player.pause()
 }
-
 </script>
 
 <template>
@@ -67,11 +66,9 @@ const pauseSong = () => {
   <div class="hidden">
     <div id="embed-iframe"></div>
   </div>
-
 </template>
 
 <style scoped>
-
 .music-card {
   width: 100%;
   min-width: var(--card-width);
@@ -102,5 +99,4 @@ const pauseSong = () => {
   height: 0;
   width: 0;
 }
-
 </style>

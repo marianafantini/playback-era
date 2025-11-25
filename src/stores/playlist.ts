@@ -6,26 +6,36 @@ import type { SpotifyPlaylist } from '@/models/spotify-playlist.ts'
 
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
-    currentSong?: Song,
-    searchResults?: Playlist[],
-    usersPlaylists: Playlist[],
-    playlist: Song[],
-    playlistSongsLeft: Song[],
-    playedSongs: Song[],
-    possibleColors: string[],
-    player: any,
-    playerReady: boolean,
-    accessToken?: string,
-    loading: boolean,
+    currentSong?: Song
+    searchResults?: Playlist[]
+    usersPlaylists: Playlist[]
+    playlist: Song[]
+    playlistSongsLeft: Song[]
+    playedSongs: Song[]
+    possibleColors: string[]
+    player: any
+    playerReady: boolean
+    accessToken?: string
+    loading: boolean
   } => ({
     usersPlaylists: [],
     playlist: [],
     playlistSongsLeft: [],
     playedSongs: [],
-    possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
+    possibleColors: [
+      'teal',
+      'lavanda',
+      'lightblue',
+      'mint',
+      'lightpink',
+      'yellow',
+      'peach',
+      'sage',
+      'violet',
+    ],
     player: {},
     playerReady: false,
-    loading: false
+    loading: false,
   }),
   actions: {
     async makeRequestToSpotify(url: string, method: string) {
@@ -34,20 +44,25 @@ export const usePlaylistStore = defineStore('playlist', {
       return await fetch(url, {
         method: method,
         headers: {
-          authorization: `Bearer ${accessToken}`
-        }
-      }).then((response) => {
-        if (response.status === 401) {
-          window.location.href = '/'
-        }
-        return response.json()
-      }).finally(() => {
-        this.loading = false
+          authorization: `Bearer ${accessToken}`,
+        },
       })
+        .then((response) => {
+          if (response.status === 401) {
+            window.location.href = '/'
+          }
+          return response.json()
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
 
     async getUserPlaylists(): Promise<Playlist[]> {
-      const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/me/playlists', 'GET')
+      const response = await this.makeRequestToSpotify(
+        'https://api.spotify.com/v1/me/playlists',
+        'GET',
+      )
       const playlistList = response.items.map((playlist: SpotifyPlaylist) => {
         return {
           name: playlist.name,
@@ -56,7 +71,7 @@ export const usePlaylistStore = defineStore('playlist', {
           collaborative: playlist.collaborative,
           description: playlist.description,
           public: playlist.public,
-          cover: playlist.images[0]?.url
+          cover: playlist.images[0]?.url,
         }
       })
 
@@ -67,7 +82,10 @@ export const usePlaylistStore = defineStore('playlist', {
     async initPlaylist(playlistID: string): Promise<Song[]> {
       this.playedSongs = []
 
-      const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/playlists/' + playlistID + '/tracks', 'GET')
+      const response = await this.makeRequestToSpotify(
+        'https://api.spotify.com/v1/playlists/' + playlistID + '/tracks',
+        'GET',
+      )
 
       const playlist = response.items
         .filter((item: SpotifyItem) => item.track.type === 'track')
@@ -77,7 +95,7 @@ export const usePlaylistStore = defineStore('playlist', {
             spotifyURI: item.track.uri,
             artist: item.track.artists.map((artist) => artist.name).join(' & '),
             year: item.track.album.release_date.split('-')[0],
-            image: item.track?.album?.images[0]?.url
+            image: item.track?.album?.images[0]?.url,
           }
         })
 
@@ -88,7 +106,10 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     async searchForPlaylist(q: string): Promise<Playlist[]> {
-      const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/search?type=playlist&q=' + q, 'GET')
+      const response = await this.makeRequestToSpotify(
+        'https://api.spotify.com/v1/search?type=playlist&q=' + q,
+        'GET',
+      )
       return response.playlists.items
         .filter((item: SpotifyPlaylist | null) => item !== null)
         .map((playlist: SpotifyPlaylist) => {
@@ -99,7 +120,7 @@ export const usePlaylistStore = defineStore('playlist', {
             collaborative: playlist.collaborative,
             description: playlist.description,
             public: playlist.public,
-            cover: playlist.images[0]?.url
+            cover: playlist.images[0]?.url,
           }
         })
     },
@@ -156,6 +177,6 @@ export const usePlaylistStore = defineStore('playlist', {
     randomColor(): string {
       const index = Math.floor(Math.random() * this.possibleColors.length)
       return this.possibleColors[index] ? this.possibleColors[index] : ''
-    }
-  }
+    },
+  },
 })
