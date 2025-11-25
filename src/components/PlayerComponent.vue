@@ -58,21 +58,22 @@ const pauseSong = () => {
 
 <template>
   <div class="music-card">
+
     <div class="player-commands" v-if="playlistStore.playerReady">
       <PlayCircleOutlined class="control-icons" @click="playSong" />
       <PauseCircleOutlined class="control-icons" @click="pauseSong" />
     </div>
 
-    <div class="progress-area">
-      <Progress :percent="(amountOfSongs - amountOfSongsLeft)/amountOfSongs*100"
-                strokeColor="#55679d"
-                trailColor="#99a9da"
-                :showInfo="false">
-      </Progress>
-      <p class="progress-text">
-        {{ (amountOfSongs - amountOfSongsLeft)}}º/{{ amountOfSongs }}
-      </p>
-    </div>
+<!--    <div class="progress-area">-->
+<!--      <Progress :percent="(amountOfSongs - amountOfSongsLeft - 1)/(amountOfSongs - 1)*100"-->
+<!--                strokeColor="#55679d"-->
+<!--                trailColor="#99a9da"-->
+<!--                :showInfo="false">-->
+<!--      </Progress>-->
+<!--      <p class="progress-text">-->
+<!--        {{ (amountOfSongs - amountOfSongsLeft - 1)}}º/{{ amountOfSongs - 1 }}-->
+<!--      </p>-->
+<!--    </div>-->
   </div>
 
   <div class="hidden">
@@ -87,29 +88,25 @@ const pauseSong = () => {
   width: 100%;
   min-width: var(--card-width);
   border: none;
-  padding: 1rem 2rem;
   display: flex;
   gap: 1rem;
   justify-content: center;
+  //flex-direction: column;
   align-items: center;
-  border-radius: 1rem;
-  background-color: var(--cards-background-color);
-}
-
-.music-slider {
-  width: 100%;
 }
 
 .player-commands {
-  padding: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  height: 3rem;
+  background-color: #243154;
+  padding: 3rem 1.5rem;
   border-radius: 0.5rem;
 }
 
 .control-icons {
-  font-size: 2rem;
+  font-size: 3rem;
   cursor: pointer;
 }
 

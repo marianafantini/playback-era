@@ -5,6 +5,7 @@ import { onBeforeMount } from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 import CardAddHereComponent from '@/components/CardAddHereComponent.vue'
 import { Spin } from 'ant-design-vue'
+import { SmileOutlined } from '@ant-design/icons-vue'
 
 const { playlist } = defineProps(['playlist'])
 const playlistStore = usePlaylistStore()
@@ -71,20 +72,29 @@ const selectTimelineForSong = (index: number) => {
     <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
       No songs to play
     </div>
-    <div class="game-board"
-         v-if="!playlistStore.loading && playlistStore.playlist.length > 0">
-      <div v-if="playlistStore.playlistSongsLeft.length === 0">
-        <h3>Parabéns!! Você acertou {{ playlistStore.playedSongs.length }} músicas</h3>
-      </div>
-      <div v-if="playlistStore.playlistSongsLeft.length > 0">
-        <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
-      </div>
+    <div class="game-board">
+      <div class="player-section">
+        <div class="player-page-title">
+          <p>Rodada {{ playlistStore.playlist.length - playlistStore.playlistSongsLeft.length - 1 }}
+            de
+            {{ playlistStore.playlist.length - 1 }}</p>
+          <div v-if="playlistStore.playlistSongsLeft.length > 0">
+            <h3>Ouça e descubra o ano!</h3>
+          </div>
+          <div v-if="playlistStore.playlistSongsLeft.length === 0">
+            <h3>
+              <SmileOutlined />
+              Parabéns!! Você acertou {{ playlistStore.playedSongs.length }} músicas
+            </h3>
+          </div>
+        </div>
 
-      <div v-if="playlistStore.currentSong" class="player-section">
-        <PlayerComponent :song="playlistStore.currentSong"
-                         :amountOfSongs="playlistStore.playlist.length"
-                         :amountOfSongsLeft="playlistStore.playlistSongsLeft.length">
-        </PlayerComponent>
+        <div v-if="playlistStore.currentSong" class="player-component">
+          <PlayerComponent :song="playlistStore.currentSong"
+                           :amountOfSongs="playlistStore.playlist.length"
+                           :amountOfSongsLeft="playlistStore.playlistSongsLeft.length">
+          </PlayerComponent>
+        </div>
       </div>
 
       <div class="timeline-section">
@@ -127,10 +137,17 @@ const selectTimelineForSong = (index: number) => {
 }
 
 .player-section,
+.player-component,
 .timeline-section,
 .cards-in-timeline,
 .cards-in-timeline-repeat {
   width: 100%;
+}
+
+.player-section {
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: var(--cards-background-color);
 }
 
 @media (min-width: 40rem) {
@@ -158,6 +175,28 @@ const selectTimelineForSong = (index: number) => {
     display: flex;
     flex-direction: column;
   }
+}
+
+.player-page-title p {
+  font-size: 0.9rem;
+  color: #8b8d94;
+}
+
+.player-page-title h3 {
+  text-align: center;
+}
+
+.player-page-title h3 span {
+  margin-right: 0.5rem;
+}
+
+.player-page-title {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .remove-item {
