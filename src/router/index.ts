@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import PlayView from '@/views/PlayView.vue'
 import LoginSuccessView from '@/views/LoginSuccessView.vue'
 import SelectPlaylistView from '@/views/SelectPlaylistView.vue'
+import SettingsView from '@/views/SettingsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       props: (route): { playlist: LocationQueryValue | LocationQueryValue[] | undefined } => ({
         playlist: route.query.playlist,
       }),
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: SettingsView,
     },
   ],
 })

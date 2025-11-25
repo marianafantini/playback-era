@@ -15,6 +15,7 @@ export const usePlaylistStore = defineStore('playlist', {
     player: any
     playerReady: boolean
     loading: boolean
+    amountOfRounds: number
   } => ({
     usersPlaylists: [],
     playlist: [],
@@ -22,7 +23,8 @@ export const usePlaylistStore = defineStore('playlist', {
     playedSongs: [],
     player: {},
     playerReady: false,
-    loading: false
+    loading: false,
+    amountOfRounds: 10
   }),
   actions: {
     async makeRequestToSpotify(url: string, method: string) {
@@ -85,6 +87,19 @@ export const usePlaylistStore = defineStore('playlist', {
         })
     },
 
+    getSongsForRounds(playlist: Song[]): Song[] {
+      const numberOfSongs: number = this.amountOfRounds + 1
+      const songs = []
+
+      while (songs.length < numberOfSongs) {
+        let index = Math.floor(Math.random() * playlist.length)
+        if (songs.indexOf(playlist[index]) === -1) {
+          songs.push(playlist[index])
+        }
+      }
+      return songs
+    },
+
     async initPlaylist(playlistID: string) {
       this.playedSongs = []
 
@@ -94,9 +109,9 @@ export const usePlaylistStore = defineStore('playlist', {
       )
 
       const playlist: Playlist[] = this.spotifyTracksToAppSongs(response.items)
-
-      this.playlist = [...playlist]
-      this.playlistSongsLeft = [...playlist]
+      const playlistForRounds: Song[] = [...this.getSongsForRounds(playlist)]
+      this.playlist = [...playlistForRounds]
+      this.playlistSongsLeft = [...playlistForRounds]
 
       return playlist
     },
@@ -171,7 +186,7 @@ export const usePlaylistStore = defineStore('playlist', {
         'violet'
       ]
       const index = Math.floor(Math.random() * possibleColors.length)
-      return this.possibleColors[index] ? this.possibleColors[index] : ''
+      return possibleColors[index] ? possibleColors[index] : ''
     }
   }
 })
