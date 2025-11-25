@@ -1,32 +1,55 @@
 <script setup lang="ts">
-const { song, hidden } = defineProps(['song', 'hidden'])
+const {song} = defineProps(['song'])
 </script>
 
 <template>
-  <div v-if="!hidden" :class="'music-card ' + song?.color + '-card'" ref="card-ref">
-    <p>{{ song?.artist }}</p>
-    <p class="year">{{ song?.year }}</p>
-    <p>{{ song?.name }}</p>
+  <div :class="'music-card ' + song?.color + '-card'">
+    <img :src="song.image" :alt="'Imagem da música ' + song.name" class="song-image">
+    <div>
+      <p class="song-name">{{ song?.name }}</p>
+      <p class="song-artist">{{ song?.artist }}</p>
+      <p class="song-year">{{ song?.year }}</p>
+    </div>
   </div>
 </template>
 
 <style scoped>
 
-.music-card {
-  border: 0.1rem solid;
-  padding: 1rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 1rem;
-  min-height: var(--card-height);
-  min-width: var(--card-width);
+.song-image {
+  height: 5rem;
 }
 
-.year {
-  font-size: 3rem;
+.music-card {
+  border: 0.1rem solid;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 25rem) {
+  .music-card {
+    min-width: var(--card-width);
+    width: calc(var(--card-width) * 1.2);
+    height: var(--card-height);
+  }
+}
+
+.song-artist {
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.song-name {
+  font-weight: bold;
+}
+
+.song-year {
+  font-size: 1.5rem;
 }
 
 </style>

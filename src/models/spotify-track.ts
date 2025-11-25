@@ -2,8 +2,13 @@ interface SpotifyArtist {
   name: string
 }
 
+interface AlbumImages {
+  url: string
+}
+
 interface SpotifyAlbum {
   release_date: string
+  images: AlbumImages[]
 }
 
 interface SpotifyTrack {
@@ -12,6 +17,7 @@ interface SpotifyTrack {
   artists: SpotifyArtist[]
   album: SpotifyAlbum
   type: string
+  duration_ms: number
 }
 
 export interface SpotifyItem {

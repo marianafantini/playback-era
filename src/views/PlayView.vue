@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import CardComponent from '@/components/CardComponent.vue'
-import AddHereComponent from '@/components/AddHereComponent.vue'
 import {usePlaylistStore} from '@/stores/playlist'
-
 import {onBeforeMount} from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
+import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
+import { Spin } from "ant-design-vue"
 
 const {playlist} = defineProps(["playlist"])
 const playlistStore = usePlaylistStore()
@@ -52,34 +52,36 @@ const selectTimelineForSong = (index: number) => {
 
 <template>
   <main>
-    <section v-if="playlistStore.playlist.length === 0">
+    <div v-if="playlistStore.loading">
+      <Spin></Spin>
+    </div>
+    <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
       No songs to play
-    </section>
-    <section class="game-board" v-if="playlistStore.playlist.length > 0">
+    </div>
+    <div class="game-board" v-if="!playlistStore.loading && playlistStore.playlist.length > 0">
+      <h3>Escute a música e coloque no lugar certo na linha do tempo abaixo</h3>
 
-      <section v-if="playlistStore.currentSong">
+      <div v-if="playlistStore.currentSong" class="player-section">
         <PlayerComponent :song="playlistStore.currentSong">
         </PlayerComponent>
-      </section>
+      </div>
 
-      <section>
+      <div class="timeline-section">
         <div class="cards-in-timeline">
-          <AddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)"></AddHereComponent>
+          <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(-1)">
+          </CardAddHereComponent>
           <div v-for="(song, index) in playlistStore.playedSongs"
                class="cards-in-timeline-repeat">
             <CardComponent
               :song="song"
               ref="cards"
             ></CardComponent>
-            <div class="add-here-button">
-              <AddHereComponent
-                @selectTimelineForSong="selectTimelineForSong(index)"></AddHereComponent>
-            </div>
+            <CardAddHereComponent @selectTimelineForSong="selectTimelineForSong(index)">
+            </CardAddHereComponent>
           </div>
         </div>
-      </section>
-
-    </section>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -92,14 +94,47 @@ const selectTimelineForSong = (index: number) => {
   align-items: center;
   height: 100%;
   min-height: 70vh;
+  width: 100%;
+  gap: 2rem;
+}
+
+.cards-in-timeline {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.player-section,
+.timeline-section,
+.cards-in-timeline,
+.cards-in-timeline-repeat {
+  width: 100%;
+}
+
+@media (min-width: 25rem) {
+  .cards-in-timeline-repeat {
+    justify-content: flex-start !important;
+  }
+}
+
+.cards-in-timeline {
+  background-color: var(--cards-background-color);
+  padding: 2rem;
+  border-radius: 1rem;
 }
 
 .cards-in-timeline,
 .cards-in-timeline-repeat {
   display: flex;
   gap: 1rem;
-  justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 40rem) {
+  .cards-in-timeline,
+  .cards-in-timeline-repeat {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 </style>

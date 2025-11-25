@@ -8,8 +8,14 @@
 #app {
   display: flex;
   flex-direction: column;
-  padding: 3rem;
+  padding: 2rem;
   justify-content: center;
+}
+
+@media (min-width: 40rem) {
+  #app {
+    padding: 3rem;
+  }
 }
 
 header {

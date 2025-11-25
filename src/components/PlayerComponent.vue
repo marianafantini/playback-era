@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { usePlaylistStore } from '@/stores/playlist.ts'
-import { onBeforeMount, onMounted } from 'vue'
-import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
+import {usePlaylistStore} from '@/stores/playlist.ts'
+import {onBeforeMount} from 'vue'
+import {PauseCircleOutlined, PlayCircleOutlined} from '@ant-design/icons-vue'
 
 const playlistStore = usePlaylistStore()
 const {song} = defineProps(["song"])
+let isPlaying = false;
 
 onBeforeMount(() => {
   configurePlayer()
 })
 
-onMounted(() => {
-  playSong()
-})
+interface CustomEvent {
+  data: {
+    isPaused: boolean
+  }
+}
 
 const configurePlayer = () => {
   (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
@@ -21,6 +24,16 @@ const configurePlayer = () => {
       uri: song.spotifyURI
     }
     const callback = (EmbedController: any) => {
+      EmbedController.addListener('playback_update', (event: CustomEvent) => {
+        if (event.data.isPaused) {
+          isPlaying = false;
+          console.log("pause")
+        } else {
+          isPlaying = true;
+          console.log("play")
+        }
+      });
+
       playlistStore.player = EmbedController
       playlistStore.playerReady = true
     }
@@ -29,9 +42,7 @@ const configurePlayer = () => {
 }
 
 const playSong = () => {
-  if (playlistStore.playerReady && playlistStore.player) {
-    playlistStore.player.play()
-  }
+  playlistStore.player.play()
 }
 
 const pauseSong = () => {
@@ -41,10 +52,11 @@ const pauseSong = () => {
 </script>
 
 <template>
-
   <div class="music-card">
-    <PlayCircleOutlined class="control-icons" @click="playSong" />
-    <PauseCircleOutlined class="control-icons" @click="pauseSong" />
+    <div class="player-commands" v-if="playlistStore.playerReady">
+      <PlayCircleOutlined class="control-icons" @click="playSong"/>
+      <PauseCircleOutlined class="control-icons" @click="pauseSong"/>
+    </div>
   </div>
 
   <div class="hidden">
@@ -56,19 +68,30 @@ const pauseSong = () => {
 <style scoped>
 
 .music-card {
-  border: 0.1rem solid;
-  padding: 1rem 2rem;
+  width: 100%;
+  min-width: var(--card-width);
+  border: none;
+  padding: 1rem;
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  min-height: var(--card-height);
-  min-width: var(--card-width);
+  background-color: var(--cards-background-color);
+}
+
+.player-commands {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  width: 100%;
 }
 
 .control-icons {
-  font-size: 3rem;
+  font-size: 2rem;
   cursor: pointer;
 }
 

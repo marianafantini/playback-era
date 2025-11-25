@@ -14,6 +14,7 @@ export const usePlaylistStore = defineStore('playlist', {
     player: any,
     playerReady: boolean,
     accessToken?: string,
+    loading: boolean,
   } => ({
     usersPlaylists: [],
     playlist: [],
@@ -21,9 +22,11 @@ export const usePlaylistStore = defineStore('playlist', {
     possibleColors: ['teal', 'lavanda', 'lightblue', 'mint', 'lightpink', 'yellow', 'peach', 'sage', 'violet'],
     player: {},
     playerReady: false,
+    loading: false,
   }),
   actions: {
     async makeRequestToSpotify(url: string, method: string) {
+      this.loading = true;
       const accessToken = window.localStorage.getItem('spotify_access_token');
       return await fetch(url, {
         method: method,
@@ -32,6 +35,8 @@ export const usePlaylistStore = defineStore('playlist', {
         }
       }).then((response) => {
         return response.json()
+      }).finally(() => {
+        this.loading = false;
       })
     },
 
@@ -65,7 +70,7 @@ export const usePlaylistStore = defineStore('playlist', {
             spotifyURI: item.track.uri,
             artist: item.track.artists.map((artist) => artist.name).join(' & '),
             year: item.track.album.release_date.split("-")[0],
-
+            image: item.track?.album?.images[0]?.url,
           }
         })
 
