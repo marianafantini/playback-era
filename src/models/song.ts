@@ -5,5 +5,5 @@ export interface Song {
   color?: string
   youtubeVideoID?: string
   spotifyURI?: string
-  image: string
+  image?: string
 }

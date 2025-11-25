@@ -2,7 +2,7 @@
 const emit = defineEmits(['onChange'])
 const { options, checked } = defineProps(['options', 'checked'])
 
-const changeValue = (newValue) => {
+const changeValue = (newValue: number) => {
   emit('onChange', newValue)
   const radioButtons = [...document.getElementsByClassName('radio-div')]
   radioButtons.forEach((item) => item.classList.remove('checked'))

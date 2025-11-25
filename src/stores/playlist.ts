@@ -63,7 +63,7 @@ export const usePlaylistStore = defineStore('playlist', {
         })
     },
 
-    async setUserPlaylists(): Promise<Playlist[]> {
+    async setUserPlaylists(): Promise<void> {
       const response = await this.makeRequestToSpotify(
         'https://api.spotify.com/v1/me/playlists',
         'GET'
@@ -72,29 +72,30 @@ export const usePlaylistStore = defineStore('playlist', {
       this.usersPlaylists = [...playlistList]
     },
 
-
     spotifyTracksToAppSongs(items: SpotifyItem[]): Song[] {
       return items
         .filter((item: SpotifyItem) => item.track.type === 'track')
+        .filter((item: SpotifyItem) => !!item.track.album.release_date)
         .map((item: SpotifyItem) => {
           return {
             name: item.track.name,
             spotifyURI: item.track.uri,
             artist: item.track.artists.map((artist) => artist.name).join(' & '),
-            year: item.track.album.release_date.split('-')[0],
+            year: item.track.album.release_date.split('-')[0] || '',
             image: item.track?.album?.images[0]?.url
           }
         })
+        .filter((item) => item.year !== '')
     },
 
     getSongsForRounds(playlist: Song[]): Song[] {
       const numberOfSongs: number = this.amountOfRounds + 1
-      const songs = []
+      const songs: Song[] = []
 
       while (songs.length < numberOfSongs) {
-        let index = Math.floor(Math.random() * playlist.length)
-        if (songs.indexOf(playlist[index]) === -1) {
-          songs.push(playlist[index])
+        let index: number = Math.floor(Math.random() * playlist.length)
+        if (songs.indexOf(playlist[index] as Song) === -1) {
+          songs.push(playlist[index] as Song)
         }
       }
       return songs
@@ -108,7 +109,7 @@ export const usePlaylistStore = defineStore('playlist', {
         'GET'
       )
 
-      const playlist: Playlist[] = this.spotifyTracksToAppSongs(response.items)
+      const playlist: Song[] = this.spotifyTracksToAppSongs(response.items)
       const playlistForRounds: Song[] = [...this.getSongsForRounds(playlist)]
       this.playlist = [...playlistForRounds]
       this.playlistSongsLeft = [...playlistForRounds]

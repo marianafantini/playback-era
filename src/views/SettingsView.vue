@@ -5,23 +5,18 @@ import { message } from 'ant-design-vue'
 
 const playlistStore = usePlaylistStore()
 
-message.config({
-  maxCount: 1
-})
-
 const [messageApi, contextHolder] = message.useMessage()
 let amountOfRounds = 10
 
 const possibleAmountOfRounds = [6, 10, 15, 20]
 
-const changeAmountOfRounds = (newValue) => {
+const changeAmountOfRounds = (newValue: number) => {
   amountOfRounds = newValue
   playlistStore.amountOfRounds = newValue
   messageApi.destroy();
   messageApi.open({
     type: 'success',
-    content: 'salvo!',
-    maxCount: 1
+    content: 'salvo!'
   })
 }
 
