@@ -16,16 +16,13 @@ const {playlist} = defineProps(['playlist'])
 .music-card {
   border-color: transparent;
   background-color: var(--cards-background-color);
-  padding: 1rem 2rem;
+  min-height: var(--card-height);
+  padding: 1rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  justify-content: center;
+  gap: 1.5rem;
   align-items: center;
   border-radius: 1rem;
-  min-width: var(--card-width);
-  width: calc(var(--card-width) * 1.2);
-  height: var(--card-height);
+  width: 100%;
 }
 
 .playlist-cover {
@@ -35,8 +32,20 @@ const {playlist} = defineProps(['playlist'])
 }
 
 p {
-  text-wrap: wrap;
   font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 30rem) {
+  .music-card {
+    min-width: var(--card-width);
+    width: calc(var(--card-width) * 1.2);
+    height: auto;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    justify-content: center;
+  }
 }
 
 </style>

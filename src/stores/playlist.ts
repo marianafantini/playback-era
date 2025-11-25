@@ -7,6 +7,7 @@ import type {SpotifyPlaylist} from "@/models/spotify-playlist.ts";
 export const usePlaylistStore = defineStore('playlist', {
   state: (): {
     currentSong?: Song,
+    searchResults?: Playlist[],
     usersPlaylists: Playlist[],
     playlist: Song[],
     playedSongs: Song[],
@@ -77,6 +78,28 @@ export const usePlaylistStore = defineStore('playlist', {
       this.playlist = playlist
 
       return playlist
+    },
+
+    async searchForPlaylist(q: string): Promise<Playlist[]> {
+      const response = await this.makeRequestToSpotify('https://api.spotify.com/v1/search?type=playlist&q=' + q, 'GET')
+      const searchResults = response.playlists.items
+        .filter((item) => item !== null)
+        .map((playlist: SpotifyPlaylist) => {
+          return {
+            name: playlist.name,
+            id: playlist.id,
+            spotifyURI: playlist.uri,
+            collaborative: playlist.collaborative,
+            description: playlist.description,
+            public: playlist.public,
+            cover: playlist.images[0]?.url
+          }
+        })
+
+      this.searchResults = searchResults;
+
+      return searchResults;
+
     },
 
     getNextSong(): void {
