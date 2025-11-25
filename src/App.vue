@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {RouterView, RouterLink, useRouter} from 'vue-router'
-
+import { inject } from "@vercel/analytics"
+inject()
 const router = useRouter();
 </script>
 
