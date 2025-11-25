@@ -1,18 +1,15 @@
 <script setup lang="ts">
-const {playlist} = defineProps(['playlist'])
+const { playlist } = defineProps(['playlist'])
 </script>
 
 <template>
   <div class="music-card">
-    <img :src="playlist.cover"
-         alt="Playlist Cover Image"
-         class="playlist-cover"/>
+    <img :src="playlist.cover" alt="Playlist Cover Image" class="playlist-cover" />
     <p>{{ playlist.name }}</p>
   </div>
 </template>
 
 <style scoped>
-
 .music-card {
   border-color: transparent;
   background-color: var(--cards-background-color);
@@ -45,5 +42,4 @@ p {
     max-width: var(--card-width);
   }
 }
-
 </style>

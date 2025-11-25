@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Button } from "ant-design-vue"
+import { Button } from 'ant-design-vue'
 
 const generateRandomString = (length: number) => {
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const values = crypto.getRandomValues(new Uint8Array(length));
-  return values.reduce((acc, x) => acc + possible[x % possible.length], "");
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const values = crypto.getRandomValues(new Uint8Array(length))
+  return values.reduce((acc, x) => acc + possible[x % possible.length], '')
 }
 
 const sha256 = async (plain: string) => {
@@ -17,22 +17,22 @@ const base64encode = (input: any) => {
   return btoa(String.fromCharCode(...new Uint8Array(input)))
     .replace(/=/g, '')
     .replace(/\+/g, '-')
-    .replace(/\//g, '_');
+    .replace(/\//g, '_')
 }
 
 const startLogin = async () => {
   const codeVerifier = generateRandomString(64)
-  console.log("code verifier saved on local storage", codeVerifier)
+  console.log('code verifier saved on local storage', codeVerifier)
   window.localStorage.setItem('code_verifier', codeVerifier)
 
   const hashed = await sha256(codeVerifier)
-  const codeChallenge = base64encode(hashed);
+  const codeChallenge = base64encode(hashed)
 
-  const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-  const redirectUri = window.location.origin + "/login-success";
+  const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID
+  const redirectUri = window.location.origin + '/login-success'
 
-  const scope = 'user-read-private user-read-email';
-  const authUrl = new URL("https://accounts.spotify.com/authorize")
+  const scope = 'user-read-private user-read-email'
+  const authUrl = new URL('https://accounts.spotify.com/authorize')
 
   const params = {
     response_type: 'code',
@@ -43,11 +43,9 @@ const startLogin = async () => {
     redirect_uri: redirectUri,
   }
 
-  authUrl.search = new URLSearchParams(params).toString();
-  window.location.href = authUrl.toString();
+  authUrl.search = new URLSearchParams(params).toString()
+  window.location.href = authUrl.toString()
 }
-
-
 </script>
 
 <template>
@@ -56,6 +54,4 @@ const startLogin = async () => {
   </div>
 </template>
 
-<style>
-
-</style>
+<style></style>

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import {usePlaylistStore} from '@/stores/playlist'
-import {Input, Button} from "ant-design-vue"
+import { usePlaylistStore } from '@/stores/playlist'
+import { Input, Button } from 'ant-design-vue'
 
-const {Search} = Input;
-import {onBeforeMount, onUnmounted} from 'vue'
-import PlaylistCardComponent from "@/components/PlaylistCardComponent.vue";
-import {useRouter} from "vue-router";
-import type {Playlist} from "@/models/playlist.ts";
+const { Search } = Input
+import { onBeforeMount, onUnmounted } from 'vue'
+import PlaylistCardComponent from '@/components/PlaylistCardComponent.vue'
+import { useRouter } from 'vue-router'
+import type { Playlist } from '@/models/playlist.ts'
 
-const router = useRouter();
+const router = useRouter()
 
 const playlistStore = usePlaylistStore()
 
@@ -17,57 +17,48 @@ onBeforeMount(async () => {
 })
 
 const goToPlaylist = (playlist: Playlist) => {
-  router.push("/play?playlist=" + playlist.id)
+  router.push('/play?playlist=' + playlist.id)
 }
 
-const searchForPlaylist = async (q: string): Promise<Playlist[]> => {
-  return await playlistStore.searchForPlaylist(q)
-}
-
-const cleanSearch = () => {
-  playlistStore.cleanSearchResults()
+const searchForPlaylist = async (q: string): Promise<void> => {
+  let searchResults: Playlist[] = []
+  if (q.length > 0) {
+    searchResults = await playlistStore.searchForPlaylist(q)
+  }
+  playlistStore.searchResults = searchResults
 }
 
 onUnmounted(() => {
-  cleanSearch()
+  playlistStore.cleanSearchResults()
 })
-
 </script>
 
 <template>
   <main>
     <section class="game-board">
-
       <div class="search-playlists-area">
-
-        <Search placeholder="Search for playlist"
-                @search="searchForPlaylist"
-                class="search-playlists-input"/>
-
-        <Button @click="cleanSearch">
-          Limpar
-        </Button>
-
+        <Search
+          placeholder="Procurar playlist do spotify"
+          @search="searchForPlaylist"
+          @onChange="searchForPlaylist"
+          :allowClear="true"
+          class="search-playlists-input"
+        />
       </div>
 
       <div class="playlist-list">
-
-        <div v-for="playlist in playlistStore.searchResults"
-             @click="goToPlaylist(playlist)">
+        <div v-for="playlist in playlistStore.searchResults" @click="goToPlaylist(playlist)">
           <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
         </div>
-        <div v-for="playlist in playlistStore.usersPlaylists"
-             @click="goToPlaylist(playlist)">
+        <div v-for="playlist in playlistStore.usersPlaylists" @click="goToPlaylist(playlist)">
           <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
         </div>
       </div>
-
     </section>
   </main>
 </template>
 
 <style scoped>
-
 .search-playlists-area {
   display: flex;
   gap: 1rem;
@@ -100,7 +91,6 @@ onUnmounted(() => {
   justify-content: flex-start;
 }
 
-
 @media (min-width: 40rem) {
   .search-playlists-input {
     max-width: 40%;
@@ -111,5 +101,4 @@ onUnmounted(() => {
     width: auto;
   }
 }
-
 </style>
