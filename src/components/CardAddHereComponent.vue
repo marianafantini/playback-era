@@ -17,7 +17,7 @@ import {PlusOutlined} from "@ant-design/icons-vue";
 
 .music-card {
   border: 0.1rem dashed var(--color);
-  padding: 1rem 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -27,13 +27,13 @@ import {PlusOutlined} from "@ant-design/icons-vue";
   cursor: pointer;
 }
 
-@media (max-width: 25rem) {
+@media (max-width: 40rem) {
   .music-card {
     width: 100%;
   }
 }
 
-@media (min-width: 25rem) {
+@media (min-width: 40rem) {
   .music-card {
     min-width: var(--card-width);
     width: var(--card-width);

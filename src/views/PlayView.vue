@@ -110,7 +110,7 @@ const selectTimelineForSong = (index: number) => {
   width: 100%;
 }
 
-@media (min-width: 25rem) {
+@media (min-width: 40rem) {
   .cards-in-timeline-repeat {
     justify-content: flex-start !important;
   }
