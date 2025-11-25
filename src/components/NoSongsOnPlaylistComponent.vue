@@ -10,5 +10,4 @@ import {Empty} from 'ant-design-vue'
 </template>
 
 <style scoped>
-
 </style>
