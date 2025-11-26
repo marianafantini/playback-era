@@ -37,7 +37,6 @@ const { animated } = defineProps(['animated'])
   animation: musicWavesFlow 1.8s infinite ease-in-out;
 }
 
-
 .music-waves-animation.animated span:nth-child(2) {
   animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -0.4s;
@@ -54,25 +53,21 @@ const { animated } = defineProps(['animated'])
 }
 
 .music-waves-animation.animated span:nth-child(5) {
-
   animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -1.6s;
 }
 
 .music-waves-animation.animated span:nth-child(6) {
-
   animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -2s;
 }
 
 .music-waves-animation.animated span:nth-child(7) {
-
   animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -2.4s;
 }
 
 .music-waves-animation.animated span:nth-child(8) {
-
   animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -2.8s;
 }
@@ -87,9 +82,9 @@ const { animated } = defineProps(['animated'])
   animation-delay: -3.6s;
 }
 
-
 @keyframes musicWavesFlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: scaleY(0.5);
   }
   50% {
@@ -110,5 +105,4 @@ const { animated } = defineProps(['animated'])
 .music-waves-animation.pause-animation span:nth-child(10) {
   animation-play-state: paused;
 }
-
 </style>

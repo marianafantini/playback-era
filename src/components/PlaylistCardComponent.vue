@@ -13,7 +13,6 @@ const { playlist } = defineProps(['playlist'])
 </template>
 
 <style scoped>
-
 .playlist-card {
   border: 1px solid var(--cards-border-color);
   background-color: var(--cards-background-color);
@@ -64,5 +63,4 @@ p {
   font-weight: 400;
   color: var(--subtitle-color);
 }
-
 </style>

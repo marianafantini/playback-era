@@ -11,10 +11,8 @@ const { round, totalRounds } = defineProps(['round', 'totalRounds'])
 </template>
 
 <style scoped>
-
 p {
   font-size: 0.9rem;
   color: #8b8d94;
 }
-
 </style>

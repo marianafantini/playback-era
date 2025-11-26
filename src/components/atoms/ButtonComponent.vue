@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const { content } = defineProps(['content'])
 const emit = defineEmits(['click'])
 </script>
@@ -11,7 +10,6 @@ const emit = defineEmits(['click'])
 </template>
 
 <style scoped>
-
 .see-more-button {
   border-radius: 3rem;
   font-size: 1.2rem;

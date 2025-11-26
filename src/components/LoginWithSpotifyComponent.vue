@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const generateRandomString = (length: number) => {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   const values = crypto.getRandomValues(new Uint8Array(length))
@@ -57,7 +56,6 @@ const startLogin = async () => {
 </template>
 
 <style>
-
 .spotify-button {
   border-radius: 3rem;
   font-size: 1.2rem;

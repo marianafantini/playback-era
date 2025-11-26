@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import WinTrophyComponent from '@/components/WinTrophyComponent.vue'
 import ButtonComponent from '@/components/atoms/ButtonComponent.vue'
 import { useRouter } from 'vue-router'
@@ -13,22 +12,17 @@ const emit = defineEmits(['restartGame'])
 <template>
   <div class="win-header-message">
     <WinTrophyComponent />
-    <h3>
-      Parabéns!!
-    </h3>
-    <p> Você acertou {{ correctSongs }} {{ correctSongs > 1 ? 'músicas' : 'música' }}</p>
+    <h3>Parabéns!!</h3>
+    <p>Você acertou {{ correctSongs }} {{ correctSongs > 1 ? 'músicas' : 'música' }}</p>
 
     <div class="button-actions">
-      <ButtonComponent content="Jogar de novo"
-                       @click="emit('restartGame')" />
-      <ButtonComponent content="Trocar de playlist"
-                       @click="router.push('/select-playlist')" />
+      <ButtonComponent content="Jogar de novo" @click="emit('restartGame')" />
+      <ButtonComponent content="Trocar de playlist" @click="router.push('/select-playlist')" />
     </div>
   </div>
 </template>
 
 <style scoped>
-
 .button-actions {
   display: flex;
   gap: 1rem;
@@ -50,5 +44,4 @@ const emit = defineEmits(['restartGame'])
 .win-header-message p {
   font-size: 1.25rem;
 }
-
 </style>

@@ -13,13 +13,12 @@ const possibleAmountOfRounds = [6, 10, 15, 20]
 const changeAmountOfRounds = (newValue: number) => {
   amountOfRounds = newValue
   playlistStore.amountOfRounds = newValue
-  messageApi.destroy();
+  messageApi.destroy()
   messageApi.open({
     type: 'success',
-    content: 'salvo!'
+    content: 'salvo!',
   })
 }
-
 </script>
 
 <template>
@@ -29,21 +28,19 @@ const changeAmountOfRounds = (newValue: number) => {
       <h1>Configurações de jogo</h1>
 
       <div class="config-item">
-        <p>
-          Quantidade de rodadas:
-        </p>
+        <p>Quantidade de rodadas:</p>
 
         <RadioButtonButtonComponent
           :options="possibleAmountOfRounds"
           :checked="amountOfRounds"
-          @onChange="changeAmountOfRounds" />
+          @onChange="changeAmountOfRounds"
+        />
       </div>
     </section>
   </main>
 </template>
 
 <style scoped>
-
 h1 {
   margin-bottom: 3rem;
 }
@@ -53,6 +50,4 @@ h1 {
   gap: 1rem;
   align-items: center;
 }
-
-
 </style>
