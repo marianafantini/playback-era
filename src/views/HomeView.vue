@@ -9,19 +9,19 @@ const router = useRouter()
 
 const steps = [
   {
-    icon: '/public/music-note.svg',
+    icon: '/music-note.svg',
     title: 'Escolha uma playlist',
     description: 'Selecione sua playlist favorita',
     color: 'from-green-400 to-emerald-500'
   },
   {
-    icon: '/public/play.svg',
+    icon: '/play.svg',
     title: 'Ouça o trecho',
     description: 'Escute uma música aleatória',
     color: 'from-pink-400 to-rose-500'
   },
   {
-    icon: '/public/calendar.svg',
+    icon: '/calendar.svg',
     title: 'Adivinhe o ano',
     description: 'Coloque a música na linha do tempo',
     color: 'from-purple-400 to-indigo-500'

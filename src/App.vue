@@ -29,13 +29,6 @@ const router = useRouter()
       v-if="router.currentRoute.value.name !== 'home'&& router.currentRoute.value.name !== 'select-playlist'">
       <BackToPlaylistsHeader />
     </div>
-
-<!--    <div-->
-<!--      v-if="router.currentRoute.value.name !== 'home'&& router.currentRoute.value.name !== 'settings'">-->
-<!--      <RouterLink to="/settings">-->
-<!--        settings-->
-<!--      </RouterLink>-->
-<!--    </div>-->
   </header>
 
   <RouterView />

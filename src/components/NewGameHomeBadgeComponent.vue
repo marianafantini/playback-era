@@ -5,7 +5,7 @@
 <template>
 
   <div class="new-game-badge">
-    <img src="/public/sparkle.svg"/>
+    <img src="/sparkle.svg"/>
     Novo jogo
   </div>
 
