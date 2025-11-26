@@ -8,7 +8,7 @@ const router = useRouter()
 <template>
   <header>
     <div class="header-logo" @click="router.push('/')">
-      <img src="/src/assets/icons/mp3-icon.png" alt="Logo of the app, which is an mp3 player icon" />
+      <img src="/mp3-icon.png" alt="Logo of the app, which is an mp3 player icon" />
       <div>
         <h1>Playback Era</h1>
         <p class="header-subtitle">Desafio musical</p>

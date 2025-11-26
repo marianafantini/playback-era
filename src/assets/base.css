@@ -47,7 +47,7 @@ body * {
 }
 
 body {
-  background: linear-gradient(120deg, rgb(21 24 49), rgb(86 28 133), rgb(59 26 98));
+  background: linear-gradient(120deg, #332e82, #561c89, #4c1d94);
   color: var(--color);
   min-height: 100vh;
   transition: color 0.5s,
