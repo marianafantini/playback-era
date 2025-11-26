@@ -1,14 +1,13 @@
 <script setup lang="ts">
 
 import PlaylistCardComponent from '@/components/PlaylistCardComponent.vue'
-const { playlistList } = defineProps(["playlistList"])
+const { searchPlaylistList, playlistList } = defineProps(["searchPlaylistList", "playlistList"])
 const emit = defineEmits('goToPlaylist')
 </script>
 
 <template>
-
   <div class="playlist-list">
-    <div v-for="playlist in playlistList" @click="emit('goToPlaylist', playlist)">
+    <div v-for="playlist in playlistList.concat(searchPlaylistList)" @click="emit('goToPlaylist', playlist)">
       <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
     </div>
   </div>

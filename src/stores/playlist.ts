@@ -18,6 +18,7 @@ export const usePlaylistStore = defineStore('playlist', {
     amountOfRounds: number
   } => ({
     usersPlaylists: [],
+    searchResults: [],
     playlist: [],
     playlistSongsLeft: [],
     playedSongs: [],

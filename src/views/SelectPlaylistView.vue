@@ -8,6 +8,7 @@ import PlaylistCardComponent from '@/components/PlaylistCardComponent.vue'
 import { useRouter } from 'vue-router'
 import type { Playlist } from '@/models/playlist.ts'
 import PlaylistListOfCardsComponent from '@/components/icons/PlaylistListOfCardsComponent.vue'
+import SearchPlaylist from '@/components/SearchPlaylist.vue'
 
 const router = useRouter()
 
@@ -22,6 +23,7 @@ const goToPlaylist = (playlist: Playlist) => {
 }
 
 const searchForPlaylist = async (q: string): Promise<void> => {
+  console.log("search for ", q)
   let searchResults: Playlist[] = []
   if (q.length > 0) {
     searchResults = await playlistStore.searchForPlaylist(q)
@@ -37,26 +39,12 @@ onUnmounted(() => {
 <template>
   <main>
     <section class="game-board">
-      <div class="search-playlists-area">
-        <Search
-          placeholder="Procurar playlist do spotify"
-          @search="searchForPlaylist"
-          @onChange="searchForPlaylist"
-          :allowClear="true"
-          class="search-playlists-input"
-        />
-      </div>
+      <SearchPlaylist @searchForPlaylist="searchForPlaylist" />
 
-      <PlaylistListOfCardsComponent :playlist-list="playlistStore.usersPlaylists" />
+      <PlaylistListOfCardsComponent :searchPlaylistList="playlistStore.usersPlaylists"
+                                    :playlist-list="playlistStore.searchResults"
+                                    @goToPlaylist="goToPlaylist" />
 
-<!--      <div class="playlist-list">-->
-<!--        <div v-for="playlist in playlistStore.searchResults" @click="goToPlaylist(playlist)">-->
-<!--          <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>-->
-<!--        </div>-->
-<!--        <div v-for="playlist in playlistStore.usersPlaylists" @click="goToPlaylist(playlist)">-->
-<!--          <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>-->
-<!--        </div>-->
-<!--      </div>-->
     </section>
   </main>
 </template>
