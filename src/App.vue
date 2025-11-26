@@ -8,7 +8,9 @@ const router = useRouter()
 <template>
   <header>
     <div class="header-logo" @click="router.push('/')">
-      <img src="/mp3-icon.png" alt="Logo of the app, which is an mp3 player icon" />
+      <div class="playback-era-logo">
+        <img src="/music-note.svg" />
+      </div>
       <div>
         <h1>Playback Era</h1>
         <p class="header-subtitle">Desafio musical</p>
@@ -44,7 +46,7 @@ header a {
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   cursor: pointer;
 }
 
@@ -54,11 +56,23 @@ header a {
 }
 .header-logo h1 {
   font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .header-logo .header-subtitle {
   font-size: 1rem;
   color: var(--subtitle-color);
+}
+
+.playback-era-logo {
+  background-image: linear-gradient(to bottom right, #9333ea, #8b5cf6);
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)
+}
+.playback-era-logo img {
+  height: 2rem;
+  color: white;
 }
 
 </style>

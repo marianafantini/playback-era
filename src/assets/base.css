@@ -1,13 +1,16 @@
 :root {
   --background-color: rgba(19, 28, 59, 0.9);
-  --home-cards-background-color: #5a2885;
-  --home-cards-border-color: #4f3b6c;
+  --home-cards-background-color: rgb(255 255 255/.05);
+  --home-cards-border-color: rgb(255 255 255/.1);
   --cards-background-color: #4f267d;
   --cards-border-color: #6b3f9b;
   --player-timeline-color: rgba(41, 50, 82, 0.75);
   --color: #ffffff;
   --subtitle-color: #c9a8d6;
   --spotify-green: #1ed760;
+
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
   font-family: Inter,
   -apple-system,
