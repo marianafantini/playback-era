@@ -4,7 +4,7 @@
 
 <template>
   <div class="trophy-div">
-    <img src="/public/trophy.svg" />
+    <img src="/trophy.svg" />
   </div>
 </template>
 
