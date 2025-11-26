@@ -5,15 +5,19 @@ const emit = defineEmits(['searchForPlaylist'])
 <template>
   <div class="search-playlists-area">
     <input
+      type="search"
       placeholder="Procurar playlist..."
-      @search="searchForPlaylist"
-      @change="(event) => emit('searchForPlaylist', event.target.value)"
+      @search="(event) => emit('searchForPlaylist', event.target.value)"
       class="search-playlists-input"
     />
   </div>
 </template>
 
 <style scoped>
+
+.search-playlists-area {
+  width: 100%;
+}
 
 input {
   width: 100%;
@@ -26,6 +30,15 @@ input {
 
 ::placeholder {
   color: var(--subtitle-color);
+}
+
+::-webkit-search-cancel-button{
+  -webkit-appearance: none;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 100%;
+  background-image: url("/public/clear-search.svg");
+
 }
 
 </style>

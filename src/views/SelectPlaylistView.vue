@@ -50,16 +50,6 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.search-playlists-area {
-  display: flex;
-  gap: 1rem;
-  width: 100%;
-}
-
-.search-playlists-input {
-  border: none;
-}
-
 .game-board {
   display: flex;
   gap: 2rem;
@@ -69,11 +59,5 @@ onUnmounted(() => {
   height: 100%;
   min-height: 70vh;
   width: 100%;
-}
-
-@media (min-width: 40rem) {
-  .search-playlists-input {
-    max-width: 40%;
-  }
 }
 </style>
