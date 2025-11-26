@@ -93,6 +93,10 @@ main {
   gap: 1rem;
 }
 
+.card-how-to-play div {
+  width: 70%;
+}
+
 .card-how-to-play .icon {
   display: flex;
   align-items: center;
