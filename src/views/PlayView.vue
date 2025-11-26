@@ -4,12 +4,9 @@ import { usePlaylistStore } from '@/stores/playlist'
 import { onBeforeMount } from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 import CardAddHereComponent from '@/components/CardAddHereComponent.vue'
-import { Spin } from 'ant-design-vue'
 import { SmileOutlined } from '@ant-design/icons-vue'
-import RoundDescriptionComponent from '@/components/RoundDescriptionComponent.vue'
-import PlayViewTitleComponent from '@/components/PlayViewTitleComponent.vue'
-import LoadingPlayViewComponent from '@/components/LoadingPlayViewComponent.vue'
 import NoSongsOnPlaylistComponent from '@/components/NoSongsOnPlaylistComponent.vue'
+import LoadingComponent from '@/components/LoadingComponent.vue'
 
 const { playlist } = defineProps(['playlist'])
 const playlistStore = usePlaylistStore()
@@ -68,7 +65,7 @@ const selectTimelineForSong = (index: number) => {
 <template>
   <main>
     <div v-if="playlistStore.loading">
-      <LoadingPlayViewComponent />
+      <LoadingComponent />
     </div>
     <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
       <NoSongsOnPlaylistComponent />
@@ -76,41 +73,47 @@ const selectTimelineForSong = (index: number) => {
     <div v-if="!playlistStore.loading && playlistStore.playlist.length > 0"
          class="game-board">
       <div class="player-section">
-        <RoundDescriptionComponent
-          :round="playlistStore.playlist.length - playlistStore.playlistSongsLeft.length - 1"
-          :total-rounds="playlistStore.playlist.length - 1">
-        </RoundDescriptionComponent>
-        <PlayViewTitleComponent :played-songs="playlistStore.playedSongs"
-                                :is-game-still-active="playlistStore.isGameStillActive()"
-                                :song="playlistStore.currentSong"
-                                :amountOfSongs="playlistStore.playlist.length"
-                                :amountOfSongsLeft="playlistStore.playlistSongsLeft.length">
-        </PlayViewTitleComponent>
+        <div v-if="playlistStore.isGameStillActive()">
+          <PlayerComponent
+            :song="playlistStore.currentSong"
+            :amountOfSongs="playlistStore.playlist.length"
+            :amountOfSongsLeft="playlistStore.playlistSongsLeft.length"
+            :round="playlistStore.playlist.length - playlistStore.playlistSongsLeft.length - 1"
+            :total-rounds="playlistStore.playlist.length - 1"
+          />
+        </div>
+        <div v-else>
+          <h3>
+            <SmileOutlined />
+            Parabéns!! Você acertou {{ playlistStore.playedSongs.length }}
+            {{ playlistStore.playedSongs.length > 1 ? 'músicas' : 'música' }}
+          </h3>
+        </div>
       </div>
 
-        <div class="cards-in-timeline">
+      <div class="cards-in-timeline">
+        <CardAddHereComponent
+          :isGameStillActive="playlistStore.isGameStillActive()"
+          @selectTimelineForSong="selectTimelineForSong(-1)"
+        >
+        </CardAddHereComponent>
+        <div
+          v-for="(song, index) in playlistStore.playedSongs"
+          class="cards-in-timeline-repeat"
+          :key="song.spotifyURI"
+        >
+          <MusicCardComponent
+            :song="song"
+            ref="cards"
+            :id="getIDForSongCard(song.name)"
+          ></MusicCardComponent>
           <CardAddHereComponent
             :isGameStillActive="playlistStore.isGameStillActive()"
-            @selectTimelineForSong="selectTimelineForSong(-1)"
+            @selectTimelineForSong="selectTimelineForSong(index)"
           >
           </CardAddHereComponent>
-          <div
-            v-for="(song, index) in playlistStore.playedSongs"
-            class="cards-in-timeline-repeat"
-            :key="song.spotifyURI"
-          >
-            <MusicCardComponent
-              :song="song"
-              ref="cards"
-              :id="getIDForSongCard(song.name)"
-            ></MusicCardComponent>
-            <CardAddHereComponent
-              :isGameStillActive="playlistStore.isGameStillActive()"
-              @selectTimelineForSong="selectTimelineForSong(index)"
-            >
-            </CardAddHereComponent>
-          </div>
         </div>
+      </div>
     </div>
   </main>
 </template>

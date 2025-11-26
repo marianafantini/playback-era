@@ -3,8 +3,7 @@ const { animated } = defineProps(['animated'])
 </script>
 
 <template>
-  <div id="music-waves-animation-container"
-       :class="'music-waves-animation animated ' + (animated ? '' : 'pause-animation')">
+  <div :class="'music-waves-animation animated ' + (animated ? '' : 'pause-animation')">
     <span></span>
     <span></span>
     <span></span>
@@ -90,14 +89,11 @@ const { animated } = defineProps(['animated'])
 
 
 @keyframes musicWavesFlow {
-  0% {
+  0%, 100% {
     transform: scaleY(0.5);
   }
   50% {
     transform: scaleY(2);
-  }
-  100% {
-    transform: scaleY(1);
   }
 }
 

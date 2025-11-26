@@ -26,8 +26,8 @@ export const usePlaylistStore = defineStore('playlist', {
     player: {},
     playerReady: false,
     loading: false,
-    amountOfRounds: 10,
-    playing: false,
+    amountOfRounds: 3,
+    playing: false
   }),
   actions: {
 
@@ -139,19 +139,21 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     getNextSong(): void {
-      if (this.playlistSongsLeft.length > 0) {
+      if (this.playlistSongsLeft && this.playlistSongsLeft.length > 0) {
         const index: number = Math.floor(Math.random() * this.playlistSongsLeft.length)
         if (this.playlistSongsLeft[index]) {
           this.currentSong = this.playlistSongsLeft[index]
           if (this.currentSong) {
             this.currentSong.color = this.randomColor()
           }
+          console.log('will splice here ', index)
           this.playlistSongsLeft.splice(index, 1)
         }
       }
     },
 
     isGameStillActive(): boolean {
+      console.log('this.playlistSongsLeft.length', this.playlistSongsLeft.length)
       return this.playlistSongsLeft.length > 0
     },
 

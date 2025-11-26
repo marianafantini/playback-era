@@ -3,12 +3,15 @@ import { usePlaylistStore } from '@/stores/playlist.ts'
 import { onBeforeMount } from 'vue'
 import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
 import MusicBarsComponent from '@/components/MusicBarsComponent.vue'
+import RoundDescriptionComponent from '@/components/RoundDescriptionComponent.vue'
 
 const playlistStore = usePlaylistStore()
-const { song, amountOfSongs, amountOfSongsLeft } = defineProps([
+const { song, amountOfSongs, amountOfSongsLeft, round, totalRounds } = defineProps([
   'song',
   'amountOfSongs',
-  'amountOfSongsLeft'
+  'amountOfSongsLeft',
+  'round',
+  'totalRounds'
 ])
 let isPlaying = false
 
@@ -48,46 +51,58 @@ const configurePlayer = () => {
 
 const playSong = () => {
   playlistStore.player.play()
-  playlistStore.setPlaying(true);
+  playlistStore.setPlaying(true)
 }
 
 const pauseSong = () => {
   playlistStore.player.pause()
-  playlistStore.setPlaying(false);
+  playlistStore.setPlaying(false)
 }
 </script>
 
 <template>
-  <div class="player-card-component">
+  <div class="player-card-component-wrapper">
+    <RoundDescriptionComponent
+      :round="playlistStore.playlist.length - playlistStore.playlistSongsLeft.length - 1"
+      :total-rounds="playlistStore.playlist.length - 1">
+    </RoundDescriptionComponent>
 
-    <div class="play-and-pause-icon">
-      <MusicBarsComponent :animated="playlistStore.playing" />
+    <h3>Em que ano essa música foi lançada?</h3>
+    <div class="player-card-component">
+      <div class="player-commands">
+        <PlayCircleOutlined v-if="!playlistStore.playing" class="control-icons" @click="playSong" />
+        <PauseCircleOutlined v-if="playlistStore.playing" class="control-icons"
+                             @click="pauseSong" />
+      </div>
+
+      <div class="play-and-pause-icon">
+        <MusicBarsComponent :animated="playlistStore.playing" />
+      </div>
     </div>
 
-
-    <div class="player-commands">
-      <PlayCircleOutlined class="control-icons" @click="playSong" />
-      <PauseCircleOutlined class="control-icons" @click="pauseSong" />
+    <div class="hidden">
+      <div id="embed-iframe"></div>
     </div>
-  </div>
-
-  <div class="hidden">
-    <div id="embed-iframe"></div>
   </div>
 </template>
 
 <style scoped>
 
-.play-and-pause-icon {
-  padding: 1rem;
+.player-card-component-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.play-and-pause-icon img {
-  height: 3rem;
+.player-card-component-wrapper h3 {
+  font-size: 1.2rem;
+}
+
+.play-and-pause-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: var(--subtitle-color)
 }
 
 .player-card-component {
@@ -95,7 +110,7 @@ const pauseSong = () => {
   min-width: var(--card-width);
   border: none;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
 }
@@ -104,14 +119,14 @@ const pauseSong = () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  height: 3rem;
-  padding: 3rem 1.5rem;
+  padding: 1rem 0;
   border-radius: 0.5rem;
 }
 
 .control-icons {
   font-size: 3rem;
   cursor: pointer;
+  color: var(--subtitle-color);
 }
 
 .hidden {
@@ -120,3 +135,4 @@ const pauseSong = () => {
   width: 0;
 }
 </style>
+
