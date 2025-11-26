@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { usePlaylistStore } from '@/stores/playlist'
-import { Input, Button } from 'ant-design-vue'
-
-const { Search } = Input
 import { onBeforeMount, onUnmounted } from 'vue'
-import PlaylistCardComponent from '@/components/PlaylistCardComponent.vue'
-import { RouterLink, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import type { Playlist } from '@/models/playlist.ts'
 import PlaylistListOfCardsComponent from '@/components/icons/PlaylistListOfCardsComponent.vue'
 import SearchPlaylist from '@/components/SearchPlaylist.vue'
 import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
 import LoadingComponent from '@/components/LoadingComponent.vue'
-import MusicBarsComponent from '@/components/MusicBarsComponent.vue'
+
+const router = useRouter()
 
 const playlistStore = usePlaylistStore()
 
