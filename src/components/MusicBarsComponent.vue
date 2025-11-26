@@ -1,9 +1,10 @@
 <script setup lang="ts">
-
+const { animated } = defineProps(['animated'])
 </script>
 
 <template>
-  <div class="music-waves-animation">
+  <div id="music-waves-animation-container"
+       :class="'music-waves-animation animated ' + (animated ? '' : 'pause-animation')">
     <span></span>
     <span></span>
     <span></span>
@@ -21,60 +22,97 @@
 .music-waves-animation {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Center the bars vertically */
-  width: 10rem; /* Adjust width as needed */
-  height: 2rem; /* Adjust height as needed */
+  align-items: center;
+  width: 10rem;
+  height: 2rem;
 }
 
 .music-waves-animation span {
-  width: 0.3rem; /* Width of each bar */
-  height: 100%; /* Initial height of bars */
-  background-color: var(--subtitle-color); /* Spotify green color */
-  animation: musicWavesFlow 1.8s infinite ease-in-out;
+  width: 0.3rem;
+  height: 100%;
+  background-color: var(--subtitle-color);
   display: inline-block;
 }
 
-/* Delay the animation for each subsequent bar to create the "flow" effect */
-.music-waves-animation span:nth-child(2) {
+.music-waves-animation.animated span:nth-child(1) {
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
+}
+
+
+.music-waves-animation.animated span:nth-child(2) {
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -0.4s;
 }
 
-.music-waves-animation span:nth-child(3) {
+.music-waves-animation.animated span:nth-child(3) {
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -0.8s;
 }
 
-.music-waves-animation span:nth-child(4) {
+.music-waves-animation.animated span:nth-child(4) {
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -1.2s;
 }
 
-.music-waves-animation span:nth-child(5) {
+.music-waves-animation.animated span:nth-child(5) {
+
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -1.6s;
 }
 
-.music-waves-animation span:nth-child(6) {
+.music-waves-animation.animated span:nth-child(6) {
+
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -2s;
 }
 
-.music-waves-animation span:nth-child(7) {
+.music-waves-animation.animated span:nth-child(7) {
+
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -2.4s;
 }
 
-.music-waves-animation span:nth-child(8) {
+.music-waves-animation.animated span:nth-child(8) {
+
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -2.8s;
 }
 
-.music-waves-animation span:nth-child(9) {
+.music-waves-animation.animated span:nth-child(9) {
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
   animation-delay: -3.2s;
 }
 
-/* The Keyframe animation for scaling */
+.music-waves-animation.animated span:nth-child(10) {
+  animation: musicWavesFlow 1.8s infinite ease-in-out;
+  animation-delay: -3.6s;
+}
+
+
 @keyframes musicWavesFlow {
-  0%, 100% {
-    transform: scaleY(0.5); /* Start and end at half height */
+  0% {
+    transform: scaleY(0.5);
   }
   50% {
-    transform: scaleY(1.5); /* Scale up to 1.5x height in the middle */
+    transform: scaleY(2);
   }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+/* pause animation smoothly */
+.music-waves-animation.pause-animation span:nth-child(1),
+.music-waves-animation.pause-animation span:nth-child(2),
+.music-waves-animation.pause-animation span:nth-child(3),
+.music-waves-animation.pause-animation span:nth-child(4),
+.music-waves-animation.pause-animation span:nth-child(5),
+.music-waves-animation.pause-animation span:nth-child(6),
+.music-waves-animation.pause-animation span:nth-child(7),
+.music-waves-animation.pause-animation span:nth-child(8),
+.music-waves-animation.pause-animation span:nth-child(9),
+.music-waves-animation.pause-animation span:nth-child(10) {
+  animation-play-state: paused;
 }
 
 </style>

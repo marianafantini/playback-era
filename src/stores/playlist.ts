@@ -16,6 +16,7 @@ export const usePlaylistStore = defineStore('playlist', {
     playerReady: boolean
     loading: boolean
     amountOfRounds: number
+    playing: boolean
   } => ({
     usersPlaylists: [],
     searchResults: [],
@@ -25,9 +26,15 @@ export const usePlaylistStore = defineStore('playlist', {
     player: {},
     playerReady: false,
     loading: false,
-    amountOfRounds: 10
+    amountOfRounds: 10,
+    playing: false,
   }),
   actions: {
+
+    setPlaying(bool) {
+      this.playing = bool
+    },
+
     async makeRequestToSpotify(url: string, method: string) {
       this.loading = true
       const accessToken = window.localStorage.getItem('spotify_access_token')

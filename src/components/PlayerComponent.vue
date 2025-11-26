@@ -2,6 +2,7 @@
 import { usePlaylistStore } from '@/stores/playlist.ts'
 import { onBeforeMount } from 'vue'
 import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
+import MusicBarsComponent from '@/components/MusicBarsComponent.vue'
 
 const playlistStore = usePlaylistStore()
 const { song, amountOfSongs, amountOfSongsLeft } = defineProps([
@@ -47,15 +48,23 @@ const configurePlayer = () => {
 
 const playSong = () => {
   playlistStore.player.play()
+  playlistStore.setPlaying(true);
 }
 
 const pauseSong = () => {
   playlistStore.player.pause()
+  playlistStore.setPlaying(false);
 }
 </script>
 
 <template>
   <div class="player-card-component">
+
+    <div class="play-and-pause-icon">
+      <MusicBarsComponent :animated="playlistStore.playing" />
+    </div>
+
+
     <div class="player-commands">
       <PlayCircleOutlined class="control-icons" @click="playSong" />
       <PauseCircleOutlined class="control-icons" @click="pauseSong" />
@@ -68,6 +77,19 @@ const pauseSong = () => {
 </template>
 
 <style scoped>
+
+.play-and-pause-icon {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+}
+
+.play-and-pause-icon img {
+  height: 3rem;
+}
+
 .player-card-component {
   width: 100%;
   min-width: var(--card-width);
