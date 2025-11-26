@@ -3,11 +3,11 @@ import LoginWithSpotifyComponent from '@/components/LoginWithSpotifyComponent.vu
 import NewGameHomeBadgeComponent from '@/components/NewGameHomeBadgeComponent.vue'
 import HomeHowToPlayComponent from '@/components/HomeHowToPlayComponent.vue'
 import ButtonComponent from '@/components/atoms/ButtonComponent.vue'
-
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-const steps = [
+const steps = ref([
   {
     icon: '/music-note.svg',
     title: 'Escolha uma playlist',
@@ -26,7 +26,8 @@ const steps = [
     description: 'Coloque a música na linha do tempo',
     color: 'from-purple-400 to-indigo-500',
   },
-]
+])
+
 </script>
 
 <template>

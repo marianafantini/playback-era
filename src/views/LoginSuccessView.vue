@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+
 const router = useRouter()
 
 const { code } = defineProps(['code'])
 
 const getToken = async (code: any) => {
   const codeVerifier = window.localStorage.getItem('code_verifier')
-  console.log('codeVerifier', codeVerifier)
   const redirectUri = window.location.origin + '/login-success'
 
   const queryParams = new URLSearchParams({
@@ -14,14 +14,14 @@ const getToken = async (code: any) => {
     grant_type: 'authorization_code',
     code: code,
     redirect_uri: redirectUri,
-    code_verifier: codeVerifier || '',
+    code_verifier: codeVerifier || ''
   })
   const payload = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: queryParams,
+    body: queryParams
   }
   const url = 'https://accounts.spotify.com/api/token'
 
@@ -29,11 +29,20 @@ const getToken = async (code: any) => {
     return response.json()
   })
 
+  const now = Date.now()
+  const expirationDate = new Date(now + response.expires_in * 1000)
+  window.localStorage.setItem('spotify_expires_in', expirationDate.getTime().toString())
   window.localStorage.setItem('spotify_access_token', response.access_token)
+
+  return response
 }
 
-getToken(code).then(() => {
-  router.push('/select-playlist')
+getToken(code).then((response) => {
+  if (response.access_token) {
+    router.push('/select-playlist')
+  } else {
+    router.push('/')
+  }
 })
 </script>
 

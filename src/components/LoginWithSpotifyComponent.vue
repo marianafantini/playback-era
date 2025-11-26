@@ -1,4 +1,8 @@
 <script setup lang="ts">
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const generateRandomString = (length: number) => {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   const values = crypto.getRandomValues(new Uint8Array(length))
@@ -19,6 +23,12 @@ const base64encode = (input: any) => {
 }
 
 const startLogin = async () => {
+  const accessToken = window.localStorage.getItem('spotify_access_token')
+  const expiresIn = window.localStorage.getItem('spotify_expires_in')
+  if (accessToken && expiresIn && parseInt(expiresIn) > Date.now()) {
+    return router.push('/select-playlist')
+  }
+
   const codeVerifier = generateRandomString(64)
   console.log('code verifier saved on local storage', codeVerifier)
   window.localStorage.setItem('code_verifier', codeVerifier)

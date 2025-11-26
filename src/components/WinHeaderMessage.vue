@@ -16,7 +16,7 @@ const emit = defineEmits(['restartGame'])
     <p>Você acertou {{ correctSongs }} {{ correctSongs > 1 ? 'músicas' : 'música' }}</p>
 
     <div class="button-actions">
-      <ButtonComponent content="Jogar de novo" @click="emit('restartGame')" />
+      <ButtonComponent content="Jogar de novo" @click="$emit('restartGame')" />
       <ButtonComponent content="Trocar de playlist" @click="router.push('/select-playlist')" />
     </div>
   </div>
