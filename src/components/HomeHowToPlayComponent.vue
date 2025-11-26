@@ -3,7 +3,6 @@ const { steps } = defineProps(['steps'])
 </script>
 
 <template>
-
   <div class="card-how-to-play">
     <h3>Como jogar</h3>
     <div class="how-to-play-list-wrapper">
@@ -24,7 +23,6 @@ const { steps } = defineProps(['steps'])
 </template>
 
 <style scoped>
-
 .card-how-to-play {
   display: flex;
   flex-direction: column;
