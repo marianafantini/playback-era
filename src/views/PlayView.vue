@@ -6,7 +6,7 @@ import PlayerComponent from '@/components/PlayerComponent.vue'
 import CardAddHereComponent from '@/components/CardAddHereComponent.vue'
 import { SmileOutlined } from '@ant-design/icons-vue'
 import NoSongsOnPlaylistComponent from '@/components/NoSongsOnPlaylistComponent.vue'
-import LoadingComponent from '@/components/LoadingComponent.vue'
+import LoadingComponent from '@/components/modules/LoadingComponent.vue'
 import WinTrophyComponent from '@/components/WinTrophyComponent.vue'
 import WinHeaderMessage from '@/components/WinHeaderMessage.vue'
 
@@ -75,7 +75,7 @@ const selectTimelineForSong = (index: number) => {
     <div v-if="!playlistStore.loading && playlistStore.playlist.length > 0"
          class="game-board">
       <div class="player-section">
-        <div v-if="playlistStore.isGameStillActive()">
+        <div v-if="false">
           <PlayerComponent
             :song="playlistStore.currentSong"
             :amountOfSongs="playlistStore.playlist.length"

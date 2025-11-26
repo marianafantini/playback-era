@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import WinTrophyComponent from '@/components/WinTrophyComponent.vue'
+import PlayAgainButtonComponent from '@/components/PlayAgainButtonComponent.vue'
+import AnotherPlaylistButtonComponent from '@/components/AnotherPlaylistButtonComponent.vue'
 
 const { correctSongs } = defineProps(['correctSongs', 'totalSongs'])
 
@@ -13,6 +15,11 @@ const { correctSongs } = defineProps(['correctSongs', 'totalSongs'])
       Parabéns!!
     </h3>
     <p> Você acertou {{ correctSongs }} {{ correctSongs > 1 ? 'músicas' : 'música' }}</p>
+
+    <div>
+      <PlayAgainButtonComponent />
+      <AnotherPlaylistButtonComponent />
+    </div>
   </div>
 </template>
 

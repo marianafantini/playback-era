@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import LoginWithSpotifyComponent from '@/components/LoginWithSpotifyComponent.vue'
-import TestWithoutLoginComponent from '@/components/TestWithoutLoginComponent.vue'
 import NewGameHomeBadgeComponent from '@/components/NewGameHomeBadgeComponent.vue'
 import HomeHowToPlayComponent from '@/components/HomeHowToPlayComponent.vue'
+import ButtonComponent from '@/components/atoms/ButtonComponent.vue'
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const steps = [
   {
@@ -32,11 +35,12 @@ const steps = [
     <NewGameHomeBadgeComponent />
     <h2 class="home-subtitle-cta">Adivinhe o ano de lançamento das suas músicas favoritas</h2>
 
-    <HomeHowToPlayComponent :steps="steps"/>
+    <HomeHowToPlayComponent :steps="steps" />
 
     <div class="login-with-spotify">
       <LoginWithSpotifyComponent />
-      <TestWithoutLoginComponent />
+      <ButtonComponent content="Testar sem login"
+                       @click="router.push('/free-test?playlist=008G1BbvK1NQvbAV8MHvDz')" />
     </div>
   </main>
 </template>

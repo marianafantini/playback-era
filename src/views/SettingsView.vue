@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RadioButtonButtonComponent from '@/components/RadioButtonButtonComponent.vue'
+import RadioButtonButtonComponent from '@/components/atoms/RadioButtonButtonComponent.vue'
 import { usePlaylistStore } from '@/stores/playlist.ts'
 import { message } from 'ant-design-vue'
 

@@ -4,9 +4,8 @@ import { onBeforeMount, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Playlist } from '@/models/playlist.ts'
 import PlaylistListOfCardsComponent from '@/components/icons/PlaylistListOfCardsComponent.vue'
-import SearchPlaylist from '@/components/SearchPlaylist.vue'
-import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
-import LoadingComponent from '@/components/LoadingComponent.vue'
+import LoadingComponent from '@/components/modules/LoadingComponent.vue'
+import SearchInputComponent from '@/components/atoms/SearchInputComponent.vue'
 
 const router = useRouter()
 
@@ -40,7 +39,8 @@ onUnmounted(() => {
       <LoadingComponent></LoadingComponent>
     </section>
     <section v-else class="game-board">
-      <SearchPlaylist @searchForPlaylist="searchForPlaylist" />
+      <SearchInputComponent @search="searchForPlaylist"
+                            placeholder="Procurar por playlist..." />
 
       <PlaylistListOfCardsComponent :searchPlaylistList="playlistStore.usersPlaylists"
                                     :playlist-list="playlistStore.searchResults"

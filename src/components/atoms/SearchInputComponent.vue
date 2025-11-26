@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CustomHTMLElementEvent } from '@/models/customHTMLElementEvent.ts'
 
+const { placeholder } = defineProps(['placeholder'])
 const emit = defineEmits(['searchForPlaylist'])
 
 </script>
@@ -9,8 +10,8 @@ const emit = defineEmits(['searchForPlaylist'])
   <div class="search-playlists-area">
     <input
       type="search"
-      placeholder="Procurar playlist..."
-      @search="(event: CustomHTMLElementEvent<HTMLInputElement>) => emit('searchForPlaylist', event?.target?.value)"
+      :placeholder="placeholder"
+      @search="(event: CustomHTMLElementEvent<HTMLInputElement>) => emit('search', event?.target?.value)"
       class="search-playlists-input"
     />
   </div>
@@ -35,12 +36,12 @@ input {
   color: var(--subtitle-color);
 }
 
-::-webkit-search-cancel-button{
+::-webkit-search-cancel-button {
   -webkit-appearance: none;
   height: 0.75rem;
   width: 0.75rem;
   border-radius: 100%;
-  background-image: url("/public/clear-search.svg");
+  background-image: url("/clear-search.svg");
 
 }
 
