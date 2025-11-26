@@ -7,6 +7,8 @@ import CardAddHereComponent from '@/components/CardAddHereComponent.vue'
 import { SmileOutlined } from '@ant-design/icons-vue'
 import NoSongsOnPlaylistComponent from '@/components/NoSongsOnPlaylistComponent.vue'
 import LoadingComponent from '@/components/LoadingComponent.vue'
+import WinTrophyComponent from '@/components/WinTrophyComponent.vue'
+import WinHeaderMessage from '@/components/WinHeaderMessage.vue'
 
 const { playlist } = defineProps(['playlist'])
 const playlistStore = usePlaylistStore()
@@ -83,11 +85,7 @@ const selectTimelineForSong = (index: number) => {
           />
         </div>
         <div v-else>
-          <h3>
-            <SmileOutlined />
-            Parabéns!! Você acertou {{ playlistStore.playedSongs.length }}
-            {{ playlistStore.playedSongs.length > 1 ? 'músicas' : 'música' }}
-          </h3>
+          <WinHeaderMessage :correctSongs="playlistStore.playedSongs.length" />
         </div>
       </div>
 
@@ -209,4 +207,5 @@ const selectTimelineForSong = (index: number) => {
     transform: scale(1);
   }
 }
+
 </style>

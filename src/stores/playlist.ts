@@ -153,7 +153,6 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     isGameStillActive(): boolean {
-      console.log('this.playlistSongsLeft.length', this.playlistSongsLeft.length)
       return this.playlistSongsLeft.length > 0
     },
 
