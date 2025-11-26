@@ -88,7 +88,6 @@ const selectTimelineForSong = (index: number) => {
         </PlayViewTitleComponent>
       </div>
 
-      <div class="timeline-section">
         <div class="cards-in-timeline">
           <CardAddHereComponent
             :isGameStillActive="playlistStore.isGameStillActive()"
@@ -112,7 +111,6 @@ const selectTimelineForSong = (index: number) => {
             </CardAddHereComponent>
           </div>
         </div>
-      </div>
     </div>
   </main>
 </template>
@@ -144,6 +142,7 @@ const selectTimelineForSong = (index: number) => {
 .player-section {
   border-radius: 1rem;
   padding: 1rem;
+  border: 1px solid var(--cards-border-color);
   background-color: var(--cards-background-color);
   text-align: center;
 }
@@ -156,6 +155,7 @@ const selectTimelineForSong = (index: number) => {
 
 .cards-in-timeline {
   background-color: var(--cards-background-color);
+  border: 1px solid var(--cards-border-color);
   padding: 2rem;
   border-radius: 1rem;
 }

@@ -14,7 +14,8 @@ import { PlusOutlined } from '@ant-design/icons-vue'
 
 <style scoped>
 .music-card {
-  border: 0.1rem dashed var(--color);
+  border: 0.1rem dashed var(--subtitle-color);
+  color: var(--subtitle-color);
   padding: 1rem;
   display: flex;
   flex-direction: column;

@@ -6,19 +6,17 @@ const router = useRouter()
 </script>
 
 <template>
-  <header v-if="router?.currentRoute.value.name !== 'home'">
+  <header>
     <div class="header-logo" @click="router.push('/')">
-      <img
-        src="/public/mp3-icon.png"
-        alt="Logo of the app, which is an mp3 player icon"
-        class="logo"
-      />
-      <span class="logo-title">Playback Era</span>
+      <img src="/src/assets/icons/mp3-icon.png" alt="Logo of the app, which is an mp3 player icon" />
+      <div>
+        <h1>Playback Era</h1>
+        <p class="header-subtitle">Desafio musical</p>
+      </div>
     </div>
 
     <nav>
-      <RouterLink to="/select-playlist">Playlists</RouterLink>
-      <RouterLink to="/settings">Settings</RouterLink>
+      <RouterLink to="/select-playlist" v-if="router.currentRoute.value.name === 'play'">Playlists</RouterLink>
     </nav>
   </header>
 
@@ -29,6 +27,8 @@ const router = useRouter()
 header {
   display: flex;
   gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header nav {
@@ -48,11 +48,17 @@ header a {
   cursor: pointer;
 }
 
-.logo {
-  height: 1.5rem;
+.header-logo img {
+  margin-top: 0.5rem;
+  height: 4rem;
+}
+.header-logo h1 {
+  font-size: 1.5rem;
 }
 
-.logo-title {
-  font-weight: 500;
+.header-logo .header-subtitle {
+  font-size: 1rem;
+  color: var(--subtitle-color);
 }
+
 </style>

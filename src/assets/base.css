@@ -1,8 +1,10 @@
 :root {
   --background-color: rgba(19, 28, 59, 0.9);
-  --cards-background-color: rgba(19, 28, 59, 0.85);
+  --cards-background-color: #4f267d;
+  --cards-border-color: #6b3f9b;
   --player-timeline-color: rgba(41, 50, 82, 0.75);
-  --color: rgba(218, 222, 235, 0.85);
+  --color: #ffffff;
+  --subtitle-color: #c9a8d6;
   --spotify-green: #1ed760;
 
   font-family:
@@ -29,7 +31,7 @@
 }
 
 body {
-  background-color: var(--background-color);
+  background: linear-gradient(120deg, rgb(21 24 49), rgb(86 28 133), rgb(59 26 98));
   color: var(--color);
   min-height: 100vh;
   transition:
