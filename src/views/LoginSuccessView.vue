@@ -31,7 +31,7 @@ const getToken = async (code: any) => {
 
   const now = Date.now()
   const expirationDate = new Date(now + response.expires_in * 1000)
-  window.localStorage.setItem('spotify_expires_in', expirationDate.getTime())
+  window.localStorage.setItem('spotify_expires_in', expirationDate.getTime().toString())
   window.localStorage.setItem('spotify_access_token', response.access_token)
 
   return response

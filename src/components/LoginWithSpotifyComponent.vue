@@ -25,7 +25,7 @@ const base64encode = (input: any) => {
 const startLogin = async () => {
   const accessToken = window.localStorage.getItem('spotify_access_token')
   const expiresIn = window.localStorage.getItem('spotify_expires_in')
-  if (accessToken && expiresIn > Date.now()) {
+  if (accessToken && expiresIn && parseInt(expiresIn) > Date.now()) {
     return router.push('/select-playlist')
   }
 
