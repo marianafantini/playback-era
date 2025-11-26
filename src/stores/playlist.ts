@@ -58,7 +58,8 @@ export const usePlaylistStore = defineStore('playlist', {
             collaborative: playlist.collaborative,
             description: playlist.description,
             public: playlist.public,
-            cover: playlist.images[0]?.url
+            cover: playlist.images[0]?.url,
+            amountOfTracks: playlist.tracks.total
           }
         })
     },
