@@ -5,12 +5,11 @@ import { Input, Button } from 'ant-design-vue'
 const { Search } = Input
 import { onBeforeMount, onUnmounted } from 'vue'
 import PlaylistCardComponent from '@/components/PlaylistCardComponent.vue'
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import type { Playlist } from '@/models/playlist.ts'
 import PlaylistListOfCardsComponent from '@/components/icons/PlaylistListOfCardsComponent.vue'
 import SearchPlaylist from '@/components/SearchPlaylist.vue'
-
-const router = useRouter()
+import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
 
 const playlistStore = usePlaylistStore()
 
@@ -23,7 +22,7 @@ const goToPlaylist = (playlist: Playlist) => {
 }
 
 const searchForPlaylist = async (q: string): Promise<void> => {
-  console.log("search for ", q)
+  console.log('search for ', q)
   let searchResults: Playlist[] = []
   if (q.length > 0) {
     searchResults = await playlistStore.searchForPlaylist(q)
@@ -37,6 +36,10 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <header>
+    <BackToHomeHeader :title="'Escolha uma playlist'"
+    :subtitle="'Suas playlists do Spotify'"/>
+  </header>
   <main>
     <section class="game-board">
       <SearchPlaylist @searchForPlaylist="searchForPlaylist" />
