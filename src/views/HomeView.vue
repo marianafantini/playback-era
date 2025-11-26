@@ -1,34 +1,32 @@
 <script setup lang="ts">
-import LoginWithSpotify from '@/components/LoginWithSpotify.vue'
+import LoginWithSpotifyComponent from '@/components/LoginWithSpotifyComponent.vue'
+import TestWithoutLoginComponent from '@/components/TestWithoutLoginComponent.vue'
 
 const steps = [
   {
-    icon: "/src/assets/icons/480-4806365_music-notes-svg-cut-file-hd-png-download.png",
-    title: "Escolha uma playlist",
-    description: "Selecione sua playlist favorita",
-    color: "from-green-400 to-emerald-500"
+    icon: '/src/assets/icons/480-4806365_music-notes-svg-cut-file-hd-png-download.png',
+    title: 'Escolha uma playlist',
+    description: 'Selecione sua playlist favorita',
+    color: 'from-green-400 to-emerald-500'
   },
   {
-    icon: "/src/assets/icons/calendar-icon.png",
-    title: "Ouça o trecho",
-    description: "Escute uma música aleatória",
-    color: "from-pink-400 to-rose-500"
+    icon: '/src/assets/icons/calendar-icon.png',
+    title: 'Ouça o trecho',
+    description: 'Escute uma música aleatória',
+    color: 'from-pink-400 to-rose-500'
   },
   {
-    icon: "/src/assets/icons/calendar-icon.png",
-    title: "Adivinhe o ano",
-    description: "Coloque a música na linha do tempo",
-    color: "from-purple-400 to-indigo-500"
+    icon: '/src/assets/icons/calendar-icon.png',
+    title: 'Adivinhe o ano',
+    description: 'Coloque a música na linha do tempo',
+    color: 'from-purple-400 to-indigo-500'
   }
-];
+]
 
 </script>
 
 <template>
   <main>
-
-    <div class="new-game-badge">Novo jogo musical</div>
-
     <h2 class="subtitle">Adivinhe o ano de lançamento das suas músicas favoritas</h2>
 
     <div class="card-how-to-play">
@@ -39,15 +37,16 @@ const steps = [
             <img :src="item.icon" />
           </div>
           <div>
-            <h4>{{item.title}}</h4>
-            <p>{{item.description}}</p>
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.description }}</p>
           </div>
         </li>
       </ul>
     </div>
 
     <div class="login-with-spotify">
-      <LoginWithSpotify />
+      <LoginWithSpotifyComponent />
+      <TestWithoutLoginComponent />
     </div>
   </main>
 </template>
@@ -56,10 +55,14 @@ const steps = [
 main {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   align-items: center;
   min-height: 90vh;
   width: 100%;
+}
+
+h2 {
+  margin-top: 1rem;
 }
 
 .subtitle {
@@ -75,14 +78,6 @@ main {
 .game-title img {
   height: 2.5rem;
   margin-top: 0.5rem;
-}
-
-.new-game-badge {
-  border-radius: 2rem;
-  border: 1px solid #6b3f9b;
-  padding: 0.5rem 1rem;
-  color: #d9c2f1;
-  background-color: #4f267d;
 }
 
 .card-how-to-play {
@@ -102,7 +97,7 @@ main {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.75rem;
   padding-left: 0;
   margin-right: 0;
 }
@@ -110,8 +105,8 @@ main {
 .card-how-to-play li {
   border-radius: 1rem;
   padding: 1rem;
-  background-color: #5a2885;
-  border: 1px solid #4f3b6c;
+  background-color: var(--home-cards-background-color);;
+  border: 1px solid var(--home-cards-border-color);;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -157,6 +152,9 @@ main {
 
 .login-with-spotify {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 @media (min-width: 40rem) {
