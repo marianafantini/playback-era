@@ -1,23 +1,22 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-const router = useRouter()
 
+const { content } = defineProps(['content'])
+const emit = defineEmits(['click'])
 </script>
 
 <template>
-  <div>
-    <button class="see-more-button" @click="router.push('/free-test?playlist=008G1BbvK1NQvbAV8MHvDz')">
-      Testar sem login
-    </button>
-  </div>
+  <button class="see-more-button" @click="emit('click')">
+    {{ content }}
+  </button>
 </template>
 
-<style>
+<style scoped>
 
 .see-more-button {
   border-radius: 3rem;
   font-size: 1.2rem;
   font-weight: 500;
+  padding: 1rem;
   width: 100%;
   background-color: var(--home-cards-background-color);
   color: var(--subtitle-color);
@@ -31,5 +30,4 @@ const router = useRouter()
 .see-more-button:hover {
   transform: scale(1.1);
 }
-
 </style>

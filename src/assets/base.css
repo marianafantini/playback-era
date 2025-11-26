@@ -1,13 +1,18 @@
 :root {
   --background-color: rgba(19, 28, 59, 0.9);
-  --home-cards-background-color: #5a2885;
-  --home-cards-border-color: #4f3b6c;
-  --cards-background-color: #4f267d;
-  --cards-border-color: #6b3f9b;
+  --home-cards-background-color: rgb(255 255 255/.05);
+  --home-cards-border-color: rgb(255 255 255/.1);
+  --cards-background-color: rgb(255 255 255/.05);
+  --cards-border-color: rgb(255 255 255 / .1);
+  --search-background-color: rgb(255 255 255 / .1);
+  --search-border-color: rgb(255 255 255 / .2);
   --player-timeline-color: rgba(41, 50, 82, 0.75);
   --color: #ffffff;
   --subtitle-color: #c9a8d6;
   --spotify-green: #1ed760;
+
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
   font-family: Inter,
   -apple-system,
@@ -47,7 +52,7 @@ body * {
 }
 
 body {
-  background: linear-gradient(120deg, rgb(21 24 49), rgb(86 28 133), rgb(59 26 98));
+  background: linear-gradient(120deg, #332e82, #561c89, #4c1d94);
   color: var(--color);
   min-height: 100vh;
   transition: color 0.5s,

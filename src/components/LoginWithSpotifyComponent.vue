@@ -50,7 +50,7 @@ const startLogin = async () => {
 <template>
   <div>
     <button @click="startLogin" size="large" class="spotify-button">
-      <img src="/src/assets/icons/2024_Spotify_logo_without_text_(black).svg" />
+      <img src="/2024_Spotify_logo_without_text_(black).svg" />
       Começar com Spotify
     </button>
   </div>

@@ -12,19 +12,24 @@ export const usePlaylistStore = defineStore('playlist', {
     playlist: Song[]
     playlistSongsLeft: Song[]
     playedSongs: Song[]
+    correctSongs: Song[]
     player: any
     playerReady: boolean
     loading: boolean
     amountOfRounds: number
+    playing: boolean
   } => ({
     usersPlaylists: [],
+    searchResults: [],
     playlist: [],
     playlistSongsLeft: [],
     playedSongs: [],
+    correctSongs: [],
     player: {},
     playerReady: false,
     loading: false,
-    amountOfRounds: 10
+    amountOfRounds: 3,
+    playing: false
   }),
   actions: {
     async makeRequestToSpotify(url: string, method: string) {
@@ -103,7 +108,11 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     async initPlaylist(playlistID: string) {
+      this.playing = false
       this.playedSongs = []
+      this.correctSongs = []
+      this.playlist = []
+      this.playlistSongsLeft = []
 
       const response = await this.makeRequestToSpotify(
         'https://api.spotify.com/v1/playlists/' + playlistID + '/tracks',
@@ -131,13 +140,14 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     getNextSong(): void {
-      if (this.playlistSongsLeft.length > 0) {
+      if (this.playlistSongsLeft && this.playlistSongsLeft.length > 0) {
         const index: number = Math.floor(Math.random() * this.playlistSongsLeft.length)
         if (this.playlistSongsLeft[index]) {
           this.currentSong = this.playlistSongsLeft[index]
           if (this.currentSong) {
             this.currentSong.color = this.randomColor()
           }
+          console.log('will splice here ', index)
           this.playlistSongsLeft.splice(index, 1)
         }
       }
@@ -156,6 +166,8 @@ export const usePlaylistStore = defineStore('playlist', {
           console.log('splice remove item')
           this.playedSongs.splice(index, 1)
         }, 1100)
+      } else {
+        this.correctSongs.splice(index, 0, currentSong)
       }
 
       return isOrderCorrect

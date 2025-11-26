@@ -1,14 +1,14 @@
 @import './base.css';
 
 :root {
-  --card-height: 13rem;
-  --card-width: 13rem;
+  --card-height: 10rem;
+  --card-width: 10rem;
 }
 
 #app {
   display: flex;
   flex-direction: column;
-  padding: 3rem 2rem;
+  padding: 2rem 2rem;
   justify-content: center;
 }
 

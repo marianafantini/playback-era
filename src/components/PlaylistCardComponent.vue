@@ -20,28 +20,29 @@ const { playlist } = defineProps(['playlist'])
   padding: 1rem;
   display: flex;
   justify-content: space-around;
-  gap: 1.5rem;
+  gap: 0.5rem;
+  flex-direction: column;
   border-radius: 1rem;
   height: 100%;
-  width: 100%;
+  width: auto;
 }
 
 .playlist-information {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-self: center;
 }
 
 .playlist-cover {
   align-self: center;
-  max-width: calc(var(--card-width) * 0.7);
+  max-width: calc(var(--card-width) * 0.9);
   height: auto;
   border-radius: 0.8rem;
 }
 
 p {
   font-weight: 600;
+  font-size: 1rem;
   overflow-wrap: anywhere;
 }
 
@@ -61,7 +62,7 @@ p {
 .subtitle {
   font-size: 0.8rem;
   font-weight: 400;
-  color: #8b8d94;
+  color: var(--subtitle-color);
 }
 
 </style>
