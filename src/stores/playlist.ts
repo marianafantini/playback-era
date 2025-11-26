@@ -12,7 +12,7 @@ export const usePlaylistStore = defineStore('playlist', {
     playlist: Song[]
     playlistSongsLeft: Song[]
     playedSongs: Song[]
-    correctSongs?: Song[]
+    correctSongs: Song[]
     player: any
     playerReady: boolean
     loading: boolean

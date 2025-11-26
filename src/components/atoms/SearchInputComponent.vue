@@ -2,7 +2,7 @@
 import type { CustomHTMLElementEvent } from '@/models/customHTMLElementEvent.ts'
 
 const { placeholder } = defineProps(['placeholder'])
-const emit = defineEmits(['searchForPlaylist'])
+const emit = defineEmits(['search'])
 
 </script>
 
