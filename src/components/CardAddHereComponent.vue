@@ -7,7 +7,7 @@ import { PlusOutlined } from '@ant-design/icons-vue'
   <div v-if="isGameStillActive" class="music-card" @click="$emit('selectTimelineForSong')">
     <div>
       <PlusOutlined />
-      Add here
+      Adicionar aqui
     </div>
   </div>
 </template>

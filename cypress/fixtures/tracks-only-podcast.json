@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "track": {
+        "type": "episode",
+        "name": "EuCast #009 | Ansiedade e Autocuidado",
+        "uri": "spotify:episode:4aqROHGxKOcc7DUcHwKtCT",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/show/29jV63iO898xsT9vgn96CP"
+            },
+            "href": "https://api.spotify.com/v1/shows/29jV63iO898xsT9vgn96CP",
+            "id": "29jV63iO898xsT9vgn96CP",
+            "name": null,
+            "type": "EuCast | Eureca",
+            "uri": "spotify:show:29jV63iO898xsT9vgn96CP"
+          }
+        ],
+        "album": {
+          "release_date": null,
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6765630000ba8ae337c9de6a552ecf4e539865",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67656300005f1fe337c9de6a552ecf4e539865",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab6765630000f68de337c9de6a552ecf4e539865",
+              "width": 64
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
