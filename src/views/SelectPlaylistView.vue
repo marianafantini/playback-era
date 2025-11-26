@@ -10,6 +10,8 @@ import type { Playlist } from '@/models/playlist.ts'
 import PlaylistListOfCardsComponent from '@/components/icons/PlaylistListOfCardsComponent.vue'
 import SearchPlaylist from '@/components/SearchPlaylist.vue'
 import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
+import LoadingComponent from '@/components/LoadingComponent.vue'
+import MusicBarsComponent from '@/components/MusicBarsComponent.vue'
 
 const playlistStore = usePlaylistStore()
 
@@ -41,7 +43,10 @@ onUnmounted(() => {
     :subtitle="'Suas playlists do Spotify'"/>
   </header>
   <main>
-    <section class="game-board">
+    <section v-if="playlistStore.loading">
+      <LoadingComponent></LoadingComponent>
+    </section>
+    <section v-else class="game-board">
       <SearchPlaylist @searchForPlaylist="searchForPlaylist" />
 
       <PlaylistListOfCardsComponent :searchPlaylistList="playlistStore.usersPlaylists"
