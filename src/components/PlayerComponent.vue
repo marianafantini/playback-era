@@ -51,12 +51,12 @@ const configurePlayer = () => {
 
 const playSong = () => {
   playlistStore.player.play()
-  playlistStore.setPlaying(true)
+  playlistStore.playing = true
 }
 
 const pauseSong = () => {
   playlistStore.player.pause()
-  playlistStore.setPlaying(false)
+  playlistStore.playing = false
 }
 </script>
 

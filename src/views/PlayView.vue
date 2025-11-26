@@ -4,16 +4,18 @@ import { usePlaylistStore } from '@/stores/playlist'
 import { onBeforeMount } from 'vue'
 import PlayerComponent from '@/components/PlayerComponent.vue'
 import CardAddHereComponent from '@/components/CardAddHereComponent.vue'
-import { SmileOutlined } from '@ant-design/icons-vue'
 import NoSongsOnPlaylistComponent from '@/components/NoSongsOnPlaylistComponent.vue'
 import LoadingComponent from '@/components/modules/LoadingComponent.vue'
-import WinTrophyComponent from '@/components/WinTrophyComponent.vue'
 import WinHeaderMessage from '@/components/WinHeaderMessage.vue'
 
 const { playlist } = defineProps(['playlist'])
 const playlistStore = usePlaylistStore()
 
 onBeforeMount(() => {
+  initializeGame()
+})
+
+const initializeGame = () => {
   playlistStore.initPlaylist(playlist).then((response) => {
     if (response.length > 0) {
       playlistStore.getNextSong()
@@ -22,7 +24,7 @@ onBeforeMount(() => {
       console.log('no songs on this playlist')
     }
   })
-})
+}
 
 const getAndStartNextSong = () => {
   playlistStore.getNextSong()
@@ -75,7 +77,7 @@ const selectTimelineForSong = (index: number) => {
     <div v-if="!playlistStore.loading && playlistStore.playlist.length > 0"
          class="game-board">
       <div class="player-section">
-        <div v-if="false">
+        <div v-if="playlistStore.isGameStillActive()">
           <PlayerComponent
             :song="playlistStore.currentSong"
             :amountOfSongs="playlistStore.playlist.length"
@@ -85,7 +87,8 @@ const selectTimelineForSong = (index: number) => {
           />
         </div>
         <div v-else>
-          <WinHeaderMessage :correctSongs="playlistStore.playedSongs.length" />
+          <WinHeaderMessage :correctSongs="playlistStore.correctSongs.length"
+                            @restartGame="initializeGame" />
         </div>
       </div>
 

@@ -16,6 +16,7 @@ const emit = defineEmits(['click'])
   border-radius: 3rem;
   font-size: 1.2rem;
   font-weight: 500;
+  padding: 1rem;
   width: 100%;
   background-color: var(--home-cards-background-color);
   color: var(--subtitle-color);

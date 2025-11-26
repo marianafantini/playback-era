@@ -12,6 +12,7 @@ export const usePlaylistStore = defineStore('playlist', {
     playlist: Song[]
     playlistSongsLeft: Song[]
     playedSongs: Song[]
+    correctSongs?: Song[]
     player: any
     playerReady: boolean
     loading: boolean
@@ -23,6 +24,7 @@ export const usePlaylistStore = defineStore('playlist', {
     playlist: [],
     playlistSongsLeft: [],
     playedSongs: [],
+    correctSongs: [],
     player: {},
     playerReady: false,
     loading: false,
@@ -30,11 +32,6 @@ export const usePlaylistStore = defineStore('playlist', {
     playing: false
   }),
   actions: {
-
-    setPlaying(bool: boolean) {
-      this.playing = bool
-    },
-
     async makeRequestToSpotify(url: string, method: string) {
       this.loading = true
       const accessToken = window.localStorage.getItem('spotify_access_token')
@@ -112,6 +109,9 @@ export const usePlaylistStore = defineStore('playlist', {
 
     async initPlaylist(playlistID: string) {
       this.playedSongs = []
+      this.correctSongs = []
+      this.playlist = []
+      this.playlistSongsLeft = []
 
       const response = await this.makeRequestToSpotify(
         'https://api.spotify.com/v1/playlists/' + playlistID + '/tracks',
@@ -165,6 +165,8 @@ export const usePlaylistStore = defineStore('playlist', {
           console.log('splice remove item')
           this.playedSongs.splice(index, 1)
         }, 1100)
+      } else {
+        this.correctSongs.splice(index, 0, currentSong)
       }
 
       return isOrderCorrect

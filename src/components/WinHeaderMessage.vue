@@ -1,11 +1,13 @@
 <script setup lang="ts">
 
 import WinTrophyComponent from '@/components/WinTrophyComponent.vue'
-import PlayAgainButtonComponent from '@/components/PlayAgainButtonComponent.vue'
-import AnotherPlaylistButtonComponent from '@/components/AnotherPlaylistButtonComponent.vue'
+import ButtonComponent from '@/components/atoms/ButtonComponent.vue'
+import { useRouter } from 'vue-router'
 
-const { correctSongs } = defineProps(['correctSongs', 'totalSongs'])
+const router = useRouter()
+const { correctSongs } = defineProps(['correctSongs'])
 
+const emit = defineEmits(['restartGame'])
 </script>
 
 <template>
@@ -16,14 +18,21 @@ const { correctSongs } = defineProps(['correctSongs', 'totalSongs'])
     </h3>
     <p> Você acertou {{ correctSongs }} {{ correctSongs > 1 ? 'músicas' : 'música' }}</p>
 
-    <div>
-      <PlayAgainButtonComponent />
-      <AnotherPlaylistButtonComponent />
+    <div class="button-actions">
+      <ButtonComponent content="Jogar de novo"
+                       @click="emit('restartGame')" />
+      <ButtonComponent content="Trocar de playlist"
+                       @click="router.push('/select-playlist')" />
     </div>
   </div>
 </template>
 
 <style scoped>
+
+.button-actions {
+  display: flex;
+  gap: 1rem;
+}
 
 .win-header-message {
   display: flex;
