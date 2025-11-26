@@ -1,47 +1,53 @@
 <script setup lang="ts">
-import LoginWithSpotify from '@/components/LoginWithSpotify.vue'
+import LoginWithSpotifyComponent from '@/components/LoginWithSpotifyComponent.vue'
+import TestWithoutLoginComponent from '@/components/TestWithoutLoginComponent.vue'
+
+const steps = [
+  {
+    icon: '/src/assets/icons/480-4806365_music-notes-svg-cut-file-hd-png-download.png',
+    title: 'Escolha uma playlist',
+    description: 'Selecione sua playlist favorita',
+    color: 'from-green-400 to-emerald-500'
+  },
+  {
+    icon: '/src/assets/icons/calendar-icon.png',
+    title: 'Ouça o trecho',
+    description: 'Escute uma música aleatória',
+    color: 'from-pink-400 to-rose-500'
+  },
+  {
+    icon: '/src/assets/icons/calendar-icon.png',
+    title: 'Adivinhe o ano',
+    description: 'Coloque a música na linha do tempo',
+    color: 'from-purple-400 to-indigo-500'
+  }
+]
+
 </script>
 
 <template>
   <main>
-    <div class="game-title">
-      <img src="/public/mp3-icon.png" alt="Logo of the app, which is an mp3 player icon" />
-      <h1>Playback Era</h1>
-    </div>
+    <h2 class="subtitle">Adivinhe o ano de lançamento das suas músicas favoritas</h2>
 
     <div class="card-how-to-play">
+      <h3>Como jogar</h3>
       <ul>
-        <li>
+        <li v-for="item in steps">
           <div class="icon">
-            <img src="/public/2024_Spotify_logo_without_text_(black).svg" />
+            <img :src="item.icon" />
           </div>
           <div>
-            <h3>Escolha uma playlist do spotify</h3>
-            <p>Escolha uma de suas playlists favoritas</p>
-          </div>
-        </li>
-        <li>
-          <div class="icon">
-            <img src="/public/480-4806365_music-notes-svg-cut-file-hd-png-download.png" />
-          </div>
-          <div>
-            <h3>Ouça a música</h3>
-            <p>Você vai ouvir um trecho de uma música</p>
-          </div>
-        </li>
-        <li>
-          <div class="icon">
-            <img src="/public/calendar-icon.png" />
-          </div>
-          <div>
-            <h3>Adivinhe o ano</h3>
-            <p>Coloque a música na posição correta da linha do tempo</p>
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.description }}</p>
           </div>
         </li>
       </ul>
     </div>
 
-    <LoginWithSpotify />
+    <div class="login-with-spotify">
+      <LoginWithSpotifyComponent />
+      <TestWithoutLoginComponent />
+    </div>
   </main>
 </template>
 
@@ -49,45 +55,58 @@ import LoginWithSpotify from '@/components/LoginWithSpotify.vue'
 main {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 2rem;
   align-items: center;
   min-height: 90vh;
   width: 100%;
 }
 
-.game-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  gap: 1.5rem;
+h2 {
+  margin-top: 1rem;
+}
+
+.subtitle {
+  text-align: center;
+  font-weight: 600;
 }
 
 .game-title h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .game-title img {
-  height: 4rem;
+  height: 2.5rem;
   margin-top: 0.5rem;
 }
 
 .card-how-to-play {
-  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.card-how-to-play h3 {
+  text-transform: uppercase;
+  padding: 0 1.3rem;
+  font-weight: 500;
+  color: #d8b4fe;
 }
 
 .card-how-to-play ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.75rem;
+  padding-left: 0;
+  margin-right: 0;
 }
 
 .card-how-to-play li {
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: var(--home-cards-background-color);;
+  border: 1px solid var(--home-cards-border-color);;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -122,8 +141,20 @@ main {
   height: 1.5rem;
 }
 
-.card-how-to-play li h3 {
-  font-weight: bold;
+.card-how-to-play li h4 {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.card-how-to-play li p {
+  color: #cbd5e1;
+}
+
+.login-with-spotify {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 @media (min-width: 40rem) {
@@ -133,15 +164,15 @@ main {
   }
 
   .game-title h1 {
-    font-size: 6rem;
+    font-size: 4rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
   }
 
   .game-title img {
     height: 5rem;
-  }
-
-  .game-title {
-    margin: 3rem 2rem;
   }
 }
 </style>

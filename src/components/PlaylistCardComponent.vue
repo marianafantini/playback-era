@@ -15,7 +15,7 @@ const { playlist } = defineProps(['playlist'])
 <style scoped>
 
 .playlist-card {
-  border-color: transparent;
+  border: 1px solid var(--cards-border-color);
   background-color: var(--cards-background-color);
   padding: 1rem;
   display: flex;

@@ -35,6 +35,14 @@ const router = createRouter({
       }),
     },
     {
+      path: '/free-test',
+      name: 'free-test',
+      component: PlayView,
+      props: (route): { playlist: LocationQueryValue | LocationQueryValue[] | undefined } => ({
+        playlist: route.query.playlist,
+      }),
+    },
+    {
       path: '/settings',
       name: 'settings',
       component: SettingsView,

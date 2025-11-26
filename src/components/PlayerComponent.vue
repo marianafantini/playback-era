@@ -83,7 +83,6 @@ const pauseSong = () => {
   align-items: center;
   gap: 0.5rem;
   height: 3rem;
-  background-color: #243154;
   padding: 3rem 1.5rem;
   border-radius: 0.5rem;
 }
