@@ -42,7 +42,6 @@ input {
   width: 0.75rem;
   border-radius: 100%;
   background-image: url("/clear-search.svg");
-
 }
 
 </style>

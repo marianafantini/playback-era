@@ -108,6 +108,7 @@ export const usePlaylistStore = defineStore('playlist', {
     },
 
     async initPlaylist(playlistID: string) {
+      this.playing = false
       this.playedSongs = []
       this.correctSongs = []
       this.playlist = []

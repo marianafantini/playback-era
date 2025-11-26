@@ -13,7 +13,6 @@ const { song, amountOfSongs, amountOfSongsLeft, round, totalRounds } = definePro
   'round',
   'totalRounds'
 ])
-let isPlaying = false
 
 onBeforeMount(() => {
   configurePlayer()
@@ -34,11 +33,9 @@ const configurePlayer = () => {
     const callback = (EmbedController: any) => {
       EmbedController.addListener('playback_update', (event: CustomEvent) => {
         if (event.data.isPaused) {
-          isPlaying = false
-          console.log('pause')
+          playlistStore.playing = false
         } else {
-          isPlaying = true
-          console.log('play')
+          playlistStore.playing = true
         }
       })
 
