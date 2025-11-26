@@ -1,8 +1,8 @@
 @import './base.css';
 
 :root {
-  --card-height: 13rem;
-  --card-width: 13rem;
+  --card-height: 10rem;
+  --card-width: 10rem;
 }
 
 #app {

@@ -7,6 +7,7 @@ import { onBeforeMount, onUnmounted } from 'vue'
 import PlaylistCardComponent from '@/components/PlaylistCardComponent.vue'
 import { useRouter } from 'vue-router'
 import type { Playlist } from '@/models/playlist.ts'
+import PlaylistListOfCardsComponent from '@/components/icons/PlaylistListOfCardsComponent.vue'
 
 const router = useRouter()
 
@@ -46,14 +47,16 @@ onUnmounted(() => {
         />
       </div>
 
-      <div class="playlist-list">
-        <div v-for="playlist in playlistStore.searchResults" @click="goToPlaylist(playlist)">
-          <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
-        </div>
-        <div v-for="playlist in playlistStore.usersPlaylists" @click="goToPlaylist(playlist)">
-          <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
-        </div>
-      </div>
+      <PlaylistListOfCardsComponent :playlist-list="playlistStore.usersPlaylists" />
+
+<!--      <div class="playlist-list">-->
+<!--        <div v-for="playlist in playlistStore.searchResults" @click="goToPlaylist(playlist)">-->
+<!--          <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>-->
+<!--        </div>-->
+<!--        <div v-for="playlist in playlistStore.usersPlaylists" @click="goToPlaylist(playlist)">-->
+<!--          <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>-->
+<!--        </div>-->
+<!--      </div>-->
     </section>
   </main>
 </template>
@@ -80,25 +83,9 @@ onUnmounted(() => {
   width: 100%;
 }
 
-.playlist-list {
-  gap: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.playlist-list div {
-  width: 100%;
-  justify-content: flex-start;
-}
-
 @media (min-width: 40rem) {
   .search-playlists-input {
     max-width: 40%;
-  }
-
-  .playlist-list div {
-    flex-grow: inherit;
-    width: auto;
   }
 }
 </style>
