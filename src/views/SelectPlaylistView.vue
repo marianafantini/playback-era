@@ -20,7 +20,6 @@ const goToPlaylist = (playlist: Playlist) => {
 }
 
 const searchForPlaylist = async (q: string): Promise<void> => {
-  console.log('search for ', q)
   let searchResults: Playlist[] = []
   if (q.length > 0) {
     searchResults = await playlistStore.searchForPlaylist(q)

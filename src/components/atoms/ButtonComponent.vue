@@ -4,7 +4,7 @@ const emit = defineEmits(['click'])
 </script>
 
 <template>
-  <button class="see-more-button" @click="emit('click')">
+  <button class="see-more-button" @click="$emit('click')">
     {{ content }}
   </button>
 </template>

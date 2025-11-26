@@ -8,7 +8,7 @@ const emit = defineEmits(['goToPlaylist'])
   <div class="playlist-list">
     <div
       v-for="playlist in playlistList.concat(searchPlaylistList)"
-      @click="emit('goToPlaylist', playlist)"
+      @click="$emit('goToPlaylist', playlist)"
     >
       <PlaylistCardComponent :playlist="playlist"></PlaylistCardComponent>
     </div>
