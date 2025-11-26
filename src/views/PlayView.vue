@@ -74,8 +74,7 @@ const selectTimelineForSong = (index: number) => {
     <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
       <NoSongsOnPlaylistComponent />
     </div>
-    <div v-if="!playlistStore.loading && playlistStore.playlist.length > 0"
-         class="game-board">
+    <div v-if="!playlistStore.loading && playlistStore.playlist.length > 0" class="game-board">
       <div class="player-section">
         <div v-if="playlistStore.isGameStillActive()">
           <PlayerComponent
@@ -87,8 +86,10 @@ const selectTimelineForSong = (index: number) => {
           />
         </div>
         <div v-else>
-          <WinHeaderMessage :correctSongs="playlistStore.correctSongs.length"
-                            @restartGame="initializeGame" />
+          <WinHeaderMessage
+            :correctSongs="playlistStore.correctSongs.length"
+            @restartGame="initializeGame"
+          />
         </div>
       </div>
 
@@ -210,5 +211,4 @@ const selectTimelineForSong = (index: number) => {
     transform: scale(1);
   }
 }
-
 </style>

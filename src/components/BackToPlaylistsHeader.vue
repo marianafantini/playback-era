@@ -1,27 +1,24 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-const { title, subtitle } = defineProps(["title", "subtitle"])
+const { title, subtitle } = defineProps(['title', 'subtitle'])
 
 const router = useRouter()
-
 </script>
 
 <template>
   <div class="back-to-home-header">
-    <div @click="router.push('/select-playlist')"
-         class="cross-icon-area">
+    <div @click="router.push('/select-playlist')" class="cross-icon-area">
       <img src="/clear-search.svg" />
     </div>
     <div>
-      <h1 class="header-title">{{title}}</h1>
-      <p class="header-subtitle">{{subtitle}}</p>
+      <h1 class="header-title">{{ title }}</h1>
+      <p class="header-subtitle">{{ subtitle }}</p>
     </div>
   </div>
 </template>
 
 <style scoped>
-
 .back-to-home-header {
   display: flex;
   align-items: center;
@@ -52,5 +49,4 @@ const router = useRouter()
 .cross-icon-area img {
   height: 1rem;
 }
-
 </style>

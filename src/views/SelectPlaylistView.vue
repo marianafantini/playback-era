@@ -39,13 +39,13 @@ onUnmounted(() => {
       <LoadingComponent></LoadingComponent>
     </section>
     <section v-else class="game-board">
-      <SearchInputComponent @search="searchForPlaylist"
-                            placeholder="Procurar por playlist..." />
+      <SearchInputComponent @search="searchForPlaylist" placeholder="Procurar por playlist..." />
 
-      <PlaylistListOfCardsComponent :searchPlaylistList="playlistStore.usersPlaylists"
-                                    :playlist-list="playlistStore.searchResults"
-                                    @goToPlaylist="goToPlaylist" />
-
+      <PlaylistListOfCardsComponent
+        :searchPlaylistList="playlistStore.usersPlaylists"
+        :playlist-list="playlistStore.searchResults"
+        @goToPlaylist="goToPlaylist"
+      />
     </section>
   </main>
 </template>

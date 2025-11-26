@@ -11,7 +11,7 @@ const { song, amountOfSongs, amountOfSongsLeft, round, totalRounds } = definePro
   'amountOfSongs',
   'amountOfSongsLeft',
   'round',
-  'totalRounds'
+  'totalRounds',
 ])
 
 onBeforeMount(() => {
@@ -28,7 +28,7 @@ const configurePlayer = () => {
   ;(window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
     const element = document.getElementById('embed-iframe')
     const options = {
-      uri: song.spotifyURI
+      uri: song.spotifyURI,
     }
     const callback = (EmbedController: any) => {
       EmbedController.addListener('playback_update', (event: CustomEvent) => {
@@ -61,15 +61,19 @@ const pauseSong = () => {
   <div class="player-card-component-wrapper">
     <RoundDescriptionComponent
       :round="playlistStore.playlist.length - playlistStore.playlistSongsLeft.length - 1"
-      :total-rounds="playlistStore.playlist.length - 1">
+      :total-rounds="playlistStore.playlist.length - 1"
+    >
     </RoundDescriptionComponent>
 
     <h3>Em que ano essa música foi lançada?</h3>
     <div class="player-card-component">
       <div class="player-commands">
         <PlayCircleOutlined v-if="!playlistStore.playing" class="control-icons" @click="playSong" />
-        <PauseCircleOutlined v-if="playlistStore.playing" class="control-icons"
-                             @click="pauseSong" />
+        <PauseCircleOutlined
+          v-if="playlistStore.playing"
+          class="control-icons"
+          @click="pauseSong"
+        />
       </div>
 
       <div class="play-and-pause-icon">
@@ -84,7 +88,6 @@ const pauseSong = () => {
 </template>
 
 <style scoped>
-
 .player-card-component-wrapper {
   display: flex;
   flex-direction: column;
@@ -99,7 +102,7 @@ const pauseSong = () => {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  color: var(--subtitle-color)
+  color: var(--subtitle-color);
 }
 
 .player-card-component {
@@ -132,4 +135,3 @@ const pauseSong = () => {
   width: 0;
 }
 </style>
-

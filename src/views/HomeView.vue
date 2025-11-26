@@ -12,22 +12,21 @@ const steps = [
     icon: '/music-note.svg',
     title: 'Escolha uma playlist',
     description: 'Selecione sua playlist favorita',
-    color: 'from-green-400 to-emerald-500'
+    color: 'from-green-400 to-emerald-500',
   },
   {
     icon: '/play.svg',
     title: 'Ouça o trecho',
     description: 'Escute uma música aleatória',
-    color: 'from-pink-400 to-rose-500'
+    color: 'from-pink-400 to-rose-500',
   },
   {
     icon: '/calendar.svg',
     title: 'Adivinhe o ano',
     description: 'Coloque a música na linha do tempo',
-    color: 'from-purple-400 to-indigo-500'
-  }
+    color: 'from-purple-400 to-indigo-500',
+  },
 ]
-
 </script>
 
 <template>
@@ -39,8 +38,10 @@ const steps = [
 
     <div class="login-with-spotify">
       <LoginWithSpotifyComponent />
-      <ButtonComponent content="Testar sem login"
-                       @click="router.push('/free-test?playlist=008G1BbvK1NQvbAV8MHvDz')" />
+      <ButtonComponent
+        content="Testar sem login"
+        @click="router.push('/free-test?playlist=008G1BbvK1NQvbAV8MHvDz')"
+      />
     </div>
   </main>
 </template>
@@ -60,7 +61,6 @@ main {
   font-weight: 700;
   font-size: 1.75rem;
   width: 100%;
-
 }
 
 .login-with-spotify {
@@ -80,5 +80,4 @@ main {
     font-size: 1.1rem;
   }
 }
-
 </style>

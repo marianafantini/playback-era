@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterView, RouterLink, useRouter } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import { inject } from '@vercel/analytics'
 import BackToPlaylistsHeader from '@/components/BackToPlaylistsHeader.vue'
 import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
@@ -10,9 +10,11 @@ const router = useRouter()
 
 <template>
   <header>
-    <div @click="router.push('/')"
-         v-if="router.currentRoute.value.name === 'home'"
-         class="header-logo">
+    <div
+      @click="router.push('/')"
+      v-if="router.currentRoute.value.name === 'home'"
+      class="header-logo"
+    >
       <div class="playback-era-logo">
         <img src="/music-note.svg" />
       </div>
@@ -22,11 +24,14 @@ const router = useRouter()
       </div>
     </div>
     <div v-if="router.currentRoute.value.name === 'select-playlist'">
-      <BackToHomeHeader :title="'Escolha uma playlist'"
-                        :subtitle="'Suas playlists do Spotify'" />
+      <BackToHomeHeader :title="'Escolha uma playlist'" :subtitle="'Suas playlists do Spotify'" />
     </div>
     <div
-      v-if="router.currentRoute.value.name !== 'home'&& router.currentRoute.value.name !== 'select-playlist'">
+      v-if="
+        router.currentRoute.value.name !== 'home' &&
+        router.currentRoute.value.name !== 'select-playlist'
+      "
+    >
       <BackToPlaylistsHeader />
     </div>
   </header>
@@ -78,12 +83,12 @@ header a {
   background-image: linear-gradient(to bottom right, #9333ea, #8b5cf6);
   border-radius: 1rem;
   padding: 0.5rem 1rem;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+  box-shadow:
+    var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .playback-era-logo img {
   height: 2rem;
   color: white;
 }
-
 </style>

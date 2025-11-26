@@ -8,15 +8,16 @@ const changeValue = (newValue: number) => {
   radioButtons.forEach((item) => item.classList.remove('checked'))
   document.getElementById('radio-button-' + newValue)?.classList.add('checked')
 }
-
 </script>
 
 <template>
   <div class="radio-buttons">
-    <div v-for="option in options"
-         @click="changeValue(option)"
-         :class="'radio-div ' + (checked == option ? 'checked' : '')"
-         :id="'radio-button-'+option">
+    <div
+      v-for="option in options"
+      @click="changeValue(option)"
+      :class="'radio-div ' + (checked == option ? 'checked' : '')"
+      :id="'radio-button-' + option"
+    >
       <input type="radio" :id="option" name="amount-of-rounds" :value="option" />
       <label :for="option">{{ option }}</label>
     </div>
@@ -24,7 +25,6 @@ const changeValue = (newValue: number) => {
 </template>
 
 <style scoped>
-
 .radio-buttons * {
   cursor: pointer;
 }
@@ -59,5 +59,4 @@ const changeValue = (newValue: number) => {
 .radio-buttons .checked {
   background-color: #30457c;
 }
-
 </style>

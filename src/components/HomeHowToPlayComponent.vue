@@ -86,7 +86,7 @@ const { steps } = defineProps(['steps'])
 }
 
 .card-how-to-play .how-to-play-list-item:nth-of-type(1) .icon {
-  background: linear-gradient(to bottom right, #4ade80, #10b981)
+  background: linear-gradient(to bottom right, #4ade80, #10b981);
 }
 
 .card-how-to-play .how-to-play-list-item:nth-of-type(2) .icon {

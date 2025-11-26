@@ -1,5 +1,4 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="empty-page">
@@ -9,7 +8,6 @@
 </template>
 
 <style scoped>
-
 .empty-page {
   display: flex;
   justify-content: center;
@@ -23,5 +21,4 @@
 .empty-gif {
   height: 10rem;
 }
-
 </style>
