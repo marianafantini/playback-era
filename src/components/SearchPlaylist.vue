@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import type { CustomHTMLElementEvent } from '@/models/customHTMLElementEvent.ts'
+
 const emit = defineEmits(['searchForPlaylist'])
+
 </script>
 
 <template>
@@ -7,7 +10,7 @@ const emit = defineEmits(['searchForPlaylist'])
     <input
       type="search"
       placeholder="Procurar playlist..."
-      @search="(event) => emit('searchForPlaylist', event.target.value)"
+      @search="(event: CustomHTMLElementEvent<HTMLInputElement>) => emit('searchForPlaylist', event?.target?.value)"
       class="search-playlists-input"
     />
   </div>

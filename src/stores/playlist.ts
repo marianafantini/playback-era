@@ -31,7 +31,7 @@ export const usePlaylistStore = defineStore('playlist', {
   }),
   actions: {
 
-    setPlaying(bool) {
+    setPlaying(bool: boolean) {
       this.playing = bool
     },
 

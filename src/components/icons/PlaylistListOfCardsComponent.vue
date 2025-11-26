@@ -2,7 +2,7 @@
 
 import PlaylistCardComponent from '@/components/PlaylistCardComponent.vue'
 const { searchPlaylistList, playlistList } = defineProps(["searchPlaylistList", "playlistList"])
-const emit = defineEmits('goToPlaylist')
+const emit = defineEmits(['goToPlaylist'])
 </script>
 
 <template>
