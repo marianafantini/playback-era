@@ -28,7 +28,7 @@ export const usePlaylistStore = defineStore('playlist', {
     player: {},
     playerReady: false,
     loading: false,
-    amountOfRounds: 3,
+    amountOfRounds: 10,
     playing: false,
   }),
   actions: {
