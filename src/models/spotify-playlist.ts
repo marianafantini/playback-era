@@ -2,6 +2,10 @@ interface SpotifyImage {
   url: string
 }
 
+interface SpotifyTracks {
+  total: number
+}
+
 export interface SpotifyPlaylist {
   id: string
   name: string
@@ -10,4 +14,5 @@ export interface SpotifyPlaylist {
   collaborative: boolean
   public: boolean
   images: SpotifyImage[]
+  tracks: SpotifyTracks
 }

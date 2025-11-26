@@ -6,4 +6,5 @@ export interface Playlist {
   description: string
   public: boolean
   cover?: string
+  amountOfTracks: number
 }
