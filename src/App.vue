@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterView, RouterLink, useRouter } from 'vue-router'
 import { inject } from '@vercel/analytics'
+import BackToPlaylistsHeader from '@/components/BackToPlaylistsHeader.vue'
+import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
 
 inject()
 const router = useRouter()
@@ -19,11 +21,21 @@ const router = useRouter()
         <p class="header-subtitle">Desafio musical</p>
       </div>
     </div>
+    <div v-if="router.currentRoute.value.name === 'select-playlist'">
+      <BackToHomeHeader :title="'Escolha uma playlist'"
+                        :subtitle="'Suas playlists do Spotify'" />
+    </div>
+    <div
+      v-if="router.currentRoute.value.name !== 'home'&& router.currentRoute.value.name !== 'select-playlist'">
+      <BackToPlaylistsHeader />
+    </div>
 
-    <nav>
-      <RouterLink to="/select-playlist" v-if="router.currentRoute.value.name === 'play'">Playlists
-      </RouterLink>
-    </nav>
+<!--    <div-->
+<!--      v-if="router.currentRoute.value.name !== 'home'&& router.currentRoute.value.name !== 'settings'">-->
+<!--      <RouterLink to="/settings">-->
+<!--        settings-->
+<!--      </RouterLink>-->
+<!--    </div>-->
   </header>
 
   <RouterView />

@@ -35,10 +35,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header>
-    <BackToHomeHeader :title="'Escolha uma playlist'"
-    :subtitle="'Suas playlists do Spotify'"/>
-  </header>
   <main>
     <section v-if="playlistStore.loading">
       <LoadingComponent></LoadingComponent>

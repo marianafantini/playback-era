@@ -63,11 +63,11 @@ const { steps } = defineProps(['steps'])
 .card-how-to-play .floating-number {
   background-color: white;
   color: black;
-  font-weight: 800;
-  font-size: 1.25rem;
+  font-weight: 600;
+  font-size: 0.8rem;
   border-radius: 100%;
-  height: 2rem;
-  width: 2rem;
+  height: 1.2rem;
+  width: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
