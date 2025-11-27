@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { RouterView, useRouter } from 'vue-router'
 import { SpeedInsights } from "@vercel/speed-insights/vue"
-import { inject } from '@vercel/analytics'
+import { Analytics } from '@vercel/analytics/vue';
 import BackToPlaylistsHeader from '@/components/BackToPlaylistsHeader.vue'
 import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
 
-inject()
 const router = useRouter()
 </script>
 
 <template>
   <header>
+    <Analytics :mode="import.meta.env.MODE" />
     <SpeedInsights/>
     <div
       @click="router.push('/')"
