@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView, useRouter } from 'vue-router'
-import { SpeedInsights } from "@vercel/speed-insights/vue"
+import { SpeedInsights } from '@vercel/speed-insights/vue'
 import { inject } from '@vercel/analytics'
 import BackToPlaylistsHeader from '@/components/BackToPlaylistsHeader.vue'
 import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
@@ -11,7 +11,7 @@ const router = useRouter()
 
 <template>
   <header>
-    <SpeedInsights/>
+    <SpeedInsights />
     <div
       @click="router.push('/')"
       v-if="router.currentRoute.value.name === 'home'"

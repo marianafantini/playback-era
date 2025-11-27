@@ -14,14 +14,14 @@ const getToken = async (code: any) => {
     grant_type: 'authorization_code',
     code: code,
     redirect_uri: redirectUri,
-    code_verifier: codeVerifier || ''
+    code_verifier: codeVerifier || '',
   })
   const payload = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: queryParams
+    body: queryParams,
   }
   const url = 'https://accounts.spotify.com/api/token'
 
