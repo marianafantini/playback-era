@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 
-const { title, subtitle } = defineProps(['title', 'subtitle'])
+const { title, subtitle } = defineProps(["title", "subtitle"]);
 
-const router = useRouter()
+const router = useRouter();
 </script>
 
 <template>

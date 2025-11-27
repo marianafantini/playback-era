@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { steps } = defineProps(['steps'])
+const { steps } = defineProps(["steps"]);
 </script>
 
 <template>

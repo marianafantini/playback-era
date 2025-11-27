@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { playlist } = defineProps(['playlist'])
+const { playlist } = defineProps(["playlist"]);
 </script>
 
 <template>
   <div class="playlist-card">
-    <img :src="playlist.cover" alt="Playlist Cover Image" class="playlist-cover" />
+    <img
+      :src="playlist.cover"
+      alt="Playlist Cover Image"
+      class="playlist-cover"
+    />
     <div class="playlist-information">
       <p>{{ playlist.name }}</p>
       <p class="subtitle">{{ playlist.amountOfTracks }} músicas</p>

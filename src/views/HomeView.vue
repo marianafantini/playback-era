@@ -1,39 +1,40 @@
 <script setup lang="ts">
-import LoginWithSpotifyComponent from '@/components/LoginWithSpotifyComponent.vue'
-import NewGameHomeBadgeComponent from '@/components/NewGameHomeBadgeComponent.vue'
-import HomeHowToPlayComponent from '@/components/HomeHowToPlayComponent.vue'
-import ButtonComponent from '@/components/atoms/ButtonComponent.vue'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import LoginWithSpotifyComponent from "@/components/LoginWithSpotifyComponent.vue";
+import NewGameHomeBadgeComponent from "@/components/NewGameHomeBadgeComponent.vue";
+import HomeHowToPlayComponent from "@/components/HomeHowToPlayComponent.vue";
+import ButtonComponent from "@/components/atoms/ButtonComponent.vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const steps = ref([
   {
-    icon: '/music-note.svg',
-    title: 'Escolha uma playlist',
-    description: 'Selecione sua playlist favorita',
-    color: 'from-green-400 to-emerald-500',
+    icon: "/music-note.svg",
+    title: "Escolha uma playlist",
+    description: "Selecione sua playlist favorita",
+    color: "from-green-400 to-emerald-500",
   },
   {
-    icon: '/play.svg',
-    title: 'Ouça o trecho',
-    description: 'Escute uma música aleatória',
-    color: 'from-pink-400 to-rose-500',
+    icon: "/play.svg",
+    title: "Ouça o trecho",
+    description: "Escute uma música aleatória",
+    color: "from-pink-400 to-rose-500",
   },
   {
-    icon: '/calendar.svg',
-    title: 'Adivinhe o ano',
-    description: 'Coloque a música na linha do tempo',
-    color: 'from-purple-400 to-indigo-500',
+    icon: "/calendar.svg",
+    title: "Adivinhe o ano",
+    description: "Coloque a música na linha do tempo",
+    color: "from-purple-400 to-indigo-500",
   },
-])
-
+]);
 </script>
 
 <template>
   <main>
     <NewGameHomeBadgeComponent />
-    <h2 class="home-subtitle-cta">Adivinhe o ano de lançamento das suas músicas favoritas</h2>
+    <h2 class="home-subtitle-cta">
+      Adivinhe o ano de lançamento das suas músicas favoritas
+    </h2>
 
     <HomeHowToPlayComponent :steps="steps" />
 

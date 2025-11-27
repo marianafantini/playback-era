@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { song, id } = defineProps(['song', 'id'])
+const { song, id } = defineProps(["song", "id"]);
 </script>
 
 <template>
   <div :id="id" :class="'music-card ' + song?.color + '-card '">
-    <img :src="song.image" :alt="'Imagem da música ' + song.name" class="song-image" />
+    <img
+      :src="song.image"
+      :alt="'Imagem da música ' + song.name"
+      class="song-image"
+    />
     <div>
       <p class="song-name">{{ song?.name }}</p>
       <p class="song-artist">{{ song?.artist }}</p>

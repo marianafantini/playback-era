@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const emit = defineEmits(['onChange'])
-const { options, checked } = defineProps(['options', 'checked'])
+const emit = defineEmits(["onChange"]);
+const { options, checked } = defineProps(["options", "checked"]);
 
 const changeValue = (newValue: number) => {
-  emit('onChange', newValue)
-  const radioButtons = [...document.getElementsByClassName('radio-div')]
-  radioButtons.forEach((item) => item.classList.remove('checked'))
-  document.getElementById('radio-button-' + newValue)?.classList.add('checked')
-}
+  emit("onChange", newValue);
+  const radioButtons = [...document.getElementsByClassName("radio-div")];
+  radioButtons.forEach((item) => item.classList.remove("checked"));
+  document.getElementById("radio-button-" + newValue)?.classList.add("checked");
+};
 </script>
 
 <template>
@@ -18,7 +18,12 @@ const changeValue = (newValue: number) => {
       :class="'radio-div ' + (checked == option ? 'checked' : '')"
       :id="'radio-button-' + option"
     >
-      <input type="radio" :id="option" name="amount-of-rounds" :value="option" />
+      <input
+        type="radio"
+        :id="option"
+        name="amount-of-rounds"
+        :value="option"
+      />
       <label :for="option">{{ option }}</label>
     </div>
   </div>

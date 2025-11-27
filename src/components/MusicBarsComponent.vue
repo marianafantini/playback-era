@@ -1,9 +1,13 @@
 <script setup lang="ts">
-const { animated } = defineProps(['animated'])
+const { animated } = defineProps(["animated"]);
 </script>
 
 <template>
-  <div :class="'music-waves-animation animated ' + (animated ? '' : 'pause-animation')">
+  <div
+    :class="
+      'music-waves-animation animated ' + (animated ? '' : 'pause-animation')
+    "
+  >
     <span></span>
     <span></span>
     <span></span>

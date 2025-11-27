@@ -1,23 +1,29 @@
 <script setup lang="ts">
-import WinTrophyComponent from '@/components/WinTrophyComponent.vue'
-import ButtonComponent from '@/components/atoms/ButtonComponent.vue'
-import { useRouter } from 'vue-router'
+import WinTrophyComponent from "@/components/WinTrophyComponent.vue";
+import ButtonComponent from "@/components/atoms/ButtonComponent.vue";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
-const { correctSongs } = defineProps(['correctSongs'])
+const router = useRouter();
+const { correctSongs } = defineProps(["correctSongs"]);
 
-const emit = defineEmits(['restartGame'])
+const emit = defineEmits(["restartGame"]);
 </script>
 
 <template>
   <div class="win-header-message">
     <WinTrophyComponent />
     <h3>Parabéns!!</h3>
-    <p>Você acertou {{ correctSongs }} {{ correctSongs > 1 ? 'músicas' : 'música' }}</p>
+    <p>
+      Você acertou {{ correctSongs }}
+      {{ correctSongs > 1 ? "músicas" : "música" }}
+    </p>
 
     <div class="button-actions">
       <ButtonComponent content="Jogar de novo" @click="$emit('restartGame')" />
-      <ButtonComponent content="Trocar de playlist" @click="router.push('/select-playlist')" />
+      <ButtonComponent
+        content="Trocar de playlist"
+        @click="router.push('/select-playlist')"
+      />
     </div>
   </div>
 </template>
