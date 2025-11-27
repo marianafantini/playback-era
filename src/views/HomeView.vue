@@ -27,7 +27,6 @@ const steps = ref([
     color: 'from-purple-400 to-indigo-500',
   },
 ])
-
 </script>
 
 <template>
