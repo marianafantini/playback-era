@@ -10,7 +10,7 @@ const router = useRouter()
 
 <template>
   <header>
-    <Analytics :mode="import.meta.env.MODE" />
+    <Analytics />
     <SpeedInsights/>
     <div
       @click="router.push('/')"
