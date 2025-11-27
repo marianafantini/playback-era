@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { RouterView, useRouter } from 'vue-router'
-import { SpeedInsights } from "@vercel/speed-insights/vue"
-import { inject } from '@vercel/analytics'
-import BackToPlaylistsHeader from '@/components/BackToPlaylistsHeader.vue'
-import BackToHomeHeader from '@/components/BackToHomeHeader.vue'
+import { RouterView, useRouter } from "vue-router";
+import { SpeedInsights } from "@vercel/speed-insights/vue";
+import { inject } from "@vercel/analytics";
+import BackToPlaylistsHeader from "@/components/BackToPlaylistsHeader.vue";
+import BackToHomeHeader from "@/components/BackToHomeHeader.vue";
 
-inject()
-const router = useRouter()
+inject();
+const router = useRouter();
 </script>
 
 <template>
   <header>
-    <SpeedInsights/>
+    <SpeedInsights />
     <div
       @click="router.push('/')"
       v-if="router.currentRoute.value.name === 'home'"
@@ -26,7 +26,10 @@ const router = useRouter()
       </div>
     </div>
     <div v-if="router.currentRoute.value.name === 'select-playlist'">
-      <BackToHomeHeader :title="'Escolha uma playlist'" :subtitle="'Suas playlists do Spotify'" />
+      <BackToHomeHeader
+        :title="'Escolha uma playlist'"
+        :subtitle="'Suas playlists do Spotify'"
+      />
     </div>
     <div
       v-if="
@@ -86,7 +89,8 @@ header a {
   border-radius: 1rem;
   padding: 0.5rem 1rem;
   box-shadow:
-    var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+    var(--tw-shadow);
 }
 
 .playback-era-logo img {

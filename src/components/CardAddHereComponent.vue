@@ -1,10 +1,14 @@
 <script setup lang="ts">
-const { isGameStillActive } = defineProps(['isGameStillActive'])
-import { PlusOutlined } from '@ant-design/icons-vue'
+const { isGameStillActive } = defineProps(["isGameStillActive"]);
+import { PlusOutlined } from "@ant-design/icons-vue";
 </script>
 
 <template>
-  <div v-if="isGameStillActive" class="music-card" @click="$emit('selectTimelineForSong')">
+  <div
+    v-if="isGameStillActive"
+    class="music-card"
+    @click="$emit('selectTimelineForSong')"
+  >
     <div>
       <PlusOutlined />
       Adicionar aqui

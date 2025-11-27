@@ -1,66 +1,71 @@
 <script setup lang="ts">
-import { usePlaylistStore } from '@/stores/playlist.ts'
-import { onBeforeMount } from 'vue'
-import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue'
-import MusicBarsComponent from '@/components/MusicBarsComponent.vue'
-import RoundDescriptionComponent from '@/components/RoundDescriptionComponent.vue'
+import { usePlaylistStore } from "@/stores/playlist.ts";
+import { onBeforeMount } from "vue";
+import { PauseCircleOutlined, PlayCircleOutlined } from "@ant-design/icons-vue";
+import MusicBarsComponent from "@/components/MusicBarsComponent.vue";
+import RoundDescriptionComponent from "@/components/RoundDescriptionComponent.vue";
 
-const playlistStore = usePlaylistStore()
-const { song, amountOfSongs, amountOfSongsLeft, round, totalRounds } = defineProps([
-  'song',
-  'amountOfSongs',
-  'amountOfSongsLeft',
-  'round',
-  'totalRounds',
-])
+const playlistStore = usePlaylistStore();
+const { song, amountOfSongs, amountOfSongsLeft, round, totalRounds } =
+  defineProps([
+    "song",
+    "amountOfSongs",
+    "amountOfSongsLeft",
+    "round",
+    "totalRounds",
+  ]);
 
 onBeforeMount(() => {
-  configurePlayer()
-})
+  configurePlayer();
+});
 
 interface CustomEvent {
   data: {
-    isPaused: boolean
-  }
+    isPaused: boolean;
+  };
 }
 
 const configurePlayer = () => {
-  ;(window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
-    const element = document.getElementById('embed-iframe')
+  (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
+    const element = document.getElementById("embed-iframe");
     const options = {
       uri: song.spotifyURI,
-    }
+    };
     const callback = (EmbedController: any) => {
-      EmbedController.addListener('playback_update', (event: CustomEvent) => {
+      EmbedController.addListener("playback_update", (event: CustomEvent) => {
         if (event.data.isPaused) {
-          playlistStore.playing = false
+          playlistStore.playing = false;
         } else {
-          playlistStore.playing = true
+          playlistStore.playing = true;
         }
-      })
+      });
 
-      playlistStore.player = EmbedController
-      playlistStore.playerReady = true
-    }
-    IFrameAPI.createController(element, options, callback)
-  }
-}
+      playlistStore.player = EmbedController;
+      playlistStore.playerReady = true;
+    };
+    IFrameAPI.createController(element, options, callback);
+  };
+};
 
 const playSong = () => {
-  playlistStore.player.play()
-  playlistStore.playing = true
-}
+  playlistStore.player.play();
+  playlistStore.playing = true;
+};
 
 const pauseSong = () => {
-  playlistStore.player.pause()
-  playlistStore.playing = false
-}
+  playlistStore.player.pause();
+  playlistStore.playing = false;
+};
 </script>
 
 <template>
   <div class="player-card-component-wrapper">
     <RoundDescriptionComponent
-      :round="playlistStore.playlist.length - playlistStore.playlistSongsLeft.length - 1"
+      :round="
+        playlistStore.playlist.length -
+        playlistStore.playlistSongsLeft.length -
+        1
+      "
       :total-rounds="playlistStore.playlist.length - 1"
     >
     </RoundDescriptionComponent>
@@ -68,7 +73,11 @@ const pauseSong = () => {
     <h3>Em que ano essa música foi lançada?</h3>
     <div class="player-card-component">
       <div class="player-commands">
-        <PlayCircleOutlined v-if="!playlistStore.playing" class="control-icons" @click="playSong" />
+        <PlayCircleOutlined
+          v-if="!playlistStore.playing"
+          class="control-icons"
+          @click="playSong"
+        />
         <PauseCircleOutlined
           v-if="playlistStore.playing"
           class="control-icons"

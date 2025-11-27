@@ -1,3 +1,3 @@
 export type CustomHTMLElementEvent<T extends HTMLElement> = Event & {
-  target: T
-}
+  target: T;
+};

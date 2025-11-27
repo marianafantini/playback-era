@@ -1,69 +1,75 @@
 <script setup lang="ts">
-import MusicCardComponent from '@/components/MusicCardComponent.vue'
-import { usePlaylistStore } from '@/stores/playlist'
-import { onBeforeMount } from 'vue'
-import PlayerComponent from '@/components/PlayerComponent.vue'
-import CardAddHereComponent from '@/components/CardAddHereComponent.vue'
-import NoSongsOnPlaylistComponent from '@/components/NoSongsOnPlaylistComponent.vue'
-import LoadingComponent from '@/components/modules/LoadingComponent.vue'
-import WinHeaderMessage from '@/components/WinHeaderMessage.vue'
+import MusicCardComponent from "@/components/MusicCardComponent.vue";
+import { usePlaylistStore } from "@/stores/playlist";
+import { onBeforeMount } from "vue";
+import PlayerComponent from "@/components/PlayerComponent.vue";
+import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
+import NoSongsOnPlaylistComponent from "@/components/NoSongsOnPlaylistComponent.vue";
+import LoadingComponent from "@/components/modules/LoadingComponent.vue";
+import WinHeaderMessage from "@/components/WinHeaderMessage.vue";
 
-const { playlist } = defineProps(['playlist'])
-const playlistStore = usePlaylistStore()
+const { playlist } = defineProps(["playlist"]);
+const playlistStore = usePlaylistStore();
 
 onBeforeMount(() => {
-  initializeGame()
-})
+  initializeGame();
+});
 
 const initializeGame = () => {
   playlistStore.initPlaylist(playlist).then((response) => {
     if (response.length > 0) {
-      playlistStore.getNextSong()
-      setInitialSong()
+      playlistStore.getNextSong();
+      setInitialSong();
     } else {
-      console.log('no songs on this playlist')
+      console.log("no songs on this playlist");
     }
-  })
-}
+  });
+};
 
 const getAndStartNextSong = () => {
-  playlistStore.getNextSong()
+  playlistStore.getNextSong();
   if (playlistStore.playerReady) {
-    playlistStore.player.loadUri(playlistStore.currentSong?.spotifyURI)
-    playlistStore.player.play()
+    playlistStore.player.loadUri(playlistStore.currentSong?.spotifyURI);
+    playlistStore.player.play();
   }
-}
+};
 
 const setInitialSong = () => {
   if (playlistStore.currentSong) {
-    playlistStore.addPlayedSong(playlistStore.currentSong, 0)
+    playlistStore.addPlayedSong(playlistStore.currentSong, 0);
   }
-  getAndStartNextSong()
-}
+  getAndStartNextSong();
+};
 
 const getIDForSongCard = (songName: string) => {
-  return 'cards-song-' + songName.replaceAll(' ', '-').replaceAll('(', '-').replaceAll(')', '-')
-}
+  return (
+    "cards-song-" +
+    songName.replaceAll(" ", "-").replaceAll("(", "-").replaceAll(")", "-")
+  );
+};
 
 const selectTimelineForSong = (index: number) => {
-  playlistStore.player.pause()
+  playlistStore.player.pause();
   if (playlistStore.currentSong && playlistStore?.currentSong?.name) {
-    const elementId = getIDForSongCard(playlistStore?.currentSong?.name)
-    const response = playlistStore.addPlayedSong(playlistStore.currentSong, index + 1)
+    const elementId = getIDForSongCard(playlistStore?.currentSong?.name);
+    const response = playlistStore.addPlayedSong(
+      playlistStore.currentSong,
+      index + 1,
+    );
 
     if (response) {
       setTimeout(() => {
-        document.getElementById(elementId)?.classList.add('correct-item')
-      }, 100)
+        document.getElementById(elementId)?.classList.add("correct-item");
+      }, 100);
     } else {
       setTimeout(() => {
-        document.getElementById(elementId)?.classList.add('remove-item')
-      }, 100)
+        document.getElementById(elementId)?.classList.add("remove-item");
+      }, 100);
     }
 
-    getAndStartNextSong()
+    getAndStartNextSong();
   }
-}
+};
 </script>
 
 <template>
@@ -74,14 +80,21 @@ const selectTimelineForSong = (index: number) => {
     <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
       <NoSongsOnPlaylistComponent />
     </div>
-    <div v-if="!playlistStore.loading && playlistStore.playlist.length > 0" class="game-board">
+    <div
+      v-if="!playlistStore.loading && playlistStore.playlist.length > 0"
+      class="game-board"
+    >
       <div class="player-section">
         <div v-if="playlistStore.isGameStillActive()">
           <PlayerComponent
             :song="playlistStore.currentSong"
             :amountOfSongs="playlistStore.playlist.length"
             :amountOfSongsLeft="playlistStore.playlistSongsLeft.length"
-            :round="playlistStore.playlist.length - playlistStore.playlistSongsLeft.length - 1"
+            :round="
+              playlistStore.playlist.length -
+              playlistStore.playlistSongsLeft.length -
+              1
+            "
             :total-rounds="playlistStore.playlist.length - 1"
           />
         </div>

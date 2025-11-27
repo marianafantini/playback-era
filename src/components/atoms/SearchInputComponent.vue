@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { CustomHTMLElementEvent } from '@/models/customHTMLElementEvent.ts'
+import type { CustomHTMLElementEvent } from "@/models/customHTMLElementEvent.ts";
 
-const { placeholder } = defineProps(['placeholder'])
-const emit = defineEmits(['search'])
+const { placeholder } = defineProps(["placeholder"]);
+const emit = defineEmits(["search"]);
 </script>
 
 <template>
@@ -11,7 +11,8 @@ const emit = defineEmits(['search'])
       type="search"
       :placeholder="placeholder"
       @search="
-        (event: CustomHTMLElementEvent<HTMLInputElement>) => emit('search', event?.target?.value)
+        (event: CustomHTMLElementEvent<HTMLInputElement>) =>
+          emit('search', event?.target?.value)
       "
       class="search-playlists-input"
     />
@@ -41,6 +42,6 @@ input {
   height: 0.75rem;
   width: 0.75rem;
   border-radius: 100%;
-  background-image: url('/clear-search.svg');
+  background-image: url("/clear-search.svg");
 }
 </style>
