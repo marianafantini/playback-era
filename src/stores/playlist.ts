@@ -1,8 +1,8 @@
-import {defineStore} from "pinia";
-import {type Song} from "@/models/song";
-import type {SpotifyItem} from "@/models/spotify-track.ts";
-import type {Playlist} from "@/models/playlist.ts";
-import type {SpotifyPlaylist} from "@/models/spotify-playlist.ts";
+import { defineStore } from "pinia";
+import { type Song } from "@/models/song";
+import type { SpotifyItem } from "@/models/spotify-track.ts";
+import type { Playlist } from "@/models/playlist.ts";
+import type { SpotifyPlaylist } from "@/models/spotify-playlist.ts";
 
 export const usePlaylistStore = defineStore("playlist", {
   state: (): {
@@ -33,11 +33,11 @@ export const usePlaylistStore = defineStore("playlist", {
   }),
   actions: {
     async makeRequestToSpotify(url: string, method: string) {
-      this.loading = true
-      const baseUrl = import.meta.env.VITE_BASE_URL
+      this.loading = true;
+      const baseUrl = import.meta.env.VITE_BASE_URL;
 
       return await fetch(baseUrl + url, {
-        method: method
+        method: method,
       })
         .then((response) => {
           return response.json();
