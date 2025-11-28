@@ -39,12 +39,10 @@ const steps = ref([
     <HomeHowToPlayComponent :steps="steps" />
 
     <div class="login-with-spotify">
-<!--      <LoginWithSpotifyComponent />-->
       <ButtonComponent
         content="Jogar"
         @click="router.push('/select-playlist')"
       />
-<!--      @click="router.push('/free-test?playlist=008G1BbvK1NQvbAV8MHvDz')"-->
     </div>
   </main>
 </template>
