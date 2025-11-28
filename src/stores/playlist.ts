@@ -34,17 +34,12 @@ export const usePlaylistStore = defineStore("playlist", {
   actions: {
     async makeRequestToSpotify(url: string, method: string) {
       this.loading = true;
-      const accessToken = window.localStorage.getItem("spotify_access_token");
-      return await fetch(url, {
+      const baseUrl = import.meta.env.VITE_BASE_URL;
+
+      return await fetch(baseUrl + url, {
         method: method,
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
       })
         .then((response) => {
-          if (response.status === 401) {
-            window.location.href = "/";
-          }
           return response.json();
         })
         .finally(() => {
@@ -71,9 +66,10 @@ export const usePlaylistStore = defineStore("playlist", {
 
     async setUserPlaylists(): Promise<void> {
       const response = await this.makeRequestToSpotify(
-        "https://api.spotify.com/v1/me/playlists",
+        "/list-playlists",
         "GET",
       );
+
       const playlistList = this.spotifyPlaylistToAppPlaylist(response.items);
       this.usersPlaylists = [...playlistList];
     },
@@ -110,7 +106,7 @@ export const usePlaylistStore = defineStore("playlist", {
       return songs;
     },
 
-    async initPlaylist(playlistID: string) {
+    async initPlaylist(playlistId: string) {
       this.playing = false;
       this.playedSongs = [];
       this.correctSongs = [];
@@ -118,7 +114,7 @@ export const usePlaylistStore = defineStore("playlist", {
       this.playlistSongsLeft = [];
 
       const response = await this.makeRequestToSpotify(
-        "https://api.spotify.com/v1/playlists/" + playlistID + "/tracks",
+        `/list-playlist-songs/${playlistId}`,
         "GET",
       );
 
@@ -132,7 +128,7 @@ export const usePlaylistStore = defineStore("playlist", {
 
     async searchForPlaylist(q: string): Promise<Playlist[]> {
       const response = await this.makeRequestToSpotify(
-        "https://api.spotify.com/v1/search?type=playlist&q=" + q,
+        `/search-playlist?q=` + q,
         "GET",
       );
       return this.spotifyPlaylistToAppPlaylist(response.playlists.items);

@@ -11,6 +11,7 @@ const emit = defineEmits(["click"]);
 
 <style scoped>
 .see-more-button {
+  cursor: pointer;
   border-radius: 3rem;
   font-size: 1.2rem;
   font-weight: 500;
