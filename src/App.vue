@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouterView, useRouter } from "vue-router";
-import { SpeedInsights } from "@vercel/speed-insights/vue";
-import { inject } from "@vercel/analytics";
-import BackToPlaylistsHeader from "@/components/BackToPlaylistsHeader.vue";
-import BackToHomeHeader from "@/components/BackToHomeHeader.vue";
+import { RouterView, useRouter } from 'vue-router';
+import { SpeedInsights } from '@vercel/speed-insights/vue';
+import { inject } from '@vercel/analytics';
+import BackToPlaylistsHeader from '@/components/BackToPlaylistsHeader.vue';
+import BackToHomeHeader from '@/components/BackToHomeHeader.vue';
 
 inject();
 const router = useRouter();

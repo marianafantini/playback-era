@@ -1,10 +1,10 @@
-import { defineStore } from "pinia";
-import { type Song } from "@/models/song";
-import type { SpotifyItem } from "@/models/spotify-track.ts";
-import type { Playlist } from "@/models/playlist.ts";
-import type { SpotifyPlaylist } from "@/models/spotify-playlist.ts";
+import { defineStore } from 'pinia';
+import { type Song } from '@/models/song';
+import type { SpotifyItem } from '@/models/spotify-track.ts';
+import type { Playlist } from '@/models/playlist.ts';
+import type { SpotifyPlaylist } from '@/models/spotify-playlist.ts';
 
-export const usePlaylistStore = defineStore("playlist", {
+export const usePlaylistStore = defineStore('playlist', {
   state: (): {
     currentSong?: Song;
     searchResults?: Playlist[];
@@ -36,7 +36,7 @@ export const usePlaylistStore = defineStore("playlist", {
       this.loading = true;
       const baseUrl = import.meta.env.VITE_BASE_URL;
 
-      console.log("baseUrl", baseUrl);
+      console.log('baseUrl', baseUrl);
 
       return await fetch(baseUrl + url, {
         method: method,
@@ -68,8 +68,8 @@ export const usePlaylistStore = defineStore("playlist", {
 
     async setUserPlaylists(): Promise<void> {
       const response = await this.makeRequestToSpotify(
-        "/list-playlists",
-        "GET",
+        '/list-playlists',
+        'GET',
       );
 
       const playlistList = this.spotifyPlaylistToAppPlaylist(response.items);
@@ -78,18 +78,18 @@ export const usePlaylistStore = defineStore("playlist", {
 
     spotifyTracksToAppSongs(items: SpotifyItem[]): Song[] {
       return items
-        .filter((item: SpotifyItem) => item.track.type === "track")
+        .filter((item: SpotifyItem) => item.track.type === 'track')
         .filter((item: SpotifyItem) => !!item.track.album.release_date)
         .map((item: SpotifyItem) => {
           return {
             name: item.track.name,
             spotifyURI: item.track.uri,
-            artist: item.track.artists.map((artist) => artist.name).join(" & "),
-            year: item.track.album.release_date.split("-")[0] || "",
+            artist: item.track.artists.map((artist) => artist.name).join(' & '),
+            year: item.track.album.release_date.split('-')[0] || '',
             image: item.track?.album?.images[0]?.url,
           };
         })
-        .filter((item) => item.year !== "");
+        .filter((item) => item.year !== '');
     },
 
     getSongsForRounds(playlist: Song[]): Song[] {
@@ -117,7 +117,7 @@ export const usePlaylistStore = defineStore("playlist", {
 
       const response = await this.makeRequestToSpotify(
         `/list-playlist-songs/${playlistId}`,
-        "GET",
+        'GET',
       );
 
       const playlist: Song[] = this.spotifyTracksToAppSongs(response.items);
@@ -131,7 +131,7 @@ export const usePlaylistStore = defineStore("playlist", {
     async searchForPlaylist(q: string): Promise<Playlist[]> {
       const response = await this.makeRequestToSpotify(
         `/search-playlist?q=` + q,
-        "GET",
+        'GET',
       );
       return this.spotifyPlaylistToAppPlaylist(response.playlists.items);
     },
@@ -150,7 +150,7 @@ export const usePlaylistStore = defineStore("playlist", {
           if (this.currentSong) {
             this.currentSong.color = this.randomColor();
           }
-          console.log("will splice here ", index);
+          console.log('will splice here ', index);
           this.playlistSongsLeft.splice(index, 1);
         }
       }
@@ -161,12 +161,12 @@ export const usePlaylistStore = defineStore("playlist", {
     },
 
     addPlayedSong(currentSong: Song, index: number): boolean {
-      console.log("addPlayedSong", currentSong);
+      console.log('addPlayedSong', currentSong);
       this.playedSongs.splice(index, 0, currentSong);
       const isOrderCorrect: boolean = this.checkPlayedSongOrder();
       if (!isOrderCorrect) {
         setTimeout(() => {
-          console.log("splice remove item");
+          console.log('splice remove item');
           this.playedSongs.splice(index, 1);
         }, 1100);
       } else {
@@ -192,18 +192,18 @@ export const usePlaylistStore = defineStore("playlist", {
 
     randomColor(): string {
       const possibleColors = [
-        "teal",
-        "lavanda",
-        "lightblue",
-        "mint",
-        "lightpink",
-        "yellow",
-        "peach",
-        "sage",
-        "violet",
+        'teal',
+        'lavanda',
+        'lightblue',
+        'mint',
+        'lightpink',
+        'yellow',
+        'peach',
+        'sage',
+        'violet',
       ];
       const index = Math.floor(Math.random() * possibleColors.length);
-      return possibleColors[index] ? possibleColors[index] : "";
+      return possibleColors[index] ? possibleColors[index] : '';
     },
   },
 });
