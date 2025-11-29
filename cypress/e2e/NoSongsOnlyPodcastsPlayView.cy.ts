@@ -7,11 +7,11 @@ describe("Play view View", () => {
       cy.intercept(
         "GET",
         `http://localhost:3000/list-playlist-songs/${playlistID}`,
-        {items: []},
+        {fixture: "tracks-only-podcast.json"},
       ).as("list-playlist-songs")
     })
 
-    it(`should show "no songs" message if response is empty for mobile ${size}`, () => {
+    it(`should show "no songs" message if response only contains podcasts for mobile ${size}`, () => {
       const playlistID = `1234`;
       cy.visit(`/play?playlist=${playlistID}`);
       cy.wait('@list-playlist-songs');
