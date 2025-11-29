@@ -7,7 +7,7 @@ describe('Play View', () => {
       cy.intercept(
         'GET',
         `http://localhost:3000/list-playlist-songs/${playlistID}`,
-        { fixture: 'response-from-tracks-api.json' },
+        {fixture: 'response-from-tracks-api.json'},
       ).as('list-playlist-songs');
 
       cy.visit(`/play?playlist=${playlistID}`);
@@ -18,12 +18,12 @@ describe('Play View', () => {
       cy.contains('Rodada 1 de 10');
       cy.contains('Em que ano essa música foi lançada?');
 
-      Array.from({ length: 10 }, (_, i) => {
+      Array.from({length: 10}, () => {
         cy.get('.music-card').then((items) => {
           items[0].click();
         });
 
-        cy.wait(150);
+        cy.wait(150); // eslint-disable-line cypress/no-unnecessary-waiting
 
         cy.get('.music-card').then((items) => {
           expect(items[1]).to.satisfy(($el) => {

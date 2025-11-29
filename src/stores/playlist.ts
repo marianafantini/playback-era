@@ -13,7 +13,7 @@ export const usePlaylistStore = defineStore('playlist', {
     playlistSongsLeft: Song[];
     playedSongs: Song[];
     correctSongs: Song[];
-    player: any;
+    player: any; // eslint-disable-line @typescript-eslint/no-explicit-any
     playerReady: boolean;
     loading: boolean;
     amountOfRounds: number;
@@ -98,7 +98,7 @@ export const usePlaylistStore = defineStore('playlist', {
       const songs: Song[] = [];
 
       while (songs.length < numberOfSongs) {
-        let index: number = Math.floor(Math.random() * playlist.length);
+        const index: number = Math.floor(Math.random() * playlist.length);
         if (songs.indexOf(playlist[index] as Song) === -1) {
           songs.push(playlist[index] as Song);
         }

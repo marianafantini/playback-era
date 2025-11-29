@@ -14,6 +14,7 @@ const changeValue = (newValue: number) => {
   <div class="radio-buttons">
     <div
       v-for="option in options"
+      :key="option"
       @click="changeValue(option)"
       :class="'radio-div ' + (checked == option ? 'checked' : '')"
       :id="'radio-button-' + option"

@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const { correctSongs } = defineProps(['correctSongs']);
 
-const emit = defineEmits(['restartGame']);
+defineEmits(['restartGame']);
 </script>
 
 <template>
