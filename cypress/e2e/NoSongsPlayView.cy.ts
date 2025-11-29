@@ -1,4 +1,4 @@
-describe('Play view View', () => {
+describe('Play View', () => {
   const mobileSizes = ['iphone-6', 'samsung-note9', 'iphone-xr'];
   mobileSizes.forEach((size) => {
     beforeEach(() => {
