@@ -1,7 +1,7 @@
 describe('Go from Home View to Play View', () => {
   const mobileSizes = ['iphone-6', 'samsung-note9', 'iphone-xr'];
   mobileSizes.forEach((size) => {
-    before(() => {
+    beforeEach(() => {
       cy.intercept('GET', `http://localhost:3000/list-playlists`, {
         fixture: 'response-from-list-playlists.json',
       }).as('list-playlists');
@@ -21,6 +21,7 @@ describe('Go from Home View to Play View', () => {
       cy.contains('button', 'Jogar').should('be.visible').click();
 
       cy.url().should('include', '/select-playlist');
+      cy.wait('@list-playlists');
 
       cy.get('.playlist-card').then((items) => {
         items[0].click();
@@ -28,6 +29,7 @@ describe('Go from Home View to Play View', () => {
 
       cy.url().should('include', '/play?playlist=03AbqFipgaR95FS1mBeNYS');
 
+      cy.wait('@list-playlist-songs');
       // add music to first position
       cy.get('.music-card').then((items) => {
         items[0].click();
