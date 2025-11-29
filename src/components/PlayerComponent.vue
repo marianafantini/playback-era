@@ -53,7 +53,7 @@ const playSong = () => {
 };
 
 const pauseSong = () => {
-  if (playlistStore.player.hasOwnProperty("pause")) {
+  if (typeof playlistStore.player?.pause === "function") {
     playlistStore.player.pause();
   }
   playlistStore.playing = false;
