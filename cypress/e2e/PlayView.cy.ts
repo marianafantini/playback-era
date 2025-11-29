@@ -1,5 +1,5 @@
 describe('Play View', () => {
-  const mobileSizes = ['samsung-note9'];
+  const mobileSizes = ['iphone-6', 'samsung-note9', 'iphone-xr'];
   mobileSizes.forEach((size) => {
     it('playing game should work on happy path', () => {
       cy.viewport(size);
@@ -46,15 +46,15 @@ describe('Play View', () => {
         });
       });
 
+      cy.wait(1000);
+
       cy.get('@willRemoveNewItem').then((willRemoveNewItem) => {
         if (willRemoveNewItem) {
           cy.get('.music-card').then((items) => {
-            console.log('3 items');
             expect(items.length).to.equal(3);
           });
         } else {
           cy.get('.music-card').then((items) => {
-            console.log('5 items');
             expect(items.length).to.equal(5);
           });
         }

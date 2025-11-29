@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import MusicCardComponent from "@/components/MusicCardComponent.vue";
-import { usePlaylistStore } from "@/stores/playlist";
-import { onBeforeMount } from "vue";
+import {usePlaylistStore} from "@/stores/playlist";
+import {onBeforeMount} from "vue";
 import PlayerComponent from "@/components/PlayerComponent.vue";
 import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
 import NoSongsOnPlaylistComponent from "@/components/NoSongsOnPlaylistComponent.vue";
 import LoadingComponent from "@/components/modules/LoadingComponent.vue";
 import WinHeaderMessage from "@/components/WinHeaderMessage.vue";
 
-const { playlist } = defineProps(["playlist"]);
+const {playlist} = defineProps(["playlist"]);
 const playlistStore = usePlaylistStore();
 
 onBeforeMount(() => {
@@ -49,7 +49,9 @@ const getIDForSongCard = (songName: string) => {
 };
 
 const selectTimelineForSong = (index: number) => {
-  playlistStore.player.pause();
+  if (playlistStore.player.hasOwnProperty("pause")) {
+    playlistStore.player.pause();
+  }
   if (playlistStore.currentSong && playlistStore?.currentSong?.name) {
     const elementId = getIDForSongCard(playlistStore?.currentSong?.name);
     const response = playlistStore.addPlayedSong(
@@ -75,10 +77,10 @@ const selectTimelineForSong = (index: number) => {
 <template>
   <main>
     <div v-if="playlistStore.loading">
-      <LoadingComponent />
+      <LoadingComponent/>
     </div>
     <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
-      <NoSongsOnPlaylistComponent />
+      <NoSongsOnPlaylistComponent/>
     </div>
     <div
       v-if="!playlistStore.loading && playlistStore.playlist.length > 0"

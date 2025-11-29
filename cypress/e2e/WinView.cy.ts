@@ -1,5 +1,5 @@
 describe('Play View', () => {
-  const mobileSizes = ['samsung-note9'];
+  const mobileSizes = ['iphone-6', 'samsung-note9', 'iphone-xr'];
   mobileSizes.forEach((size) => {
     it('playing game should work on happy path', () => {
       cy.viewport(size);
