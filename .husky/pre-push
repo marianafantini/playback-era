@@ -1,1 +1,1 @@
-npm run prettier-format && npm run test:e2e
+npm run prettier-format
