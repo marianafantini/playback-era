@@ -5,7 +5,7 @@ describe('Play View', () => {
 
   it('playing game should work on happy path', () => {
     const playlistID = "1234"
-    cy.intercept('GET', `http://localhost:3000/list-playlist-songs/${playlistID}`, { fixture: 'response-from-tracks-api.json' })
+    cy.intercept('GET', `http://localhost:3000/list-playlist-songs/${playlistID}`, {fixture: 'response-from-tracks-api.json'})
     cy.visit(`/play?playlist=${playlistID}`)
 
     // should have controller for game
