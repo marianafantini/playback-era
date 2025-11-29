@@ -1,4 +1,8 @@
 describe('Play View', () => {
+  beforeEach(() => {
+    cy.viewport('samsung-note9')
+  })
+
   it('playing game should work on happy path', () => {
     const playlistID = "1234"
     cy.intercept('GET', `http://localhost:3000/list-playlist-songs/${playlistID}`, { fixture: 'response-from-tracks-api.json' })
