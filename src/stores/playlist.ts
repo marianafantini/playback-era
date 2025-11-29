@@ -36,7 +36,7 @@ export const usePlaylistStore = defineStore("playlist", {
       this.loading = true;
       const baseUrl = import.meta.env.VITE_BASE_URL;
 
-      console.log("baseUrl", baseUrl)
+      console.log("baseUrl", baseUrl);
 
       return await fetch(baseUrl + url, {
         method: method,
