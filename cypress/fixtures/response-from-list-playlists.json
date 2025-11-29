@@ -1,0 +1,338 @@
+{
+  "href": "https://api.spotify.com/v1/users/mariana.fantini/playlists?offset=0&limit=100&locale=*",
+  "limit": 100,
+  "next": null,
+  "offset": 0,
+  "previous": null,
+  "total": 9,
+  "items": [
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/03AbqFipgaR95FS1mBeNYS"
+      },
+      "href": "https://api.spotify.com/v1/playlists/03AbqFipgaR95FS1mBeNYS",
+      "id": "03AbqFipgaR95FS1mBeNYS",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d00001e021b9daff4eaffaa52f1a9c402ab67616d00001e0220791d35ab8a9eb9a63d6e38ab67616d00001e025245d513567fe12a726e60d4ab67616d00001e025816f459eef7cd1cda33eb06",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d00001e021b9daff4eaffaa52f1a9c402ab67616d00001e0220791d35ab8a9eb9a63d6e38ab67616d00001e025245d513567fe12a726e60d4ab67616d00001e025816f459eef7cd1cda33eb06",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d00001e021b9daff4eaffaa52f1a9c402ab67616d00001e0220791d35ab8a9eb9a63d6e38ab67616d00001e025245d513567fe12a726e60d4ab67616d00001e025816f459eef7cd1cda33eb06",
+          "width": 60
+        }
+      ],
+      "name": "testing",
+      "owner": {
+        "display_name": "mariana.fantini",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/mariana.fantini"
+        },
+        "href": "https://api.spotify.com/v1/users/mariana.fantini",
+        "id": "mariana.fantini",
+        "type": "user",
+        "uri": "spotify:user:mariana.fantini"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAB6TTfb9C11CHp5dxf+39XNnUqtE9",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/03AbqFipgaR95FS1mBeNYS/tracks",
+        "total": 6
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:03AbqFipgaR95FS1mBeNYS"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6oE1Y5f3Yhl2NUbSLr4ekY"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6oE1Y5f3Yhl2NUbSLr4ekY",
+      "id": "6oE1Y5f3Yhl2NUbSLr4ekY",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d00001e025e90ff76fd49a23f7333de76ab67616d00001e027c0dcaf2587dd360f21b6a3cab67616d00001e02de1a3a5eaa0c75bb18e7b597ab67616d00001e02fd8d7a8d96871e791cb1f626",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d00001e025e90ff76fd49a23f7333de76ab67616d00001e027c0dcaf2587dd360f21b6a3cab67616d00001e02de1a3a5eaa0c75bb18e7b597ab67616d00001e02fd8d7a8d96871e791cb1f626",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d00001e025e90ff76fd49a23f7333de76ab67616d00001e027c0dcaf2587dd360f21b6a3cab67616d00001e02de1a3a5eaa0c75bb18e7b597ab67616d00001e02fd8d7a8d96871e791cb1f626",
+          "width": 60
+        }
+      ],
+      "name": "trintou",
+      "owner": {
+        "display_name": "mariana.fantini",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/mariana.fantini"
+        },
+        "href": "https://api.spotify.com/v1/users/mariana.fantini",
+        "id": "mariana.fantini",
+        "type": "user",
+        "uri": "spotify:user:mariana.fantini"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAKhzbfc0dS44UvL5cZXaRJBUwT2+h",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6oE1Y5f3Yhl2NUbSLr4ekY/tracks",
+        "total": 41
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6oE1Y5f3Yhl2NUbSLr4ekY"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/6iiYHCILuK01U9MP1Alj71"
+      },
+      "href": "https://api.spotify.com/v1/playlists/6iiYHCILuK01U9MP1Alj71",
+      "id": "6iiYHCILuK01U9MP1Alj71",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d00001e02445ecc3b8e98a77b3dbf440eab67616d00001e025b9c332f9f76cabc137e400fab67616d00001e02628dba01c669d89586967dc5ab67616d00001e026989318748cd6b05744bfbb4",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d00001e02445ecc3b8e98a77b3dbf440eab67616d00001e025b9c332f9f76cabc137e400fab67616d00001e02628dba01c669d89586967dc5ab67616d00001e026989318748cd6b05744bfbb4",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d00001e02445ecc3b8e98a77b3dbf440eab67616d00001e025b9c332f9f76cabc137e400fab67616d00001e02628dba01c669d89586967dc5ab67616d00001e026989318748cd6b05744bfbb4",
+          "width": 60
+        }
+      ],
+      "name": "acordar smart things",
+      "owner": {
+        "display_name": "mariana.fantini",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/mariana.fantini"
+        },
+        "href": "https://api.spotify.com/v1/users/mariana.fantini",
+        "id": "mariana.fantini",
+        "type": "user",
+        "uri": "spotify:user:mariana.fantini"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAArzFpLs3g2b6SXdpdoaR/nd0Vm2u",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/6iiYHCILuK01U9MP1Alj71/tracks",
+        "total": 105
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:6iiYHCILuK01U9MP1Alj71"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/735KJ7GXMpvGxeMcKySnmD"
+      },
+      "href": "https://api.spotify.com/v1/playlists/735KJ7GXMpvGxeMcKySnmD",
+      "id": "735KJ7GXMpvGxeMcKySnmD",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d00001e022433cb43f0f2f0f23b7c8b82ab67616d00001e02a26dc692f35673eb199c446fab67616d00001e02d1e3f0c0555023668291a728ab67616d00001e02df8a2ed8111de3161c4a4c30",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d00001e022433cb43f0f2f0f23b7c8b82ab67616d00001e02a26dc692f35673eb199c446fab67616d00001e02d1e3f0c0555023668291a728ab67616d00001e02df8a2ed8111de3161c4a4c30",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d00001e022433cb43f0f2f0f23b7c8b82ab67616d00001e02a26dc692f35673eb199c446fab67616d00001e02d1e3f0c0555023668291a728ab67616d00001e02df8a2ed8111de3161c4a4c30",
+          "width": 60
+        }
+      ],
+      "name": "fr",
+      "owner": {
+        "display_name": "mariana.fantini",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/mariana.fantini"
+        },
+        "href": "https://api.spotify.com/v1/users/mariana.fantini",
+        "id": "mariana.fantini",
+        "type": "user",
+        "uri": "spotify:user:mariana.fantini"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAADzOVuttRUrrValdxhuraBul0hSkc",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/735KJ7GXMpvGxeMcKySnmD/tracks",
+        "total": 30
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:735KJ7GXMpvGxeMcKySnmD"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/66dn9L1y9rjIk4h2Vceuid"
+      },
+      "href": "https://api.spotify.com/v1/playlists/66dn9L1y9rjIk4h2Vceuid",
+      "id": "66dn9L1y9rjIk4h2Vceuid",
+      "images": [
+        {
+          "height": null,
+          "url": "https://i.scdn.co/image/ab67656300005f1f5d423ec75083da4326b34586",
+          "width": null
+        }
+      ],
+      "name": "podcasts pra ouvir",
+      "owner": {
+        "display_name": "mariana.fantini",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/mariana.fantini"
+        },
+        "href": "https://api.spotify.com/v1/users/mariana.fantini",
+        "id": "mariana.fantini",
+        "type": "user",
+        "uri": "spotify:user:mariana.fantini"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAAkxuICwkgsb47gV+pPDV6ax2bXYk",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/66dn9L1y9rjIk4h2Vceuid/tracks",
+        "total": 1
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:66dn9L1y9rjIk4h2Vceuid"
+    },
+    {
+      "collaborative": false,
+      "description": "Songs <a href=\"http://www.ofmonstersandmen.com/\">Of Monsters and Men</a> are listening to right now.",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0nw9ICH2UKlNymKbEpmVm0"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0nw9ICH2UKlNymKbEpmVm0",
+      "id": "0nw9ICH2UKlNymKbEpmVm0",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da840bc7b96a79a7a1e06d7f4eca",
+          "width": null
+        }
+      ],
+      "name": "What We're Listening To",
+      "owner": {
+        "display_name": "ofmonstersandmen",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/ofmonstersandmen"
+        },
+        "href": "https://api.spotify.com/v1/users/ofmonstersandmen",
+        "id": "ofmonstersandmen",
+        "type": "user",
+        "uri": "spotify:user:ofmonstersandmen"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAKTzn+b/55u9QvcXeITSLRxU5+f7q",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0nw9ICH2UKlNymKbEpmVm0/tracks",
+        "total": 25
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0nw9ICH2UKlNymKbEpmVm0"
+    },
+    {
+      "collaborative": false,
+      "description": "Essa playlist não é para cantar ou dançar, os nomes das müsicas são uma mensagem de basta para a cultura do estupro. Siga, compartilhe e denuncie!",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/3mpe8gDwQpvL3G9w4mlEGz"
+      },
+      "href": "https://api.spotify.com/v1/playlists/3mpe8gDwQpvL3G9w4mlEGz",
+      "id": "3mpe8gDwQpvL3G9w4mlEGz",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da844dfc56e6956fc5e3e769ed94",
+          "width": null
+        }
+      ],
+      "name": "#EstuproNãoÉCulpaDaVítima",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotifybrazilian"
+        },
+        "href": "https://api.spotify.com/v1/users/spotifybrazilian",
+        "id": "spotifybrazilian",
+        "type": "user",
+        "uri": "spotify:user:spotifybrazilian"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAAD/0e7TUHDAGvIQLsmk8fk0pdEPvp",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/3mpe8gDwQpvL3G9w4mlEGz/tracks",
+        "total": 36
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:3mpe8gDwQpvL3G9w4mlEGz"
+    },
+    {
+      "collaborative": false,
+      "description": "Chilled out, mellow pop from your favourite artists right now. Cover: Dylan Gossett",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2JtkUgJumiz7K4AblbFlgK"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2JtkUgJumiz7K4AblbFlgK",
+      "id": "2JtkUgJumiz7K4AblbFlgK",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da848e1011438ba07d4e6fd2d234",
+          "width": null
+        }
+      ],
+      "name": "Acoustic Room",
+      "owner": {
+        "display_name": "HITS",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/digster.co.uk"
+        },
+        "href": "https://api.spotify.com/v1/users/digster.co.uk",
+        "id": "digster.co.uk",
+        "type": "user",
+        "uri": "spotify:user:digster.co.uk"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "AAAS1KPmqp8cH3oAKFS+CqgYMSvOEml3",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2JtkUgJumiz7K4AblbFlgK/tracks",
+        "total": 116
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2JtkUgJumiz7K4AblbFlgK"
+    }
+  ]
+}
