@@ -30,6 +30,8 @@ describe('Play View', () => {
         items[0].click();
       });
 
+      cy.wait(150);
+
       cy.get('.music-card').then((items) => {
         expect(items[1]).to.satisfy(($el) => {
           const classList = Array.from($el.classList);
@@ -43,6 +45,8 @@ describe('Play View', () => {
           );
         });
       });
+
+      cy.wait(1000);
 
       cy.get('@willRemoveNewItem').then((willRemoveNewItem) => {
         if (willRemoveNewItem) {
