@@ -49,7 +49,7 @@ const getIDForSongCard = (songName: string) => {
 };
 
 const selectTimelineForSong = (index: number) => {
-  if (playlistStore.player.hasOwnProperty("pause")) {
+  if (typeof playlistStore.player?.pause === "function") {
     playlistStore.player.pause();
   }
   if (playlistStore.currentSong && playlistStore?.currentSong?.name) {
