@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import PlaylistCardComponent from "@/components/PlaylistCardComponent.vue";
+import PlaylistCardComponent from '@/components/PlaylistCardComponent.vue';
 const { searchPlaylistList, playlistList } = defineProps([
-  "searchPlaylistList",
-  "playlistList",
+  'searchPlaylistList',
+  'playlistList',
 ]);
-const emit = defineEmits(["goToPlaylist"]);
+const emit = defineEmits(['goToPlaylist']);
 </script>
 
 <template>

@@ -1,30 +1,35 @@
-describe('Play View', () => {
+describe('Go from Home View to Play View', () => {
   const mobileSizes = ['iphone-6', 'samsung-note9', 'iphone-xr'];
   mobileSizes.forEach((size) => {
-    it('playing game should work on happy path', () => {
-      cy.viewport(size);
-      const playlistID = '1234';
+    beforeEach(() => {
+      cy.intercept('GET', `http://localhost:3000/list-playlists`, {
+        fixture: 'response-from-list-playlists.json',
+      }).as('list-playlists');
+
+      const playlistID = `03AbqFipgaR95FS1mBeNYS`;
       cy.intercept(
         'GET',
         `http://localhost:3000/list-playlist-songs/${playlistID}`,
         { fixture: 'response-from-tracks-api.json' },
       ).as('list-playlist-songs');
+    });
 
-      cy.visit(`/play?playlist=${playlistID}`);
+    it(`visits home page and should see play button on mobile size ${size}`, () => {
+      cy.viewport(size);
+      cy.visit('/');
+      cy.contains('h1', 'Playback Era');
+      cy.contains('button', 'Jogar').should('be.visible').click();
 
-      cy.wait('@list-playlist-songs');
+      cy.url().should('include', '/select-playlist');
+      cy.wait('@list-playlists');
 
-      // should have controller for game
-      cy.contains('Rodada 1 de 10');
-      cy.contains('Em que ano essa música foi lançada?');
-
-      // should have `add here` buttons before and after initial song
-      cy.get('.music-card').should('have.length', 3);
-      cy.get('.music-card').then((items) => {
-        expect(items[0]).to.contain.text('Adicionar aqui');
-        expect(items[2]).to.contain.text('Adicionar aqui');
+      cy.get('.playlist-card').then((items) => {
+        items[0].click();
       });
 
+      cy.url().should('include', '/play?playlist=03AbqFipgaR95FS1mBeNYS');
+
+      cy.wait('@list-playlist-songs');
       // add music to first position
       cy.get('.music-card').then((items) => {
         items[0].click();

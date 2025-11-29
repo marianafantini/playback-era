@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { round, totalRounds } = defineProps(["round", "totalRounds"]);
+const { round, totalRounds } = defineProps(['round', 'totalRounds']);
 </script>
 
 <template>

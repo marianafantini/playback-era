@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { usePlaylistStore } from "@/stores/playlist.ts";
-import { onBeforeMount } from "vue";
-import { PauseCircleOutlined, PlayCircleOutlined } from "@ant-design/icons-vue";
-import MusicBarsComponent from "@/components/MusicBarsComponent.vue";
-import RoundDescriptionComponent from "@/components/RoundDescriptionComponent.vue";
+import { usePlaylistStore } from '@/stores/playlist.ts';
+import { onBeforeMount } from 'vue';
+import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons-vue';
+import MusicBarsComponent from '@/components/MusicBarsComponent.vue';
+import RoundDescriptionComponent from '@/components/RoundDescriptionComponent.vue';
 
 const playlistStore = usePlaylistStore();
 const { song, amountOfSongs, amountOfSongsLeft, round, totalRounds } =
   defineProps([
-    "song",
-    "amountOfSongs",
-    "amountOfSongsLeft",
-    "round",
-    "totalRounds",
+    'song',
+    'amountOfSongs',
+    'amountOfSongsLeft',
+    'round',
+    'totalRounds',
   ]);
 
 onBeforeMount(() => {
@@ -27,12 +27,12 @@ interface CustomEvent {
 
 const configurePlayer = () => {
   (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
-    const element = document.getElementById("embed-iframe");
+    const element = document.getElementById('embed-iframe');
     const options = {
       uri: song.spotifyURI,
     };
     const callback = (EmbedController: any) => {
-      EmbedController.addListener("playback_update", (event: CustomEvent) => {
+      EmbedController.addListener('playback_update', (event: CustomEvent) => {
         if (event.data.isPaused) {
           playlistStore.playing = false;
         } else {
@@ -53,7 +53,9 @@ const playSong = () => {
 };
 
 const pauseSong = () => {
-  playlistStore.player.pause();
+  if (typeof playlistStore.player?.pause === 'function') {
+    playlistStore.player.pause();
+  }
   playlistStore.playing = false;
 };
 </script>

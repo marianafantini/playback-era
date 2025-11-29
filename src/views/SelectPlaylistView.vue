@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { usePlaylistStore } from "@/stores/playlist";
-import { onBeforeMount, onUnmounted } from "vue";
-import { useRouter } from "vue-router";
-import type { Playlist } from "@/models/playlist.ts";
-import PlaylistListOfCardsComponent from "@/components/icons/PlaylistListOfCardsComponent.vue";
-import LoadingComponent from "@/components/modules/LoadingComponent.vue";
-import SearchInputComponent from "@/components/atoms/SearchInputComponent.vue";
+import { usePlaylistStore } from '@/stores/playlist';
+import { onBeforeMount, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
+import type { Playlist } from '@/models/playlist.ts';
+import PlaylistListOfCardsComponent from '@/components/icons/PlaylistListOfCardsComponent.vue';
+import LoadingComponent from '@/components/modules/LoadingComponent.vue';
+import SearchInputComponent from '@/components/atoms/SearchInputComponent.vue';
 
 const router = useRouter();
 
@@ -16,7 +16,7 @@ onBeforeMount(async () => {
 });
 
 const goToPlaylist = (playlist: Playlist) => {
-  router.push("/play?playlist=" + playlist.id);
+  router.push('/play?playlist=' + playlist.id);
 };
 
 const searchForPlaylist = async (q: string): Promise<void> => {

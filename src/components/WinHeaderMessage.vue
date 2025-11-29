@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import WinTrophyComponent from "@/components/WinTrophyComponent.vue";
-import ButtonComponent from "@/components/atoms/ButtonComponent.vue";
-import { useRouter } from "vue-router";
+import WinTrophyComponent from '@/components/WinTrophyComponent.vue';
+import ButtonComponent from '@/components/atoms/ButtonComponent.vue';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const { correctSongs } = defineProps(["correctSongs"]);
+const { correctSongs } = defineProps(['correctSongs']);
 
-const emit = defineEmits(["restartGame"]);
+const emit = defineEmits(['restartGame']);
 </script>
 
 <template>
@@ -15,7 +15,7 @@ const emit = defineEmits(["restartGame"]);
     <h3>Parabéns!!</h3>
     <p>
       Você acertou {{ correctSongs }}
-      {{ correctSongs > 1 ? "músicas" : "música" }}
+      {{ correctSongs > 1 ? 'músicas' : 'música' }}
     </p>
 
     <div class="button-actions">

@@ -1,52 +1,52 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const generateRandomString = (length: number) => {
   const possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const values = crypto.getRandomValues(new Uint8Array(length));
-  return values.reduce((acc, x) => acc + possible[x % possible.length], "");
+  return values.reduce((acc, x) => acc + possible[x % possible.length], '');
 };
 
 const sha256 = async (plain: string) => {
   const encoder = new TextEncoder();
   const data = encoder.encode(plain);
-  return window.crypto.subtle.digest("SHA-256", data);
+  return window.crypto.subtle.digest('SHA-256', data);
 };
 
 const base64encode = (input: any) => {
   return btoa(String.fromCharCode(...new Uint8Array(input)))
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
 };
 
 const startLogin = async () => {
-  const accessToken = window.localStorage.getItem("spotify_access_token");
-  const expiresIn = window.localStorage.getItem("spotify_expires_in");
+  const accessToken = window.localStorage.getItem('spotify_access_token');
+  const expiresIn = window.localStorage.getItem('spotify_expires_in');
   if (accessToken && expiresIn && parseInt(expiresIn) > Date.now()) {
-    return router.push("/select-playlist");
+    return router.push('/select-playlist');
   }
 
   const codeVerifier = generateRandomString(64);
-  console.log("code verifier saved on local storage", codeVerifier);
-  window.localStorage.setItem("code_verifier", codeVerifier);
+  console.log('code verifier saved on local storage', codeVerifier);
+  window.localStorage.setItem('code_verifier', codeVerifier);
 
   const hashed = await sha256(codeVerifier);
   const codeChallenge = base64encode(hashed);
 
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-  const redirectUri = window.location.origin + "/login-success";
+  const redirectUri = window.location.origin + '/login-success';
 
-  const scope = "user-read-private user-read-email playlist-read-private";
-  const authUrl = new URL("https://accounts.spotify.com/authorize");
+  const scope = 'user-read-private user-read-email playlist-read-private';
+  const authUrl = new URL('https://accounts.spotify.com/authorize');
 
   const params = {
-    response_type: "code",
+    response_type: 'code',
     client_id: clientId,
     scope: scope,
-    code_challenge_method: "S256",
+    code_challenge_method: 'S256',
     code_challenge: codeChallenge,
     redirect_uri: redirectUri,
   };

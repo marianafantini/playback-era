@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { content } = defineProps(["content"]);
-const emit = defineEmits(["click"]);
+const { content } = defineProps(['content']);
+const emit = defineEmits(['click']);
 </script>
 
 <template>

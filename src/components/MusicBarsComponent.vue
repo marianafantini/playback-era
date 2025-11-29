@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { animated } = defineProps(["animated"]);
+const { animated } = defineProps(['animated']);
 </script>
 
 <template>
