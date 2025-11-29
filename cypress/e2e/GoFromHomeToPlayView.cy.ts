@@ -35,7 +35,7 @@ describe('Go from Home View to Play View', () => {
         items[0].click();
       });
 
-      cy.wait(150);
+      cy.wait(150); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.get('.music-card').then((items) => {
         expect(items[1]).to.satisfy(($el) => {
@@ -51,7 +51,7 @@ describe('Go from Home View to Play View', () => {
         });
       });
 
-      cy.wait(1000);
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.get('@willRemoveNewItem').then((willRemoveNewItem) => {
         if (willRemoveNewItem) {
