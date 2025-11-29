@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import LoginWithSpotifyComponent from '@/components/LoginWithSpotifyComponent.vue';
 import NewGameHomeBadgeComponent from '@/components/NewGameHomeBadgeComponent.vue';
 import HomeHowToPlayComponent from '@/components/HomeHowToPlayComponent.vue';
 import ButtonComponent from '@/components/atoms/ButtonComponent.vue';

@@ -6,13 +6,9 @@ import MusicBarsComponent from '@/components/MusicBarsComponent.vue';
 import RoundDescriptionComponent from '@/components/RoundDescriptionComponent.vue';
 
 const playlistStore = usePlaylistStore();
-const { song, amountOfSongs, amountOfSongsLeft, round, totalRounds } =
+const { song } =
   defineProps([
     'song',
-    'amountOfSongs',
-    'amountOfSongsLeft',
-    'round',
-    'totalRounds',
   ]);
 
 onBeforeMount(() => {
