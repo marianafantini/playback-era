@@ -5,7 +5,6 @@ const { searchPlaylistList, playlistList } = defineProps([
   'playlistList',
 ]);
 defineEmits(['goToPlaylist']);
-
 </script>
 
 <template>

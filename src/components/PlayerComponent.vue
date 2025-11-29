@@ -19,11 +19,13 @@ interface CustomEvent {
 }
 
 const configurePlayer = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).onSpotifyIframeApiReady = (IFrameAPI: any) => {
     const element = document.getElementById('embed-iframe');
     const options = {
       uri: song.spotifyURI,
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const callback = (EmbedController: any) => {
       EmbedController.addListener('playback_update', (event: CustomEvent) => {
         if (event.data.isPaused) {

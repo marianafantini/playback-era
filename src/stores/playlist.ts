@@ -13,7 +13,7 @@ export const usePlaylistStore = defineStore('playlist', {
     playlistSongsLeft: Song[];
     playedSongs: Song[];
     correctSongs: Song[];
-    player: any;
+    player: any; // eslint-disable-line @typescript-eslint/no-explicit-any
     playerReady: boolean;
     loading: boolean;
     amountOfRounds: number;
