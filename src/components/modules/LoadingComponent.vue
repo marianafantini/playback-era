@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import MusicBarsComponent from "@/components/MusicBarsComponent.vue";
+import MusicBarsComponent from '@/components/MusicBarsComponent.vue';
 
 const niceLoadingMessages = [
-  "Procurando músicas...",
-  "Procurando o fone de ouvido...",
-  "Buscando por músicas nostálgicas",
+  'Procurando músicas...',
+  'Procurando o fone de ouvido...',
+  'Buscando por músicas nostálgicas',
 ];
 
 const randomIndex = Math.floor(Math.random() * niceLoadingMessages.length);

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { isGameStillActive } = defineProps(["isGameStillActive"]);
-import { PlusOutlined } from "@ant-design/icons-vue";
+const { isGameStillActive } = defineProps(['isGameStillActive']);
+import { PlusOutlined } from '@ant-design/icons-vue';
 </script>
 
 <template>

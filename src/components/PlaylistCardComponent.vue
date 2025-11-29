@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { playlist } = defineProps(["playlist"]);
+const { playlist } = defineProps(['playlist']);
 </script>
 
 <template>

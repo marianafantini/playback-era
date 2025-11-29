@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import RadioButtonButtonComponent from "@/components/atoms/RadioButtonButtonComponent.vue";
-import { usePlaylistStore } from "@/stores/playlist.ts";
-import { message } from "ant-design-vue";
+import RadioButtonButtonComponent from '@/components/atoms/RadioButtonButtonComponent.vue';
+import { usePlaylistStore } from '@/stores/playlist.ts';
+import { message } from 'ant-design-vue';
 
 const playlistStore = usePlaylistStore();
 
@@ -15,8 +15,8 @@ const changeAmountOfRounds = (newValue: number) => {
   playlistStore.amountOfRounds = newValue;
   messageApi.destroy();
   messageApi.open({
-    type: "success",
-    content: "salvo!",
+    type: 'success',
+    content: 'salvo!',
   });
 };
 </script>

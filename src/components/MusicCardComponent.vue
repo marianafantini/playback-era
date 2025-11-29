@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { song, id } = defineProps(["song", "id"]);
+const { song, id } = defineProps(['song', 'id']);
 </script>
 
 <template>

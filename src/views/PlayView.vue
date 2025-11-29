@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import MusicCardComponent from "@/components/MusicCardComponent.vue";
-import {usePlaylistStore} from "@/stores/playlist";
-import {onBeforeMount} from "vue";
-import PlayerComponent from "@/components/PlayerComponent.vue";
-import CardAddHereComponent from "@/components/CardAddHereComponent.vue";
-import NoSongsOnPlaylistComponent from "@/components/NoSongsOnPlaylistComponent.vue";
-import LoadingComponent from "@/components/modules/LoadingComponent.vue";
-import WinHeaderMessage from "@/components/WinHeaderMessage.vue";
+import MusicCardComponent from '@/components/MusicCardComponent.vue';
+import { usePlaylistStore } from '@/stores/playlist';
+import { onBeforeMount } from 'vue';
+import PlayerComponent from '@/components/PlayerComponent.vue';
+import CardAddHereComponent from '@/components/CardAddHereComponent.vue';
+import NoSongsOnPlaylistComponent from '@/components/NoSongsOnPlaylistComponent.vue';
+import LoadingComponent from '@/components/modules/LoadingComponent.vue';
+import WinHeaderMessage from '@/components/WinHeaderMessage.vue';
 
-const {playlist} = defineProps(["playlist"]);
+const { playlist } = defineProps(['playlist']);
 const playlistStore = usePlaylistStore();
 
 onBeforeMount(() => {
@@ -21,7 +21,7 @@ const initializeGame = () => {
       playlistStore.getNextSong();
       setInitialSong();
     } else {
-      console.log("no songs on this playlist");
+      console.log('no songs on this playlist');
     }
   });
 };
@@ -43,13 +43,13 @@ const setInitialSong = () => {
 
 const getIDForSongCard = (songName: string) => {
   return (
-    "cards-song-" +
-    songName.replaceAll(" ", "-").replaceAll("(", "-").replaceAll(")", "-")
+    'cards-song-' +
+    songName.replaceAll(' ', '-').replaceAll('(', '-').replaceAll(')', '-')
   );
 };
 
 const selectTimelineForSong = (index: number) => {
-  if (typeof playlistStore.player?.pause === "function") {
+  if (typeof playlistStore.player?.pause === 'function') {
     playlistStore.player.pause();
   }
   if (playlistStore.currentSong && playlistStore?.currentSong?.name) {
@@ -61,11 +61,11 @@ const selectTimelineForSong = (index: number) => {
 
     if (response) {
       setTimeout(() => {
-        document.getElementById(elementId)?.classList.add("correct-item");
+        document.getElementById(elementId)?.classList.add('correct-item');
       }, 100);
     } else {
       setTimeout(() => {
-        document.getElementById(elementId)?.classList.add("remove-item");
+        document.getElementById(elementId)?.classList.add('remove-item');
       }, 100);
     }
 
@@ -77,10 +77,10 @@ const selectTimelineForSong = (index: number) => {
 <template>
   <main>
     <div v-if="playlistStore.loading">
-      <LoadingComponent/>
+      <LoadingComponent />
     </div>
     <div v-if="!playlistStore.loading && playlistStore.playlist.length === 0">
-      <NoSongsOnPlaylistComponent/>
+      <NoSongsOnPlaylistComponent />
     </div>
     <div
       v-if="!playlistStore.loading && playlistStore.playlist.length > 0"
