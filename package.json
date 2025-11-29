@@ -15,7 +15,7 @@
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "prettier-format": "prettier --config .prettierrc '**/*.ts|**/*.vue' --write",
+    "prettier-format": "prettier --config .prettierrc '**/*.{ts,vue}' --write",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write src/",
     "prepare": "husky"
