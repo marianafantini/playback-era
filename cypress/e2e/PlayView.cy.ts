@@ -35,11 +35,29 @@ describe('Play View', () => {
       cy.get('.music-card').then((items) => {
         expect(items[1]).to.satisfy(($el) => {
           const classList = Array.from($el.classList);
+          console.log('will remove: ', classList.includes('remove-item'));
+          const willRemoveNewItem = classList.includes('remove-item');
+          cy.wrap(willRemoveNewItem).as('willRemoveNewItem');
+
           return (
             classList.includes('correct-item') ||
             classList.includes('remove-item')
           );
         });
+      });
+
+      cy.get('@willRemoveNewItem').then((willRemoveNewItem) => {
+        if (willRemoveNewItem) {
+          cy.get('.music-card').then((items) => {
+            console.log('3 items');
+            expect(items.length).to.equal(3);
+          });
+        } else {
+          cy.get('.music-card').then((items) => {
+            console.log('5 items');
+            expect(items.length).to.equal(5);
+          });
+        }
       });
     });
   });
