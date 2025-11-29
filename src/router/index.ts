@@ -31,7 +31,7 @@ const router = createRouter({
       } => ({
         playlist: route.query.playlist,
       }),
-    }
+    },
   ],
 });
 

@@ -18,12 +18,10 @@ describe('Play View', () => {
       cy.contains('Rodada 1 de 10');
       cy.contains('Em que ano essa música foi lançada?');
 
-      Array.from({ length: 10 }, (_, i) => {
+      Array.from({ length: 10 }, () => {
         cy.get('.music-card').then((items) => {
           items[0].click();
         });
-
-        cy.wait(150);
 
         cy.get('.music-card').then((items) => {
           expect(items[1]).to.satisfy(($el) => {

@@ -98,7 +98,7 @@ export const usePlaylistStore = defineStore('playlist', {
       const songs: Song[] = [];
 
       while (songs.length < numberOfSongs) {
-        let index: number = Math.floor(Math.random() * playlist.length);
+        const index: number = Math.floor(Math.random() * playlist.length);
         if (songs.indexOf(playlist[index] as Song) === -1) {
           songs.push(playlist[index] as Song);
         }

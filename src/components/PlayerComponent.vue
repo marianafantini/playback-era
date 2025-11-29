@@ -6,10 +6,7 @@ import MusicBarsComponent from '@/components/MusicBarsComponent.vue';
 import RoundDescriptionComponent from '@/components/RoundDescriptionComponent.vue';
 
 const playlistStore = usePlaylistStore();
-const { song } =
-  defineProps([
-    'song',
-  ]);
+const { song } = defineProps(['song']);
 
 onBeforeMount(() => {
   configurePlayer();

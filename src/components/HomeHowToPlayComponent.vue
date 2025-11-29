@@ -6,7 +6,9 @@ const { steps } = defineProps(['steps']);
   <div class="card-how-to-play">
     <h3>Como jogar</h3>
     <div class="how-to-play-list-wrapper">
-      <div class="how-to-play-list-item" v-for="(item, index) in steps">
+      <div class="how-to-play-list-item"
+           v-for="(item, index) in steps"
+           :key="item.title">
         <div class="floating-number">{{ index + 1 }}</div>
         <div class="how-to-play-step">
           <div class="icon">
