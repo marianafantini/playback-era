@@ -7,12 +7,12 @@ describe('Play View', () => {
       cy.intercept(
         'GET',
         `http://localhost:3000/list-playlist-songs/${playlistID}`,
-        {fixture: 'response-from-tracks-api.json'},
+        { fixture: 'response-from-tracks-api.json' },
       ).as('list-playlist-songs');
 
       cy.visit(`/play?playlist=${playlistID}`);
 
-      cy.wait("@list-playlist-songs");
+      cy.wait('@list-playlist-songs');
 
       // should have controller for game
       cy.contains('Rodada 1 de 10');
@@ -27,20 +27,20 @@ describe('Play View', () => {
 
       // add music to first position
       cy.get('.music-card').then((items) => {
-        items[0].click()
+        items[0].click();
       });
 
-      cy.wait(150)
+      cy.wait(150);
 
       cy.get('.music-card').then((items) => {
         expect(items[1]).to.satisfy(($el) => {
           const classList = Array.from($el.classList);
-          return classList.includes('correct-item') || classList.includes('remove-item');
+          return (
+            classList.includes('correct-item') ||
+            classList.includes('remove-item')
+          );
         });
-
       });
-
-
     });
   });
 });
